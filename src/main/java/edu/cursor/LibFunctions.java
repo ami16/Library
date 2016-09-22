@@ -7,20 +7,24 @@ import java.util.Scanner;
 
 public class LibFunctions {
 
-   public void showMainMenu( boolean userIsLogged ){
+   private static List<User> uList = new ArrayList<>();
+
+   public LibFunctions() {
+      uList = createUserList() ;
+   }
+
+   public void showMainMenu(boolean userIsLogged ){
       System.out.println("MENU:\n");
       if( userIsLogged ){
          System.out.println("Hello, " + Library.getLoggedUser() + "! ");
          System.out.println("1. View library books");
          System.out.println("2. My books");
-         System.out.println("z. LOG OUT");
-         System.out.println("x. EXIT");
+         System.out.println("z. Log out");
+         System.out.println("x. Exit");
       } else {
-         // TEST for loggedUser
-//         System.out.println("Hello, " + Library.getLoggedUser() + "! ");
-         System.out.println("1. Register");
-         System.out.println("2. Login");
-         System.out.println("3. View library books");
+         System.out.println("1. REGISTER");
+         System.out.println("2. LOGIN");
+         System.out.println("3. VIEW LIBRARY BOOKS");
          System.out.println("x. EXIT");
       }
 
@@ -63,7 +67,7 @@ public class LibFunctions {
          switch ( Character.toLowerCase(loggedChoice) ){
             case '1' :case '2' : is = true ; break;
             case 'x': is = true ; sayBye(); System.exit(0); break;
-            case 'z': is = true; logOut(); showMainMenu( Library.getUserIsLogged() );
+            case 'z': is = true; logOut();
             default: System.out.println("Choose correct item (1-2, z or x): ");
          }
       } while ( !is ) ;
@@ -76,7 +80,7 @@ public class LibFunctions {
       switch(answer){
 
          case '1': // Register
-
+            registerUser();
             break;
 
          case '2': // Login
@@ -91,8 +95,90 @@ public class LibFunctions {
    }
 
 
+
+
+
+   // 1 - REGISTER USER
+
    public void registerUser(){
-      
+      Scanner scan = new Scanner(System.in) ;
+      String desiredLogin ;
+      boolean loginAllowed = false ;
+
+      // LOGIN
+      do{
+         System.out.println("Please enter your nickname for LOGIN (4-20 long, no spec chars at begin & the end): ");
+         desiredLogin = scan.nextLine().trim() ;
+         if( validateLogin( desiredLogin )  ){
+            loginAllowed = true ;
+
+            if( !loginAvailable( desiredLogin ) ){
+               loginAllowed = false ;
+            } else {
+
+
+               // LOGIN ok.
+               // Now PASS
+               boolean correctPass = false ;
+               boolean equalPass = false ;
+               String pass1 ;
+               System.out.print("OKAY NOW! Enter your password. ");
+               do {
+                  System.out.println("Password must be at least 4 chars:");
+                  pass1 = scan.nextLine().trim();
+                  if( validatePass( pass1 ) )
+                     correctPass = true ;
+               } while( !correctPass ) ;
+               do{
+                  System.out.println("Repeat pass ones more:");
+                  String pass2 = scan.nextLine().trim() ;
+
+                  if( pass1.equals( pass2 ) ) {
+                     equalPass = true;
+                  } else { System.out.println("Your passwords doesn't match."); }
+               } while( !equalPass ) ;
+
+
+
+               // PASS ok.
+               // Now MAIL
+               boolean correctMail = false ;
+               String desiredMail ;
+               do {
+                  System.out.print("Pls give your valid email: ");
+                  desiredMail = scan.nextLine().trim();
+                  if( validateMail( desiredMail ) )
+                     correctMail = true ;
+               } while( !correctMail ) ;
+
+
+               // MAIL ok.
+               // Now NAME
+               boolean correctName = false ;
+               String desiredName ;
+               do {
+                  System.out.print("And now pls provide your name: ");
+                  desiredName = scan.nextLine().trim();
+                  if( validateName( desiredName ) )
+                     correctName = true ;
+               } while( !correctName ) ;
+
+
+
+               uList.add( new User(desiredLogin, pass1, desiredMail, desiredName, 0) ) ;
+
+               Library.setUserIsLogged(true);
+               Library.setLoggedUser(desiredLogin);
+               System.out.println("Congrats! You're in!");
+
+            }
+
+         } else {
+            System.out.println("Not allowed");
+         }
+      } while( !loginAllowed ) ;
+
+
    }
 
 
@@ -164,14 +250,50 @@ public class LibFunctions {
 
 
 
+   public boolean validateLogin( String val ){
+      // http://stackoverflow.com/questions/12018245/regular-expression-to-validate-username
+      return val.matches("^(?=.{4,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$") ;
+   }
+
+   public boolean validatePass( String val ){
+      return ( val.length() >= 4) ;
+   }
+
+   public boolean validateMail( String val ){
+      return val.matches("^(.+)@(.+)$") ;
+   }
+
+   public boolean validateName( String val ){
+//      return ( val.length() > 1) ;
+      return val.matches("^[a-zA-Z0-9_-]{2,16}$") ;
+   }
+
+   public boolean loginAvailable( String desiredLogin ){
+      boolean loginAvailable = false ;
+
+//      System.out.println( "uList.size: " + uList.size() );
+      Iterator<User> iterator = uList.iterator();
+//      System.out.println( "List Login: " + iterator.next().getLogin() );
+      while(iterator.hasNext()){
+         if( iterator.next().getLogin().equals( desiredLogin ) ){
+            loginAvailable = false ;
+            System.out.println("Login NOT available.");
+            break;
+         } else {
+            loginAvailable = true ;
+         }
+      }
+
+
+      return loginAvailable ;
+   }
+
    private void logOut(){
       Library.setLoggedUser("");
       Library.setUserIsLogged(false);
    }
 
-
    // 1. USERS LIST. Olesya
-   private static List<User> uList = new ArrayList<>();
    private static List<User> createUserList(){
       uList.add( new User("peter_griffin", "peter1234", "peter@gmail.com", "Peter", 0));
       uList.add( new User("lois", "lois1234", "lois@gmail.com", "Lois", 0));
@@ -182,7 +304,6 @@ public class LibFunctions {
       uList.add( new User("user3", "3456", "mail3@m.c", "name3", 0) ) ;
       return uList ;
    }
-
 
    public void sayBye(){ System.out.println("See ya."); }
 

@@ -7,11 +7,10 @@ public class Library {
    private static boolean userIsLogged = false ;
    private static String loggedUser ;
 
-   public static boolean getUserIsLogged() { return userIsLogged; }
-   public static void setUserIsLogged(boolean userIsLogged) { Library.userIsLogged = userIsLogged; }
-
-   public static String getLoggedUser() { return loggedUser; }
-   public static void setLoggedUser(String loggedUser) { Library.loggedUser = loggedUser; }
+   public static boolean   getUserIsLogged() { return userIsLogged; }
+   public static void      setUserIsLogged(boolean userIsLogged) { Library.userIsLogged = userIsLogged; }
+   public static String    getLoggedUser() { return loggedUser; }
+   public static void      setLoggedUser(String loggedUser) { Library.loggedUser = loggedUser; }
 
    public void run(){
 
@@ -23,10 +22,10 @@ public class Library {
          func.showMainMenu(userIsLogged);
          char mainAnswer = func.getMain(userIsLogged);
 
-//         boolean processedMain = func.proceedMain(mainAnswer);
          func.proceedMain(mainAnswer);
 
-         System.out.println("here");
+
+//         System.out.println("----<  End of Library.java :)  >----");
 
       }
 
