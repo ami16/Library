@@ -21,6 +21,7 @@ public class User {
    public void setRole(int role) { this.role = role; }
 
    public User(String login, String pass, String email, String name, int role) {
+// (lesia) public User(String name, String login, String email, String password
       this.login = login;
       this.password = pass;
       this.email = email;
@@ -45,6 +46,35 @@ public class User {
 
    }
 
+//   @Override
+//   public boolean equals(Object obj) {
+//      if (this == obj)return true;
+//      if (obj == null)return false;
+//      if (getClass() != obj.getClass())return false;
+//      User other = (User) obj;
+//      if (email == null) {
+//         if (other.email != null)
+//            return false;
+//      } else if (!email.equals(other.email))
+//         return false;
+//      if (login == null) {
+//         if (other.login != null)
+//            return false;
+//      } else if (!login.equals(other.login))
+//         return false;
+//      if (name == null) {
+//         if (other.name != null)
+//            return false;
+//      } else if (!name.equals(other.name))
+//         return false;
+//      if (password == null) {
+//         if (other.password != null)
+//            return false;
+//      } else if (!password.equals(other.password))
+//         return false;
+//      return true;
+//   }
+
    @Override
    public int hashCode() {
       int result = getLogin().hashCode();
@@ -53,5 +83,21 @@ public class User {
       result = 31 * result + getName().hashCode();
       result = 31 * result + getRole();
       return result;
+   }
+
+//   @Override
+//   public int hashCode() {
+//      final int prime = 31;
+//      int result = 1;
+//      result = prime * result + ((email == null) ? 0 : email.hashCode());
+//      result = prime * result + ((login == null) ? 0 : login.hashCode());
+//      result = prime * result + ((name == null) ? 0 : name.hashCode());
+//      result = prime * result + ((password == null) ? 0 : password.hashCode());
+//      return result;
+//   }
+
+   @Override
+   public String toString() {
+      return "User [name=" + name + ", login=" + login + ", email=" + email + ", password=" + password + "]";
    }
 }
