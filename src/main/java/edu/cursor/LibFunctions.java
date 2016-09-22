@@ -10,11 +10,14 @@ public class LibFunctions {
    public void showMainMenu( boolean userIsLogged ){
       System.out.println("MENU:\n");
       if( userIsLogged ){
+         System.out.println("Hello, " + Library.getLoggedUser() + "! ");
          System.out.println("1. View library books");
          System.out.println("2. My books");
          System.out.println("z. LOG OUT");
          System.out.println("x. EXIT");
       } else {
+         // TEST for loggedUser
+//         System.out.println("Hello, " + Library.getLoggedUser() + "! ");
          System.out.println("1. Register");
          System.out.println("2. Login");
          System.out.println("3. View library books");
@@ -24,18 +27,18 @@ public class LibFunctions {
    }
 
    public char getMain( boolean userIsLogged ){
-      Scanner scan = new Scanner(System.in) ;
       // Main or logged choice
-      char mainChoice ;
+      char choice ;
       if( userIsLogged ){
-         mainChoice = getLoggedChoice(scan) ;
+         choice = getLoggedChoice() ;
       } else {
-         mainChoice = getMainChoice(scan) ;
+         choice = getMainChoice() ;
       }
-      return mainChoice;
+      return choice;
    }
 
-   public char getMainChoice( Scanner scan ){
+   public char getMainChoice(){
+      Scanner scan = new Scanner(System.in) ;
       char mainChoice = 0 ;
       boolean is = false ;
       do {
@@ -43,22 +46,23 @@ public class LibFunctions {
          switch ( Character.toLowerCase(mainChoice) ){
             case '1' :case '2' :case '3':
                is = true ; break;
-            case 'x': sayBye(); System.exit(0);
-            case 'z': logOut();
+            case 'x': is = true ; sayBye(); System.exit(0); break;
+            case 'z': is = true ; logOut();
             default: System.out.println("Choose correct item (1-3 or x): ");
          }
       } while ( !is ) ;
       return mainChoice ;
    }
 
-   public char getLoggedChoice( Scanner scan ){
+   public char getLoggedChoice(){
+      Scanner scan = new Scanner(System.in) ;
       char loggedChoice = 0 ;
       boolean is = false ;
       do {
          loggedChoice = scan.next().charAt(0) ;
          switch ( Character.toLowerCase(loggedChoice) ){
             case '1' :case '2' : is = true ; break;
-            case 'x': sayBye(); System.exit(0);
+            case 'x': is = true ; sayBye(); System.exit(0); break;
             case 'z': is = true; logOut(); showMainMenu( Library.getUserIsLogged() );
             default: System.out.println("Choose correct item (1-2, z or x): ");
          }
@@ -83,10 +87,56 @@ public class LibFunctions {
          case '3': // View books
 
             break;
-
-         default: break;
       }
    }
+
+
+   public void registerUser(){
+      
+   }
+
+
+
+
+   private void validateUser(){
+      // generate initial users list
+      List<User> uList = createUserList() ;
+
+      validateUser('l');  // login
+      validateUser('p');  // pass
+      Library.setUserIsLogged(true);
+   }
+
+
+   public void validateUser( char login_pass ){
+      Scanner scan = new Scanner(System.in) ;
+      String uVar ;
+      boolean is = false ;
+      String lineInput = login_pass == 'l' ? "Enter your login:" : "Enter your password:";
+      String lineOutput = login_pass == 'l' ? "No such login (2)" : "Wrong password (2)";
+
+      System.out.println( lineInput );
+
+      do {
+         uVar = scan.nextLine().trim() ;
+         if(uVar.equals("")){
+            is = false ; System.out.print("Enter smth: ");
+         } else {
+            Iterator<User> iterator = uList.iterator();
+
+            while(iterator.hasNext()){
+               if(login_pass == 'l'){
+                  if( iterator.next().getLogin().equals( uVar ) ){ is = true ; Library.setLoggedUser( uVar ); }
+               } else {
+                  if( iterator.next().getPass().equals( uVar ) ){ is = true ; }
+               }
+            }
+         }
+         if( !is ){ System.out.println( lineOutput ); }
+      } while ( !is ) ;
+   }
+
+
 
    public void proceedLogged( char answer ){
       switch(answer){
@@ -112,55 +162,17 @@ public class LibFunctions {
       }
    }
 
-   private void validateUser(){
-      Scanner scan = new Scanner(System.in) ;
-      // generate initial users list
-      List<User> uList = getInitUsers() ;
 
-
-      validateUser(scan, 'l');  // login
-      validateUser(scan, 'p');  // pass
-      Library.setUserIsLogged(true);
-   }
-
-
-   public void validateUser( Scanner scan, char login_pass ){
-      String uVar ;
-      boolean is = false ;
-      String lineInput = login_pass == 'l' ? "Enter your login:" : "Enter your password:";
-      String lineOutput = login_pass == 'l' ? "No such login (2)" : "Wrong password (2)";
-
-      System.out.println( lineInput );
-
-      do {
-         uVar = scan.nextLine().trim() ;
-         if(uVar.equals("")){
-            is = false ; System.out.print("Enter smth: ");
-         } else {
-            Iterator<User> iterator = uList.iterator();
-
-            while(iterator.hasNext()){
-               if(login_pass == 'l'){
-                  if( iterator.next().getLogin().equals( uVar ) ){ is = true ; }
-               } else {
-                  if( iterator.next().getPass().equals( uVar ) ){ is = true ; }
-               }
-
-            }
-         }
-         if( !is ){ System.out.println( lineOutput ); }
-      } while ( !is ) ;
-   }
 
    private void logOut(){
+      Library.setLoggedUser("");
       Library.setUserIsLogged(false);
    }
 
-   /* 1. USERS COLLECTION
-         Olesya
-   */
+
+   // 1. USERS LIST. Olesya
    private static List<User> uList = new ArrayList<>();
-   private static List<User> getInitUsers(){
+   private static List<User> createUserList(){
       uList.add( new User("peter_griffin", "peter1234", "peter@gmail.com", "Peter", 0));
       uList.add( new User("lois", "lois1234", "lois@gmail.com", "Lois", 0));
       uList.add( new User("stewie_best", "coolStew", "stewie@gmail.com", "Stewie", 0 ));
