@@ -21,11 +21,7 @@ public class Library {
 
          func.showMainMenu(userIsLogged);
          char mainAnswer = func.getMain(userIsLogged);
-
          func.proceedMain(mainAnswer);
-
-
-//         System.out.println("----<  End of Library.java :)  >----");
 
       }
 

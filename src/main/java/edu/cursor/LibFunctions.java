@@ -15,8 +15,15 @@ public class LibFunctions {
 
    public void showMainMenu(boolean userIsLogged ){
       System.out.println("MENU:\n");
+
+//      System.out.println("userISLogged: " + Library.getUserIsLogged() );
+//      System.out.println("loggedUser: " + Library.getLoggedUser() );
+//      System.out.println( uList.toString() );
+
       if( userIsLogged ){
-         System.out.println("Hello, " + Library.getLoggedUser() + "! ");
+
+         User user = getUser(Library.getLoggedUser()) ;
+         System.out.println("Hello, " + user.getName() + " (" + user.getLogin() + ") <" +  user.getEmail() + "> ! ");
          System.out.println("1. View library books");
          System.out.println("2. My books");
          System.out.println("z. Log out");
@@ -51,7 +58,7 @@ public class LibFunctions {
             case '1' :case '2' :case '3':
                is = true ; break;
             case 'x': is = true ; sayBye(); System.exit(0); break;
-            case 'z': is = true ; logOut();
+            case 'z': is = true ; logOut(); break;
             default: System.out.println("Choose correct item (1-3 or x): ");
          }
       } while ( !is ) ;
@@ -67,7 +74,7 @@ public class LibFunctions {
          switch ( Character.toLowerCase(loggedChoice) ){
             case '1' :case '2' : is = true ; break;
             case 'x': is = true ; sayBye(); System.exit(0); break;
-            case 'z': is = true; logOut();
+            case 'z': is = true; logOut(); break;
             default: System.out.println("Choose correct item (1-2, z or x): ");
          }
       } while ( !is ) ;
@@ -89,11 +96,35 @@ public class LibFunctions {
 
 
          case '3': // View books
-
+            System.out.println("View books");
             break;
       }
    }
 
+
+   public void proceedLogged( char answer ){
+      switch(answer){
+
+         case '1': // View LIBRARY
+            System.out.println("View LIBRARY");
+            break;
+
+         case '2': // My books
+            System.out.println("My books");
+            break;
+
+
+         case 'z': // Log out
+//            logOut();
+            break;
+
+         case 'x': // EXIT
+            System.out.println("EXIT");
+            break;
+
+         default: break;
+      }
+   }
 
 
 
@@ -106,9 +137,12 @@ public class LibFunctions {
       boolean loginAllowed = false ;
 
       // LOGIN
+      outer:
       do{
          System.out.println("Please enter your nickname for LOGIN (4-20 long, no spec chars at begin & the end): ");
          desiredLogin = scan.nextLine().trim() ;
+         // X
+         if(desiredLogin.equalsIgnoreCase("x")) break;
          if( validateLogin( desiredLogin )  ){
             loginAllowed = true ;
 
@@ -126,6 +160,8 @@ public class LibFunctions {
                do {
                   System.out.println("Password must be at least 4 chars:");
                   pass1 = scan.nextLine().trim();
+                  // X
+                  if(pass1.equalsIgnoreCase("x")) break outer;
                   if( validatePass( pass1 ) )
                      correctPass = true ;
                } while( !correctPass ) ;
@@ -133,6 +169,8 @@ public class LibFunctions {
                   System.out.println("Repeat pass ones more:");
                   String pass2 = scan.nextLine().trim() ;
 
+                  // X
+                  if(pass2.equalsIgnoreCase("x")) break outer;
                   if( pass1.equals( pass2 ) ) {
                      equalPass = true;
                   } else { System.out.println("Your passwords doesn't match."); }
@@ -147,6 +185,8 @@ public class LibFunctions {
                do {
                   System.out.print("Pls give your valid email: ");
                   desiredMail = scan.nextLine().trim();
+                  // X
+                  if(desiredMail.equalsIgnoreCase("x")) break outer;
                   if( validateMail( desiredMail ) )
                      correctMail = true ;
                } while( !correctMail ) ;
@@ -159,6 +199,8 @@ public class LibFunctions {
                do {
                   System.out.print("And now pls provide your name: ");
                   desiredName = scan.nextLine().trim();
+                  // X
+                  if(desiredName.equalsIgnoreCase("x")) break outer;
                   if( validateName( desiredName ) )
                      correctName = true ;
                } while( !correctName ) ;
@@ -166,10 +208,7 @@ public class LibFunctions {
 
 
                uList.add( new User(desiredLogin, pass1, desiredMail, desiredName, 0) ) ;
-
-               Library.setUserIsLogged(true);
-               Library.setLoggedUser(desiredLogin);
-               System.out.println("Congrats! You're in!");
+               System.out.println("Now login using your credentials");
 
             }
 
@@ -183,70 +222,49 @@ public class LibFunctions {
 
 
 
-
+   // 2 - LOGIN  <VALIDATE USER>
    private void validateUser(){
-      // generate initial users list
-      List<User> uList = createUserList() ;
 
-      validateUser('l');  // login
-      validateUser('p');  // pass
-      Library.setUserIsLogged(true);
-   }
-
-
-   public void validateUser( char login_pass ){
       Scanner scan = new Scanner(System.in) ;
-      String uVar ;
+      String uLog, uPass, verifiedLog = "" ;
       boolean is = false ;
-      String lineInput = login_pass == 'l' ? "Enter your login:" : "Enter your password:";
-      String lineOutput = login_pass == 'l' ? "No such login (2)" : "Wrong password (2)";
 
-      System.out.println( lineInput );
-
+      System.out.println( "Enter your login:" );
+      // LOGIN
       do {
-         uVar = scan.nextLine().trim() ;
-         if(uVar.equals("")){
-            is = false ; System.out.print("Enter smth: ");
-         } else {
-            Iterator<User> iterator = uList.iterator();
-
-            while(iterator.hasNext()){
-               if(login_pass == 'l'){
-                  if( iterator.next().getLogin().equals( uVar ) ){ is = true ; Library.setLoggedUser( uVar ); }
-               } else {
-                  if( iterator.next().getPass().equals( uVar ) ){ is = true ; }
-               }
-            }
+         uLog = scan.nextLine().trim() ;
+         if(uLog.equals("")){
+            System.out.print("Enter smth: ");
          }
-         if( !is ){ System.out.println( lineOutput ); }
-      } while ( !is ) ;
-   }
-
-
-
-   public void proceedLogged( char answer ){
-      switch(answer){
-
-         case '1': // View LIBRARY
-
-            break;
-
-         case '2': // My books
-
-            break;
-
-
-         case 'z': // Log out
-
-            break;
-
-         case 'x': // EXIT
-
-            break;
-
-         default: break;
+         else {
+            is = userExists( uLog ) ;
+            if( is )
+               verifiedLog = uLog ;
+         }
+         if( !is ){ System.out.println( "No such login (3)" ); }
       }
+      while ( !is ) ;
+
+
+      // PASS
+      System.out.println( "Enter your pass:" );
+      do {
+         uPass = scan.nextLine().trim() ;
+         if(uPass.equals("")){
+            System.out.print("Enter smth: ");
+         }
+         else {
+//            System.out.println("uLog: " + uLog + ", uPass: " + uPass);
+            is = passCorrect( verifiedLog, uPass ) ;
+            if( is ) logIn( uLog );
+         }
+         if( !is ){ System.out.println( "Wrong password (3)" ); }
+      }
+      while ( !is ) ;
+
    }
+
+
 
 
 
@@ -264,18 +282,15 @@ public class LibFunctions {
    }
 
    public boolean validateName( String val ){
-//      return ( val.length() > 1) ;
       return val.matches("^[a-zA-Z0-9_-]{2,16}$") ;
    }
 
    public boolean loginAvailable( String desiredLogin ){
       boolean loginAvailable = false ;
-
-//      System.out.println( "uList.size: " + uList.size() );
       Iterator<User> iterator = uList.iterator();
-//      System.out.println( "List Login: " + iterator.next().getLogin() );
       while(iterator.hasNext()){
-         if( iterator.next().getLogin().equals( desiredLogin ) ){
+         User user = iterator.next() ;
+         if( user.getLogin().equals( desiredLogin ) ){
             loginAvailable = false ;
             System.out.println("Login NOT available.");
             break;
@@ -283,11 +298,43 @@ public class LibFunctions {
             loginAvailable = true ;
          }
       }
-
-
       return loginAvailable ;
    }
 
+   private User getUser( String login ){
+      Iterator<User> iterator = uList.iterator();
+      while(iterator.hasNext()){
+         User user = iterator.next() ;
+         if( user.getLogin().equals( login ) ){
+            return user ;
+         }
+      }
+      return iterator.next() ;
+   }
+   private boolean userExists( String login ){
+      Iterator<User> iterator = uList.iterator();
+      while(iterator.hasNext()){
+         User user = iterator.next() ;
+         if( user.getLogin().equals( login ) ){
+//            System.out.println("user.getLogin().equals( login ): " + user.getLogin().equals( login ) + ", LOGIN: " + login);
+            return true ;
+         }
+      } return false ;
+   }
+   private boolean passCorrect( String login, String pass ){
+      Iterator<User> iterator = uList.iterator();
+      while(iterator.hasNext()){
+         User user = iterator.next() ;
+         if( user.getLogin().equals(login) && user.getPass().equals(pass)  ){
+            return true ;
+         }
+      } return false ;
+   }
+
+   private void logIn( String login ){
+      Library.setLoggedUser(login);
+      Library.setUserIsLogged(true);
+   }
    private void logOut(){
       Library.setLoggedUser("");
       Library.setUserIsLogged(false);
