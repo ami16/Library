@@ -9,13 +9,13 @@ public class Test {
     public static void main(String[] args) {
         BookManager bm = new BookManager();
 
-        Book c1 = new Book("Socrat", "Book1", 10);
-        Book c2 = new Book("Shakespeare", "Book2", 20);
-        Book c3 = new Book("King", "Book3", 30);
+        Book b1 = new Book("Socrat", "Book1", 10);
+        Book b2 = new Book("Shakespeare", "Book2", 20);
+        Book b3 = new Book("King", "Book3", 30);
         System.out.println("ADD Book ==============");
-        Integer ISBN1 = bm.addBook(c1);
-        Integer ISBN2 = bm.addBook(c2);
-        Integer ISBN3 = bm.addBook(c3);
+        Integer ISBN1 = bm.addBook(b1);
+        Integer ISBN2 = bm.addBook(b2);
+        Integer ISBN3 = bm.addBook(b3);
         List<Book> result1 = bm.findBooks();
         for(Book b : result1) {
             System.out.println(b);

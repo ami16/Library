@@ -46,9 +46,9 @@ public class BookSimpleDAO implements BookDAO {
     }
 
     private Integer generateBookISBN() {
-        Integer ISBN = (int)Math.round(Math.random() * 1000);
+        Integer ISBN = (int)Math.round((Math.random() + 1)  * 1000);
         while(getBook(ISBN) != null) {
-            ISBN = (int)Math.round(Math.random() * 1000);
+            ISBN = (int)Math.round((Math.random() + 1) * 1000);
         }
         return ISBN;
     }
