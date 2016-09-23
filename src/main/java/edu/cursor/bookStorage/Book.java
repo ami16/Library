@@ -7,7 +7,7 @@ public class Book {
     private Integer ISBN;
     private String Author;
     private String Title;
-    private Integer quantity;
+    private Integer Quantity;
 
 
     public Book() {
@@ -16,15 +16,15 @@ public class Book {
     public Book(String author, String title, Integer quantity) {
         Author = author;
         Title = title;
-        quantity = quantity;
+        Quantity = quantity;
     }
 
     public Integer getQuantity() {
-        return quantity;
+        return Quantity;
     }
 
     public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+        this.Quantity = quantity;
     }
 
     public Integer getBookISBN() {
@@ -81,7 +81,7 @@ public class Book {
                 "ISBN=" + ISBN +
                 ", Author='" + Author + '\'' +
                 ", Title='" + Title + '\'' +
-                ", quantity=" + quantity +
+                ", quantity=" + Quantity +
                 '}';
     }
 }
