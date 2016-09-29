@@ -10,61 +10,20 @@ public class User {
 	private String address;
 	private String dateOfRegistration;
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public int getMobileNo() {
-		return mobileNo;
-	}
-
-	public void setMobileNo(int mobileNo) {
-		this.mobileNo = mobileNo;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getDateOfRegistration() {
-		return dateOfRegistration;
-	}
-
-	public void setDateOfRegistration(String dateOfRegistration) {
-		this.dateOfRegistration = dateOfRegistration;
-	}
+	public int getId() { return id; }
+	public void setId(int id) { this.id = id; }
+	public String getFirstName() { return firstName; }
+	public void setFirstName(String firstName) { this.firstName = firstName; }
+	public String getLastName() { return lastName; }
+	public void setLastName(String lastName) { this.lastName = lastName; }
+	public String getEmail() { return email; }
+	public void setEmail(String email) { this.email = email; }
+	public int getMobileNo() { return mobileNo; }
+	public void setMobileNo(int mobileNo) { this.mobileNo = mobileNo; }
+	public String getAddress() { return address; }
+	public void setAddress(String address) { this.address = address; }
+	public String getDateOfRegistration() { return dateOfRegistration; }
+	public void setDateOfRegistration(String dateOfRegistration) { this.dateOfRegistration = dateOfRegistration; }
 
 	public User(int id, String firstName, String lastName, String email, int mobileNo, String address,
 			String dateOfRegistration) {

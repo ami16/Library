@@ -154,7 +154,8 @@ public class LibFunctions {
 		boolean loginAllowed = false;
 
 		// LOGIN
-		//for Andrew. It`s for you :) sorry.. 
+		// for Andrew. It`s for you :) sorry..
+		// Okay..
 		outer: do {
 			System.out.println("Please enter your nickname for LOGIN (4-20 long, no spec chars at begin & the end): ");
 			desiredLogin = scan.nextLine().trim();
