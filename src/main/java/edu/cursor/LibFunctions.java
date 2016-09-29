@@ -1,9 +1,6 @@
 package edu.cursor;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class LibFunctions {
 
@@ -150,29 +147,28 @@ public class LibFunctions {
 
 	public void registerUser() {
 		Scanner scan = new Scanner(System.in);
-		String desiredLogin;
+		String desiredMail;
 		boolean loginAllowed = false;
 
 		// LOGIN
 		// for Andrew. It`s for you :) sorry..
 		// Okay..
 		outer: do {
-			System.out.println("Please enter your nickname for LOGIN (4-20 long, no spec chars at begin & the end): ");
-			desiredLogin = scan.nextLine().trim();
+			System.out.println("Please enter your MAIL as a login: ");
+			desiredMail = scan.nextLine().trim();
 			// X
-			if (desiredLogin.equalsIgnoreCase("x"))
+			if (desiredMail.equalsIgnoreCase("x"))
 				break;
-			if (validateLogin(desiredLogin)) {
-				loginAllowed = true;
+			if (validateMail(desiredMail)) {
 
-				if (!loginAvailable(desiredLogin)) {
+				if (!loginAvailable(desiredMail)) {
 					loginAllowed = false;
 				} else {
 
-					// LOGIN ok.
+					// MAIL ok.
 					// Now PASS
-					boolean correctPass = false;
-					boolean equalPass = false;
+					boolean passCorrect = false;
+					boolean passEqual = false;
 					String pass1;
 					System.out.print("OKAY NOW! Enter your password. ");
 					do {
@@ -182,8 +178,8 @@ public class LibFunctions {
 						if (pass1.equalsIgnoreCase("x"))
 							break outer;
 						if (validatePass(pass1))
-							correctPass = true;
-					} while (!correctPass);
+							passCorrect = true;
+					} while (!passCorrect);
 					do {
 						System.out.println("Repeat pass ones more:");
 						String pass2 = scan.nextLine().trim();
@@ -192,32 +188,18 @@ public class LibFunctions {
 						if (pass2.equalsIgnoreCase("x"))
 							break outer;
 						if (pass1.equals(pass2)) {
-							equalPass = true;
+							passEqual = true;
 						} else {
 							System.out.println("Your passwords doesn't match.");
 						}
-					} while (!equalPass);
+					} while (!passEqual);
 
 					// PASS ok.
-					// Now MAIL
-					boolean correctMail = false;
-					String desiredMail;
-					do {
-						System.out.print("Pls give your valid email: ");
-						desiredMail = scan.nextLine().trim();
-						// X
-						if (desiredMail.equalsIgnoreCase("x"))
-							break outer;
-						if (validateMail(desiredMail))
-							correctMail = true;
-					} while (!correctMail);
-
-					// MAIL ok.
-					// Now NAME
+					// Now Name
 					boolean correctName = false;
 					String desiredName;
 					do {
-						System.out.print("And now pls provide your name: ");
+						System.out.print("Pls give your name: ");
 						desiredName = scan.nextLine().trim();
 						// X
 						if (desiredName.equalsIgnoreCase("x"))
@@ -226,16 +208,67 @@ public class LibFunctions {
 							correctName = true;
 					} while (!correctName);
 
-					uList.add(new User(desiredLogin, pass1, desiredMail, desiredName, 0));
-					System.out.println("Now login using your credentials");
+					// Name ok.
+					// Now name2
+					boolean correctName2 = false;
+					String desiredName2;
+					do {
+						System.out.print("Pls provide your second name: ");
+						desiredName2 = scan.nextLine().trim();
+						// X
+						if (desiredName2.equalsIgnoreCase("x"))
+							break outer;
+						if (validateName(desiredName2))
+							correctName2 = true;
+					} while (!correctName2);
 
+					// name2 ok.
+					// Now MOBILE
+					boolean correctMobile = false;
+					int desiredMobile;
+					do {
+						System.out.print("Your mobile # (10 numbers): ");
+						desiredMobile = scan.nextInt();
+						// X
+						if ( Integer.toString(desiredMobile).equalsIgnoreCase("x"))
+							break outer;
+						if (validateMobile(desiredMobile))
+							correctMobile = true;
+					} while (!correctMobile);
+
+					// MOBILE ok.
+					// Now ADDRESS
+					boolean correctAddr = false;
+					String desiredAddr;
+					do {
+						System.out.print("Provide your address (10 chars min): ");
+						desiredAddr = scan.nextLine().trim();
+						// X
+						if ( desiredAddr.equalsIgnoreCase("x"))
+							break outer;
+						if ( desiredAddr.length() > 10 )
+							correctAddr = true;
+					} while (!correctAddr);
+
+					loginAllowed = true;
+
+					uList.add(new User( getNewUserId(), desiredName, desiredName2, desiredMail, desiredMobile, desiredAddr, getNewUserRegDate() ));
+					System.out.println("Now login using your credentials");
 				}
 
 			} else {
 				System.out.println("Not allowed");
 			}
 		} while (!loginAllowed);
+	}
 
+	private int getNewUserId(){
+
+		return 1;
+	}
+	private String getNewUserRegDate(){
+		Date date = new Date() ;
+		return date.toString() ;
 	}
 
 	// 2 - LOGIN <VALIDATE USER>
@@ -290,11 +323,16 @@ public class LibFunctions {
 	}
 
 	public boolean validateMail(String val) {
-		return val.matches("^(.+)@(.+)$");
+		return val.matches("^(.+)@(.+)\\.(.+){1,3}$");
 	}
 
 	public boolean validateName(String val) {
 		return val.matches("^[a-zA-Z0-9_-]{2,16}$");
+	}
+
+	private boolean validateMobile( int val ){
+//		return Integer.toString(val).matches("^(d{3})\\-(d{3})\\-(d{4})$");
+		return Integer.toString(val).matches("^(\\d{10})$");
 	}
 
 	public boolean loginAvailable(String desiredLogin) {
@@ -337,16 +375,17 @@ public class LibFunctions {
 		return false;
 	}
     //need class Credential for password
-//	private boolean passCorrect(String login, String pass) {
-//		Iterator<User> iterator = uList.iterator();
-//		while (iterator.hasNext()) {
-//			User user = iterator.next();
+	private boolean passCorrect(String login, String pass) {
+		Iterator<User> iterator = uList.iterator();
+		while (iterator.hasNext()) {
+			User user = iterator.next();
 //			if (user.getEmail().equals(login) && user.getPass().equals(pass)) {
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
+			if (user.getEmail().equals(login) ) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	private void logIn(String login) {
 		Library.setLoggedUser(login);

@@ -25,8 +25,7 @@ public class User {
 	public String getDateOfRegistration() { return dateOfRegistration; }
 	public void setDateOfRegistration(String dateOfRegistration) { this.dateOfRegistration = dateOfRegistration; }
 
-	public User(int id, String firstName, String lastName, String email, int mobileNo, String address,
-			String dateOfRegistration) {
+	public User(int id, String firstName, String lastName, String email, int mobileNo, String address, String dateOfRegistration) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
