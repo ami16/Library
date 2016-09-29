@@ -10,12 +10,9 @@ public class LibFunctions {
 	public LibFunctions() {
 		List<User> uList = auth.createUserList();
 		bList = createBookList() ;
-
-		System.out.println( uList.toString() );
 	}
 
 	public void showMainMenu(boolean userIsLogged) {
-//		AuthFactory auth = AuthFactory.getInstance();
 		System.out.println("MENU:\n");
 
 		 System.out.println("userISLogged: " + auth.getUserIsLogged() );
@@ -258,7 +255,7 @@ public class LibFunctions {
 
 //					uList.add(new User( getNewUserId(), desiredName, desiredName2, desiredMail, desiredMobile, desiredAddr, getNewUserRegDate() ));
 					int newId = getNewUserId() ;
-					auth.addUser( newId, desiredName, desiredName2, desiredMail, desiredMobile, desiredAddr, getNewUserRegDate() ) ;
+					auth.addUser( newId, desiredName, desiredName2, desiredMail, desiredMobile, desiredAddr, getNewUserRegDate(), pass1 ) ;
 					System.out.println("Now login using your credentials");
 				}
 
@@ -269,8 +266,12 @@ public class LibFunctions {
 	}
 
 	private int getNewUserId(){
-
-		return 47;
+		Iterator<User> itr = auth.getuList().iterator();
+		int currentId = 1 ;
+		while (itr.hasNext()) {
+			currentId = itr.next().getId();
+		}
+		return currentId + 1;
 	}
 	private String getNewUserRegDate(){
 		Date date = new Date() ;
@@ -337,13 +338,11 @@ public class LibFunctions {
 	}
 
 	private boolean validateMobile( int val ){
-//		return Integer.toString(val).matches("^(d{3})\\-(d{3})\\-(d{4})$");
 		return Integer.toString(val).matches("^(\\d{9})$");
 	}
 
 	public boolean loginAvailable(String desiredLogin) {
 		boolean loginAvailable = false;
-//		Iterator<User> iterator = uList.iterator();
 		Iterator<User> iterator = auth.getuList().iterator();
 		while (iterator.hasNext()) {
 			User user = iterator.next();
@@ -359,7 +358,6 @@ public class LibFunctions {
 	}
 
 	private User getUser(String login) {
-//		Iterator<User> iterator = uList.iterator();
 		Iterator<User> iterator = auth.getuList().iterator();
 		while (iterator.hasNext()) {
 			User user = iterator.next();
@@ -371,7 +369,6 @@ public class LibFunctions {
 	}
 
 	private boolean userExists(String login) {
-//		Iterator<User> iterator = uList.iterator();
 		Iterator<User> iterator = auth.getuList().iterator();
 		while (iterator.hasNext()) {
 			User user = iterator.next();
@@ -385,7 +382,6 @@ public class LibFunctions {
 	}
     //need class Credential for password
 	private boolean passCorrect(String login, String pass) {
-//		Iterator<User> iterator = uList.iterator();
 		Iterator<User> iterator = auth.getuList().iterator();
 		while (iterator.hasNext()) {
 			User user = iterator.next();

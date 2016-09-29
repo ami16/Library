@@ -5,15 +5,18 @@ import java.util.List;
 
 public class AuthFactory {
 
+   Credential cred = Credential.getInstance();
+
    private boolean userIsLogged = false;
    private String loggedUser;
    private List<User> uList = new ArrayList<>();
 
    public boolean getUserIsLogged() { return userIsLogged; }
-   public void setUserIsLogged(boolean usrIsLogged) { userIsLogged = usrIsLogged; }
    public String getLoggedUser() { return loggedUser; }
-   public void setLoggedUser(String loggedUsr) { loggedUser = loggedUsr; }
    public List<User> getuList() { return uList; }
+
+   public void setUserIsLogged(boolean usrIsLogged) { userIsLogged = usrIsLogged; }
+   public void setLoggedUser(String loggedUsr) { loggedUser = loggedUsr; }
 
 
    private static AuthFactory instance ;
@@ -46,10 +49,9 @@ public class AuthFactory {
       return uList;
    }
 
-   public List<User> addUser( int id, String firstName, String lastName, String email, int mobileNo, String address, String dateOfRegistration ) {
-      uList.add(
-          new User( id, firstName, lastName, email, mobileNo, address, dateOfRegistration )
-      ) ;
+   public List<User> addUser( int id, String firstName, String lastName, String email, int mobileNo, String address, String dateOfRegistration, String pass ) {
+      uList.add( new User(id, firstName, lastName, email, mobileNo, address, dateOfRegistration) ) ;
+      cred.addCred( id, pass ) ;
       return uList ;
    }
 
