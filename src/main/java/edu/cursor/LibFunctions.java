@@ -4,24 +4,28 @@ import java.util.*;
 
 public class LibFunctions {
 
-	private static List<User> uList = new ArrayList<>();
+	AuthFactory auth = AuthFactory.getInstance();
 	private static List<Book1> bList = new ArrayList<>();
 
 	public LibFunctions() {
-		uList = createUserList();
-		bList = createBookList();
+		List<User> uList = auth.createUserList();
+		bList = createBookList() ;
+
+		System.out.println( uList.toString() );
 	}
 
 	public void showMainMenu(boolean userIsLogged) {
+//		AuthFactory auth = AuthFactory.getInstance();
 		System.out.println("MENU:\n");
 
-		// System.out.println("userISLogged: " + Library.getUserIsLogged() );
-		// System.out.println("loggedUser: " + Library.getLoggedUser() );
-		// System.out.println( uList.toString() );
+		 System.out.println("userISLogged: " + auth.getUserIsLogged() );
+		 System.out.println("loggedUser: " + auth.getLoggedUser() );
+//		 System.out.println( uList.toString() );
+//		 System.out.println( auth.getuList() );
 
 		if (userIsLogged) {
 
-			User user = getUser(Library.getLoggedUser());
+			User user = getUser(auth.getLoggedUser());
 			System.out.println("Hello, " + user.getFirstName());
 			System.out.println("1. View my profile");
 			System.out.println("1. View library books");
@@ -227,7 +231,7 @@ public class LibFunctions {
 					boolean correctMobile = false;
 					int desiredMobile;
 					do {
-						System.out.print("Your mobile # (10 numbers): ");
+						System.out.print("Your mobile # (9 numbers): ");
 						desiredMobile = scan.nextInt();
 						// X
 						if ( Integer.toString(desiredMobile).equalsIgnoreCase("x"))
@@ -252,7 +256,9 @@ public class LibFunctions {
 
 					loginAllowed = true;
 
-					uList.add(new User( getNewUserId(), desiredName, desiredName2, desiredMail, desiredMobile, desiredAddr, getNewUserRegDate() ));
+//					uList.add(new User( getNewUserId(), desiredName, desiredName2, desiredMail, desiredMobile, desiredAddr, getNewUserRegDate() ));
+					int newId = getNewUserId() ;
+					auth.addUser( newId, desiredName, desiredName2, desiredMail, desiredMobile, desiredAddr, getNewUserRegDate() ) ;
 					System.out.println("Now login using your credentials");
 				}
 
@@ -264,7 +270,7 @@ public class LibFunctions {
 
 	private int getNewUserId(){
 
-		return 1;
+		return 47;
 	}
 	private String getNewUserRegDate(){
 		Date date = new Date() ;
@@ -332,12 +338,13 @@ public class LibFunctions {
 
 	private boolean validateMobile( int val ){
 //		return Integer.toString(val).matches("^(d{3})\\-(d{3})\\-(d{4})$");
-		return Integer.toString(val).matches("^(\\d{10})$");
+		return Integer.toString(val).matches("^(\\d{9})$");
 	}
 
 	public boolean loginAvailable(String desiredLogin) {
 		boolean loginAvailable = false;
-		Iterator<User> iterator = uList.iterator();
+//		Iterator<User> iterator = uList.iterator();
+		Iterator<User> iterator = auth.getuList().iterator();
 		while (iterator.hasNext()) {
 			User user = iterator.next();
 			if (user.getEmail().equals(desiredLogin)) {
@@ -352,7 +359,8 @@ public class LibFunctions {
 	}
 
 	private User getUser(String login) {
-		Iterator<User> iterator = uList.iterator();
+//		Iterator<User> iterator = uList.iterator();
+		Iterator<User> iterator = auth.getuList().iterator();
 		while (iterator.hasNext()) {
 			User user = iterator.next();
 			if (user.getEmail().equals(login)) {
@@ -363,7 +371,8 @@ public class LibFunctions {
 	}
 
 	private boolean userExists(String login) {
-		Iterator<User> iterator = uList.iterator();
+//		Iterator<User> iterator = uList.iterator();
+		Iterator<User> iterator = auth.getuList().iterator();
 		while (iterator.hasNext()) {
 			User user = iterator.next();
 			if (user.getEmail().equals(login)) {
@@ -376,7 +385,8 @@ public class LibFunctions {
 	}
     //need class Credential for password
 	private boolean passCorrect(String login, String pass) {
-		Iterator<User> iterator = uList.iterator();
+//		Iterator<User> iterator = uList.iterator();
+		Iterator<User> iterator = auth.getuList().iterator();
 		while (iterator.hasNext()) {
 			User user = iterator.next();
 //			if (user.getEmail().equals(login) && user.getPass().equals(pass)) {
@@ -388,27 +398,16 @@ public class LibFunctions {
 	}
 
 	private void logIn(String login) {
-		Library.setLoggedUser(login);
-		Library.setUserIsLogged(true);
+		auth.setLoggedUser(login);
+		auth.setUserIsLogged(true);
 	}
 
 	private void logOut() {
-		Library.setLoggedUser("");
-		Library.setUserIsLogged(false);
+		auth.setLoggedUser("");
+		auth.setUserIsLogged(false);
 	}
 
-	// 1. USERS LIST. Olesya
-	private static List<User> createUserList() {
-		uList.add(new User(1, "Peter", "Griffin", "peter@gmail.com", 982545785, "Quahog,Spoon st., 34", "25-11-2016"));
-		uList.add(new User(2, "Lois", "Griffin", "lois@gmail.com", 735458787, "Quahog,Spoon st.,34", "18-05-2014"));
-		uList.add(new User(3, "Homer", "Simpson", "hommy@gmail.com", 598741547, "Springfield, Evergreeen st.,45",
-				"13-04-2016"));
-		uList.add(
-				new User(4, "Eric", "Cartman", "eric@gmail.com", 857845175, "South Park, Jew st., 1845", "25-06-2014"));
-		uList.add(new User(5, "Leopold", "Stoch", "butters@gmailm.com", 547845145, "South Park, Raisins st., 34",
-				"18-07-2013"));
-		return uList;
-	}
+
 
 	private static List<Book1> createBookList() {
 		/*
