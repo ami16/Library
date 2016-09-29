@@ -2,6 +2,7 @@ package edu.cursor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Iterator;
 
 public class AuthFactory {
 
@@ -53,6 +54,19 @@ public class AuthFactory {
       uList.add( new User(id, firstName, lastName, email, mobileNo, address, dateOfRegistration) ) ;
       cred.addCred( id, pass ) ;
       return uList ;
+   }
+
+   public int getUserId( String email ){
+      int id = 0;
+      Iterator<User> itr = getuList().iterator();
+      while( itr.hasNext() ){
+         User user = itr.next();
+         if( user.getEmail().equals( email ) ){
+            id = user.getId() ;
+            break;
+         }
+      }
+      return id;
    }
 
 }

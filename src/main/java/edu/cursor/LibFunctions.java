@@ -5,10 +5,14 @@ import java.util.*;
 public class LibFunctions {
 
 	AuthFactory auth = AuthFactory.getInstance();
+	Credential cred = Credential.getInstance();
 	private static List<Book1> bList = new ArrayList<>();
 
 	public LibFunctions() {
-		List<User> uList = auth.createUserList();
+//		List<User> uList = auth.createUserList();
+//		Map<Integer, String> cList = cred.createCredList();
+		auth.createUserList();
+		cred.createCredList();
 		bList = createBookList() ;
 	}
 
@@ -253,7 +257,6 @@ public class LibFunctions {
 
 					loginAllowed = true;
 
-//					uList.add(new User( getNewUserId(), desiredName, desiredName2, desiredMail, desiredMobile, desiredAddr, getNewUserRegDate() ));
 					int newId = getNewUserId() ;
 					auth.addUser( newId, desiredName, desiredName2, desiredMail, desiredMobile, desiredAddr, getNewUserRegDate(), pass1 ) ;
 					System.out.println("Now login using your credentials");
@@ -373,8 +376,7 @@ public class LibFunctions {
 		while (iterator.hasNext()) {
 			User user = iterator.next();
 			if (user.getEmail().equals(login)) {
-				// System.out.println("user.getLogin().equals( login ): " +
-				// user.getLogin().equals( login ) + ", LOGIN: " + login);
+//				 System.out.println("user.getEmail().equals( login ): " + user.getEmail().equals( login ) + ", LOGIN: " + login);
 				return true;
 			}
 		}
@@ -385,9 +387,11 @@ public class LibFunctions {
 		Iterator<User> iterator = auth.getuList().iterator();
 		while (iterator.hasNext()) {
 			User user = iterator.next();
-//			if (user.getEmail().equals(login) && user.getPass().equals(pass)) {
-			if (user.getEmail().equals(login) ) {
-				return true;
+			if ( user.getEmail().equals(login) ) {
+				if( cred.getPass(auth.getUserId(user.getEmail())).equals(pass) ){
+					return true;
+				}
+
 			}
 		}
 		return false;

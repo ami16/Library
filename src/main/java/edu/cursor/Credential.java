@@ -10,7 +10,9 @@ public class Credential {
 
    private static Credential instance ;
 
-   private Credential() { }
+   private Credential() {
+
+   }
 
    public static Credential getInstance(){
       if( instance == null ){
@@ -37,6 +39,10 @@ public class Credential {
    public Map<Integer, String> addCred( int id, String pass ) {
       cList.put(id, pass) ;
       return cList ;
+   }
+
+   public String getPass( int id ){
+      return cList.get(id);
    }
 
 }
