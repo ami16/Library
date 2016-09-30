@@ -1,5 +1,10 @@
 package edu.cursor;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Scanner;
+
 public class User {
 
 	private int id;
@@ -9,6 +14,8 @@ public class User {
 	private int mobileNo;
 	private String address;
 	private String dateOfRegistration;
+
+	public static Map<Integer, Integer> ubList = new HashMap<>() ;
 
 	public int getId() { return id; }
 	public void setId(int id) { this.id = id; }
@@ -96,5 +103,46 @@ public class User {
 		return "User [id: " + id + ", firstName: " + firstName + ", lastName: " + lastName + ", email: " + email
 				+ ", mobileNo: " + mobileNo + ", address: " + address + ", dateOfRegistration: " + dateOfRegistration
 				+ "]\n";
+	}
+
+	public static void showMyBooks() {
+		Iterator<Map.Entry<Integer, Integer>> itr = ubList.entrySet().iterator() ;
+		while(itr.hasNext()){
+			Map.Entry<Integer, Integer> ub = itr.next();
+			System.out.println( Book.getBook( ub.getKey() ).toString() );
+		}
+	}
+
+
+	public static String takeBook() {
+		Scanner scan = new Scanner(System.in);
+		String userChoice = "";
+		boolean is = false;
+		do {
+			System.out.println("Input ISBN please: ");
+
+			userChoice = scan.nextLine().toLowerCase().trim() ;
+			Iterator<Book> itr = Book.bList.iterator() ;
+
+			while( itr.hasNext() ){
+				Book b = itr.next() ;
+				if( b.getISBN() == Integer.parseInt( userChoice ) ){
+					is = true;
+					System.out.print("Book is present. ");
+					if( b.getQuantity() !=0 ){
+						System.out.println("Take it.");
+						b.setQuantity( b.getQuantity() - 1 );
+						ubList.put( b.getISBN(), 1 ) ;
+					} else {
+						System.out.println("Book is unavailable. Turn back in few days. ");
+					}
+					break;
+				}
+			}
+			if( !is ){
+				System.out.println("No such book in list. Try ones more...");
+			}
+		} while (!is);
+		return userChoice;
 	}
 }

@@ -2,6 +2,7 @@ package edu.cursor;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 public class Book implements Comparable<Book> {
@@ -70,6 +71,18 @@ public class Book implements Comparable<Book> {
     @Override
     public String toString() {
         return ISBN + "\t'" + Title + "' -- " + Author + " ("+ BookCat.getCat(cat) + ") " + PublYear + "/" + WritYear + " (" + quantity + ")\n" ;
+    }
+
+    public static Book getBook( Integer ISBN ){
+        Book b = null ;
+        Iterator<Book> itr = bList.iterator();
+        while (itr.hasNext()){
+            b = itr.next();
+            if( b.getISBN().equals(ISBN) ){
+                return b ;
+            }
+        }
+        return b;
     }
 
 

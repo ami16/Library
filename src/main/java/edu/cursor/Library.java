@@ -17,7 +17,7 @@ public class Library {
 
 			func.showMainMenu( auth.getUserIsLogged());
 			char mainAnswer = func.getMain( auth.getUserIsLogged());
-			func.proceedMain(mainAnswer);
+			func.proceedMain(mainAnswer, auth.getUserIsLogged());
 
 		}
 

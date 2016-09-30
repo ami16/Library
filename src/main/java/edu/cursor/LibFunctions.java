@@ -6,8 +6,8 @@ public class LibFunctions {
 
 	AuthFactory auth = AuthFactory.getInstance();
 	Credential cred = Credential.getInstance();
-//	private static List<Book> bList = new ArrayList<>();
-	private static List<Book> bList = Book.bList ;
+	public static List<Book> bList = Book.bList ;
+//	private static Map<Integer, Integer> ubList = User.ubList ;
 
 	public LibFunctions() {
 		auth.createUserList();
@@ -107,21 +107,39 @@ public class LibFunctions {
 		return loggedChoice;
 	}
 
-	public void proceedMain(char answer) {
-		switch (answer) {
+	public void proceedMain(char answer, boolean isLogged) {
+		if( !isLogged ) {
+			switch (answer) {
+				case '1': // Register
+					auth.registerUser();
+					break;
 
-		case '1': // Register
-			auth.registerUser();
-			break;
+				case '2': // Login
+					auth.validateUser();
+					break;
 
-		case '2': // Login
-			auth.validateUser();
-			break;
+				case '3': // View books
+					getLibraryBooks();
+					proposeLibSorted();
+					break;
+			}
+		} else {
+			switch (answer) {
+				case '1': // View books
+					getLibraryBooks();
+					proposeLibSorted();
+					break;
 
-		case '3': // View books
-			getLibraryBooks();
-			proposeLibSorted();
-			break;
+				case '2': // My books
+					System.out.println("---My books here---");
+					User.showMyBooks();
+					System.out.println("-------------------");
+					break;
+
+				case '3': // My profile
+					System.out.println("---My PROFILE---");
+					break;
+			}
 		}
 	}
 
@@ -162,9 +180,12 @@ public class LibFunctions {
 
 
 	public void proposeLibSorted() {
-		System.out.println("You can sort this list by: a) Title, b) Author, c) Written Date d) Publish Date. \n" +
-			"t) - take a book\n" +
-			"z) - to Main menu ");
+		System.out.println("You can sort this list by: a) Title, b) Author, c) Written Date d) Publish Date.") ;
+		if( auth.getUserIsLogged() ){
+			System.out.println("t) - take a book" );
+		}
+		System.out.println("z) - to Main menu ");
+
 		getLibSortedChoice() ;
 	}
 
@@ -200,9 +221,19 @@ public class LibFunctions {
 					proposeLibSorted();
 					break;
 				case "t":
-					is = true;
-					takeBook() ;
-					break;
+					if( auth.getUserIsLogged() ){
+						is = true;
+						User.takeBook() ;
+						getLibraryBooks();
+						proposeLibSorted();
+						break;
+					} else {
+						is = false;
+						System.out.println("Choose correct item (a-d, t or z): ");
+						break;
+					}
+
+
 				case "z":
 					is = true;
 					break;
@@ -213,30 +244,7 @@ public class LibFunctions {
 		return userChoice;
 	}
 
-	public String takeBook() {
-		Scanner scan = new Scanner(System.in);
-		String userChoice = "";
-		boolean is = false;
-		do {
-			System.out.println("Input ISBN please: ");
 
-			userChoice = scan.nextLine().toLowerCase().trim() ;
-			Iterator<Book> itr = Book.bList.iterator() ;
-
-			while( itr.hasNext() ){
-				Book b = itr.next() ;
-				if( b.getISBN() == Integer.parseInt( userChoice ) ){
-					is = true;
-					System.out.println("Okay. Book is present");
-					break;
-				}
-			}
-			if( !is ){
-				System.out.println("No such book in list. Try ones more...");
-			}
-		} while (!is);
-		return userChoice;
-	}
 
 
 	public void sayBye() {

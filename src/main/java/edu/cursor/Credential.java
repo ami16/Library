@@ -33,6 +33,7 @@ public class Credential {
       cList.put(3, "doughnut") ;
       cList.put(4, "shit") ;
       cList.put(5, "brave") ;
+      cList.put(6, "1234") ;
       return cList;
    }
 

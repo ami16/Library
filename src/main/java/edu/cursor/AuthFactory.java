@@ -44,7 +44,8 @@ public class AuthFactory {
           new User(4, "Eric", "Cartman", "eric@gmail.com", 857845175, "South Park, Jew st., 1845", "25-06-2014"));
          // Jew St. )))))))
       uList.add(
-          new User(5, "Leopold", "Stoch", "butters@gmailm.com", 547845145, "South Park, Raisins st., 34", "18-07-2013"));
+          new User(5, "Leopold", "Stoch", "butters@gmail.com", 547845145, "South Park, Raisins st., 34", "18-07-2013"));
+      uList.add(new User(6, "User1", "Userenko", "m@m.c", 123456789, "abcdefghijklmn", "01-01-2016"));
       return uList;
    }
 
