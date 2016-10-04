@@ -1,148 +1,202 @@
 package edu.cursor;
 
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Scanner;
 
 public class User {
 
-	private int id;
-	private String firstName;
-	private String lastName;
-	private String email;
-	private int mobileNo;
-	private String address;
-	private String dateOfRegistration;
-
-	public static Map<Integer, Integer> ubList = new HashMap<>() ;
-
-	public int getId() { return id; }
-	public void setId(int id) { this.id = id; }
-	public String getFirstName() { return firstName; }
-	public void setFirstName(String firstName) { this.firstName = firstName; }
-	public String getLastName() { return lastName; }
-	public void setLastName(String lastName) { this.lastName = lastName; }
-	public String getEmail() { return email; }
-	public void setEmail(String email) { this.email = email; }
-	public int getMobileNo() { return mobileNo; }
-	public void setMobileNo(int mobileNo) { this.mobileNo = mobileNo; }
-	public String getAddress() { return address; }
-	public void setAddress(String address) { this.address = address; }
-	public String getDateOfRegistration() { return dateOfRegistration; }
-	public void setDateOfRegistration(String dateOfRegistration) { this.dateOfRegistration = dateOfRegistration; }
-
-	public User(int id, String firstName, String lastName, String email, int mobileNo, String address, String dateOfRegistration) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.mobileNo = mobileNo;
-		this.address = address;
-		this.dateOfRegistration = dateOfRegistration;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + ((dateOfRegistration == null) ? 0 : dateOfRegistration.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + mobileNo;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
-		if (dateOfRegistration == null) {
-			if (other.dateOfRegistration != null)
-				return false;
-		} else if (!dateOfRegistration.equals(other.dateOfRegistration))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (id != other.id)
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (mobileNo != other.mobileNo)
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "User [id: " + id + ", firstName: " + firstName + ", lastName: " + lastName + ", email: " + email
-				+ ", mobileNo: " + mobileNo + ", address: " + address + ", dateOfRegistration: " + dateOfRegistration
-				+ "]\n";
-	}
-
-	public static void showMyBooks() {
-		Iterator<Map.Entry<Integer, Integer>> itr = ubList.entrySet().iterator() ;
-		while(itr.hasNext()){
-			Map.Entry<Integer, Integer> ub = itr.next();
-			System.out.println( Book.getBook( ub.getKey() ).toString() );
-		}
-	}
+   private int id;
+   private String firstName;
+   private String lastName;
+   private String email;
+   private int mobileNo;
+   private String address;
+   private String dateOfRegistration;
 
 
-	public static String takeBook() {
-		Scanner scan = new Scanner(System.in);
-		String userChoice = "";
-		boolean is = false;
-		do {
-			System.out.println("Input ISBN please: ");
+   public int getId() {
+      return id;
+   }
 
-			userChoice = scan.nextLine().toLowerCase().trim() ;
-			Iterator<Book> itr = Book.bList.iterator() ;
+   public void setId(int id) {
+      this.id = id;
+   }
 
-			while( itr.hasNext() ){
-				Book b = itr.next() ;
-				if( b.getISBN() == Integer.parseInt( userChoice ) ){
-					is = true;
-					System.out.print("Book is present. ");
-					if( b.getQuantity() !=0 ){
-						System.out.println("Take it.");
-						b.setQuantity( b.getQuantity() - 1 );
-						ubList.put( b.getISBN(), 1 ) ;
-					} else {
-						System.out.println("Book is unavailable. Turn back in few days. ");
-					}
-					break;
-				}
-			}
-			if( !is ){
-				System.out.println("No such book in list. Try ones more...");
-			}
-		} while (!is);
-		return userChoice;
-	}
+   public String getFirstName() {
+      return firstName;
+   }
+
+   public void setFirstName(String firstName) {
+      this.firstName = firstName;
+   }
+
+   public String getLastName() {
+      return lastName;
+   }
+
+   public void setLastName(String lastName) {
+      this.lastName = lastName;
+   }
+
+   public String getEmail() {
+      return email;
+   }
+
+   public void setEmail(String email) {
+      this.email = email;
+   }
+
+   public int getMobileNo() {
+      return mobileNo;
+   }
+
+   public void setMobileNo(int mobileNo) {
+      this.mobileNo = mobileNo;
+   }
+
+   public String getAddress() {
+      return address;
+   }
+
+   public void setAddress(String address) {
+      this.address = address;
+   }
+
+   public String getDateOfRegistration() {
+      return dateOfRegistration;
+   }
+
+   public void setDateOfRegistration(String dateOfRegistration) {
+      this.dateOfRegistration = dateOfRegistration;
+   }
+
+   public User(int id, String firstName, String lastName, String email, int mobileNo, String address, String dateOfRegistration) {
+      super();
+      this.id = id;
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.email = email;
+      this.mobileNo = mobileNo;
+      this.address = address;
+      this.dateOfRegistration = dateOfRegistration;
+   }
+
+   @Override
+   public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((address == null) ? 0 : address.hashCode());
+      result = prime * result + ((dateOfRegistration == null) ? 0 : dateOfRegistration.hashCode());
+      result = prime * result + ((email == null) ? 0 : email.hashCode());
+      result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+      result = prime * result + id;
+      result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+      result = prime * result + mobileNo;
+      return result;
+   }
+
+   @Override
+   public boolean equals(Object obj) {
+      if (this == obj)
+         return true;
+      if (obj == null)
+         return false;
+      if (getClass() != obj.getClass())
+         return false;
+      User other = (User) obj;
+      if (address == null) {
+         if (other.address != null)
+            return false;
+      } else if (!address.equals(other.address))
+         return false;
+      if (dateOfRegistration == null) {
+         if (other.dateOfRegistration != null)
+            return false;
+      } else if (!dateOfRegistration.equals(other.dateOfRegistration))
+         return false;
+      if (email == null) {
+         if (other.email != null)
+            return false;
+      } else if (!email.equals(other.email))
+         return false;
+      if (firstName == null) {
+         if (other.firstName != null)
+            return false;
+      } else if (!firstName.equals(other.firstName))
+         return false;
+      if (id != other.id)
+         return false;
+      if (lastName == null) {
+         if (other.lastName != null)
+            return false;
+      } else if (!lastName.equals(other.lastName))
+         return false;
+      if (mobileNo != other.mobileNo)
+         return false;
+      return true;
+   }
+
+   @Override
+   public String toString() {
+      return "User [id: " + id + ", firstName: " + firstName + ", lastName: " + lastName + ", email: " + email
+          + ", mobileNo: " + mobileNo + ", address: " + address + ", dateOfRegistration: " + dateOfRegistration
+          + "]";
+   }
+
+   public static void takeBook(int userId) {
+      Scanner scan = new Scanner(System.in);
+      String userChoice = "";
+      boolean is = false;
+      do {
+         System.out.println("Input ISBN please: ");
+
+         userChoice = scan.nextLine().toLowerCase().trim();
+         Iterator<Book> itr = Book.bookList.iterator();
+
+         while (itr.hasNext()) {
+            Book book = itr.next();
+            if (book.getISBN() == Integer.parseInt(userChoice)) {
+               is = true;
+               System.out.print("Book is present. ");
+               if (book.getQuantity() != 0) {
+                  System.out.println("Take it.");
+                  book.setQuantity(book.getQuantity() - 1);
+                  book.setBookState( BookStates.TAKEN );
+                  book.setTakenBy( userId );
+               } else {
+                  System.out.println("Book is unavailable. Turn back in few days. ");
+               }
+               break;
+            }
+         }
+         if (!is) {
+            System.out.println("No such book in list. Try ones more...");
+         }
+      } while (!is);
+   }
+
+   public static void returnBook(int userId) {
+      Scanner scan = new Scanner(System.in);
+      String userChoice = "";
+      boolean is = false;
+      do {
+         System.out.println("Input ISBN please: ");
+
+         userChoice = scan.nextLine().toLowerCase().trim();
+
+         for( Book b : Book.getBookList() ){
+            if(b.getTakenBy() == userId && b.getISBN() == Integer.parseInt(userChoice) ){
+               b.setTakenBy(0);
+               b.setQuantity( b.getQuantity() + 1 );
+               is = true;
+            }
+         }
+
+         if (!is) {
+            System.out.println("No such book in list. Try ones more...");
+         }
+      } while (!is);
+
+   }
+
 }

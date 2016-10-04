@@ -6,10 +6,10 @@ public class Library {
 
 	public void run() {
 
-		AuthFactory auth = AuthFactory.getInstance();
+		Auth auth = Auth.getInstance();
 		LibFunctions func = new LibFunctions();
-		System.out.println("Library 0.3.\n");
-		List<User> uList = auth.getuList() ;
+		System.out.println("Library 0.4.\n");
+//		List<User> uList = auth.getUserList() ;
 
 		while (true) {
 

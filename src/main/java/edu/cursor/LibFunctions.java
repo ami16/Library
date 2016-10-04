@@ -4,28 +4,22 @@ import java.util.*;
 
 public class LibFunctions {
 
-	AuthFactory auth = AuthFactory.getInstance();
+	Auth auth = Auth.getInstance();
 	Credential cred = Credential.getInstance();
-	public static List<Book> bList = Book.bList ;
-//	private static Map<Integer, Integer> ubList = User.ubList ;
 
 	public LibFunctions() {
 		auth.createUserList();
 		cred.createCredList();
-		bList = Book.createBookList() ;
+		Book.bookList = Book.createBookList() ;
 	}
 
 	public void showMainMenu(boolean userIsLogged) {
 		System.out.println("MENU:\n");
 
-		 System.out.println("userISLogged: " + auth.getUserIsLogged() );
-		 System.out.println("loggedUser: " + auth.getLoggedUser() );
-//		 System.out.println( uList.toString() );
-//		 System.out.println( auth.getuList() );
-
 		if (userIsLogged) {
-
-			User user = auth.getUser( auth.getLoggedUser() );
+			User user = auth.getLoggedUser() ;
+			System.out.println("userISLogged: " + auth.getUserIsLogged() );
+			System.out.println("loggedUser: " + user.getEmail() + " (id: " + user.getId() +  ")\n" );
 			System.out.println("Hello, " + user.getFirstName());
 			System.out.println("1. View library books");
 			System.out.println("2. My books");
@@ -120,20 +114,19 @@ public class LibFunctions {
 
 				case '3': // View books
 					getLibraryBooks();
-					proposeLibSorted();
+					proposeLibrarySorted();
 					break;
 			}
 		} else {
 			switch (answer) {
 				case '1': // View books
 					getLibraryBooks();
-					proposeLibSorted();
+					proposeLibrarySorted();
 					break;
 
 				case '2': // My books
-					System.out.println("---My books here---");
-					User.showMyBooks();
-					System.out.println("-------------------");
+					Book.showUserBooks( auth.getLoggedUser().getId() );
+					showMyBooksMenu( auth.getLoggedUser().getId() );
 					break;
 
 				case '3': // My profile
@@ -143,48 +136,20 @@ public class LibFunctions {
 		}
 	}
 
-	public void proceedLogged(char answer) {
-		switch (answer) {
-
-		case '1': // 1. View library books
-			System.out.println("View LIBRARY");
-			break;
-
-		case '2': // 2. My books
-			System.out.println("My books");
-			break;
-
-		case '3': // 3. My profile
-			System.out.println("My profile");
-			break;
-
-		case 'z': // Log out
-			// logOut();
-			break;
-
-		case 'x': // EXIT
-			System.out.println("EXIT");
-			break;
-
-		default:
-			break;
-		}
-	}
-
 	public void getLibraryBooks() {
 		System.out.println("\tisbn\t|\t\t\ttitle\t\t\t\t\t  |  \tauthor\t |   publ. / writt.  |   (category)   |    (available)");
 		System.out.println(
 				"---------------------------------------------------------------------------------------------------------------------");
-		System.out.println( bList.toString() );
+		System.out.println( Book.bookList );
 	}
 
 
-	public void proposeLibSorted() {
+	public void proposeLibrarySorted() {
 		System.out.println("You can sort this list by: a) Title, b) Author, c) Written Date d) Publish Date.") ;
 		if( auth.getUserIsLogged() ){
-			System.out.println("t) - take a book" );
+			System.out.println("t - take a book" );
 		}
-		System.out.println("z) - to Main menu ");
+		System.out.println("z - to Main menu ");
 
 		getLibSortedChoice() ;
 	}
@@ -198,41 +163,40 @@ public class LibFunctions {
 			switch (userChoice) {
 				case "a":
 					is = true; System.out.println("A!");
-					Collections.sort(bList, Book.Comparators.TITLE_);
+					Collections.sort(Book.bookList, Book.Comparators.TITLE_);
 					getLibraryBooks();
-					proposeLibSorted();
+					proposeLibrarySorted();
 					break;
 				case "b":
 					is = true; System.out.println("B");
-					Collections.sort(bList, Book.Comparators.AUTHOR_);
+					Collections.sort(Book.bookList, Book.Comparators.AUTHOR_);
 					getLibraryBooks();
-					proposeLibSorted();
+					proposeLibrarySorted();
 					break;
 				case "c":
 					is = true; System.out.println("C!");
-					Collections.sort(bList, Book.Comparators.WRITTEN_);
+					Collections.sort(Book.bookList, Book.Comparators.WRITTEN_);
 					getLibraryBooks();
-					proposeLibSorted();
+					proposeLibrarySorted();
 					break;
 				case "d":
 					is = true; System.out.println("D");
-					Collections.sort(bList, Book.Comparators.PUBLISHED_);
+					Collections.sort(Book.bookList, Book.Comparators.PUBLISHED_);
 					getLibraryBooks();
-					proposeLibSorted();
+					proposeLibrarySorted();
 					break;
 				case "t":
 					if( auth.getUserIsLogged() ){
 						is = true;
-						User.takeBook() ;
+						User.takeBook( auth.getLoggedUser().getId() ) ;
 						getLibraryBooks();
-						proposeLibSorted();
+						proposeLibrarySorted();
 						break;
 					} else {
 						is = false;
 						System.out.println("Choose correct item (a-d, t or z): ");
 						break;
 					}
-
 
 				case "z":
 					is = true;
@@ -244,11 +208,38 @@ public class LibFunctions {
 		return userChoice;
 	}
 
+	/**
+	 * @since 0.4
+	 * When user is logged in
+	 * he can see his books taken
+	 */
+	public void showMyBooksMenu( int _id ){
+		boolean is = false;
+		Scanner scan = new Scanner(System.in);
+		String userReply = "";
 
+		do{
+			if( Book.getUserBooks( auth.getLoggedUser().getId() ).size() == 0 ) {
+				System.out.println("You have no books taken. \nz - to Main menu");
+			} else {
+				System.out.println("r - Return book \nz - to Main menu");
+			}
 
+			userReply = scan.nextLine().trim();
+			if( userReply.equalsIgnoreCase("r") ){
+				is = true;
+				User.returnBook( auth.getLoggedUser().getId() );
+				Book.showUserBooks( auth.getLoggedUser().getId() );
+				showMyBooksMenu( auth.getLoggedUser().getId() );
+			}
+			if( userReply.equalsIgnoreCase("z") ){
+				is = true;
+			}
+
+		} while(!is) ;
+	}
 
 	public void sayBye() {
 		System.out.println("See ya.");
 	}
-
 }

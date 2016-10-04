@@ -2,73 +2,76 @@ package edu.cursor;
 
 import java.util.*;
 
-public class AuthFactory {
+public class Auth {
 
    Credential cred = Credential.getInstance();
 
    private boolean userIsLogged = false;
-   private String loggedUser;
-   private List<User> uList = new ArrayList<>();
-
-   public boolean getUserIsLogged() { return userIsLogged; }
-   public String getLoggedUser() { return loggedUser; }
-   public List<User> getuList() { return uList; }
-
-   public void setUserIsLogged(boolean usrIsLogged) { userIsLogged = usrIsLogged; }
-   public void setLoggedUser(String loggedUsr) { loggedUser = loggedUsr; }
+//   private int loggedUser;
+   private User loggedUser;
+   private List<User> userList = new ArrayList<>();
 
 
-   private static AuthFactory instance ;
+   public boolean getUserIsLogged() {
+      return userIsLogged;
+   }
 
-   private AuthFactory() { }
+   public User getLoggedUser() {
+      return loggedUser;
+   }
 
-   public static AuthFactory getInstance(){
+   public List<User> getUserList() {
+      return userList;
+   }
+
+   public void setUserIsLogged(boolean usrIsLogged) {
+      userIsLogged = usrIsLogged;
+   }
+
+   public void setLoggedUser(User loggedUsr) {
+      loggedUser = loggedUsr;
+   }
+
+
+   private static Auth instance ;
+
+   private Auth() { }
+
+   public static Auth getInstance(){
       if( instance == null ){
-         synchronized (AuthFactory.class){
+         synchronized (Auth.class){
             // Double check
             if (instance == null) {
-               instance = new AuthFactory() ;
+               instance = new Auth() ;
             }
          }
       }
       return instance ;
    }
 
+
    // 1. USERS LIST. Olesya
    public List<User> createUserList() {
-      uList.add(new User(1, "Peter", "Griffin", "peter@gmail.com", 982545785, "Quahog, Spoon st., 34", "25-11-2016"));
-      uList.add(new User(2, "Lois", "Griffin", "lois@gmail.com", 735458787, "Quahog, Spoon st.,34", "18-05-2014"));
-      uList.add(
+      userList.add(new User(1, "Peter", "Griffin", "peter@gmail.com", 982545785, "Quahog, Spoon st., 34", "25-11-2016"));
+      userList.add(new User(2, "Lois", "Griffin", "lois@gmail.com", 735458787, "Quahog, Spoon st.,34", "18-05-2014"));
+      userList.add(
           new User(3, "Homer", "Simpson", "hommy@gmail.com", 598741547, "Springfield, Evergreeen st.,45", "13-04-2016"));
-      uList.add(
+      userList.add(
           new User(4, "Eric", "Cartman", "eric@gmail.com", 857845175, "South Park, Jew st., 1845", "25-06-2014"));
          // Jew St. )))))))
-      uList.add(
+      userList.add(
           new User(5, "Leopold", "Stoch", "butters@gmail.com", 547845145, "South Park, Raisins st., 34", "18-07-2013"));
-      uList.add(new User(6, "User1", "Userenko", "m@m.c", 123456789, "abcdefghijklmn", "01-01-2016"));
-      return uList;
+      userList.add(new User(6, "User1", "Userenko", "m@m.c", 987654321, "abcdefghijklmn", "01-01-2016"));
+      return userList;
    }
 
    public List<User> addUser( int id, String firstName, String lastName, String email, int mobileNo, String address, String dateOfRegistration, String pass ) {
-      uList.add( new User(id, firstName, lastName, email, mobileNo, address, dateOfRegistration) ) ;
+      userList.add( new User(id, firstName, lastName, email, mobileNo, address, dateOfRegistration) ) ;
       cred.addCred( id, pass ) ;
-      return uList ;
+      return userList;
    }
 
-   public int getUserId( String email ){
-      int id = 0;
-      Iterator<User> itr = getuList().iterator();
-      while( itr.hasNext() ){
-         User user = itr.next();
-         if( user.getEmail().equals( email ) ){
-            id = user.getId() ;
-            break;
-         }
-      }
-      return id;
-   }
-
-   // ------------------
+      // ------------------
    // 1 - REGISTER USER
 
    public void registerUser() {
@@ -173,7 +176,7 @@ public class AuthFactory {
                loginAllowed = true;
 
                int newId = getNewUserId() ;
-               addUser( newId, desiredName, desiredName2, desiredMail, desiredMobile, desiredAddr, getNewUserRegDate(), pass1 ) ;
+               addUser( newId, desiredName, desiredName2, desiredMail, desiredMobile, desiredAddr, new Date().toString(), pass1 ) ;
                System.out.println("Now login using your credentials");
             }
 
@@ -184,35 +187,31 @@ public class AuthFactory {
    }
 
    public int getNewUserId(){
-      Iterator<User> itr = getuList().iterator();
+      Iterator<User> itr = getUserList().iterator();
       int currentId = 1 ;
       while (itr.hasNext()) {
          currentId = itr.next().getId();
       }
       return currentId + 1;
    }
-   public String getNewUserRegDate(){
-      Date date = new Date() ;
-      return date.toString() ;
-   }
 
    // 2 - LOGIN <VALIDATE USER>
    public void validateUser() {
 
       Scanner scan = new Scanner(System.in);
-      String uLog, uPass, verifiedLog = "";
+      String userLogin, userPassword, verifiedLog = "";
       boolean is = false;
 
       System.out.println("Enter your login:");
       // LOGIN
       do {
-         uLog = scan.nextLine().trim();
-         if (uLog.equals("")) {
+         userLogin = scan.nextLine().trim();
+         if (userLogin.equals("")) {
             System.out.print("Enter smth: ");
          } else {
-            is = userExists(uLog);
+            is = userExists(userLogin);
             if (is)
-               verifiedLog = uLog;
+               verifiedLog = userLogin;
          }
          if (!is) {
             System.out.println("No such login (3)");
@@ -222,19 +221,18 @@ public class AuthFactory {
       // PASS
       System.out.println("Enter your pass:");
       do {
-         uPass = scan.nextLine().trim();
-         if (uPass.equals("")) {
+         userPassword = scan.nextLine().trim();
+         if (userPassword.equals("")) {
             System.out.print("Enter smth: ");
          } else {
-            is = passCorrect(verifiedLog, uPass);
+            is = passIsCorrect(verifiedLog, userPassword);
             if (is)
-               logIn(uLog);
+               logIn( getUserId(userLogin) );
          }
          if (!is) {
             System.out.println("Wrong password (3)");
          }
       } while (!is);
-
    }
 
    public boolean validateLogin(String val) {
@@ -260,7 +258,7 @@ public class AuthFactory {
 
    public boolean loginAvailable(String desiredLogin) {
       boolean loginAvailable = false;
-      Iterator<User> iterator = getuList().iterator();
+      Iterator<User> iterator = getUserList().iterator();
       while (iterator.hasNext()) {
          User user = iterator.next();
          if (user.getEmail().equals(desiredLogin)) {
@@ -275,7 +273,7 @@ public class AuthFactory {
    }
 
    public User getUser(String login) {
-      Iterator<User> iterator = getuList().iterator();
+      Iterator<User> iterator = getUserList().iterator();
       while (iterator.hasNext()) {
          User user = iterator.next();
          if (user.getEmail().equals(login)) {
@@ -284,9 +282,30 @@ public class AuthFactory {
       }
       return iterator.next();
    }
+   public User getUser(int userId) {
+      Iterator<User> iterator = getUserList().iterator();
+      while (iterator.hasNext()) {
+         User user = iterator.next();
+         if (user.getId() == userId) {
+            return user;
+         }
+      }
+      return iterator.next();
+   }
+
+   public int getUserId(String login) {
+      Iterator<User> iterator = getUserList().iterator();
+      while (iterator.hasNext()) {
+         User user = iterator.next();
+         if (user.getEmail().equals(login)) {
+            return user.getId();
+         }
+      }
+      return 0;
+   }
 
    public boolean userExists(String login) {
-      Iterator<User> iterator = getuList().iterator();
+      Iterator<User> iterator = getUserList().iterator();
       while (iterator.hasNext()) {
          User user = iterator.next();
          if (user.getEmail().equals(login)) {
@@ -295,29 +314,27 @@ public class AuthFactory {
       }
       return false;
    }
-   //need class Credential for password
-   public boolean passCorrect(String login, String pass) {
-      Iterator<User> iterator = getuList().iterator();
+
+   public boolean passIsCorrect(String login, String pass) {
+      Iterator<User> iterator = getUserList().iterator();
       while (iterator.hasNext()) {
          User user = iterator.next();
          if ( user.getEmail().equals(login) ) {
             if( cred.getPass(getUserId(user.getEmail())).equals(pass) ){
                return true;
             }
-
          }
       }
       return false;
    }
 
-   public void logIn(String login) {
-      setLoggedUser(login);
+   public void logIn(int login) {
+      setLoggedUser( getUser(login) );
       setUserIsLogged(true);
    }
 
    public void logOut() {
-      setLoggedUser("");
+      setLoggedUser(null);
       setUserIsLogged(false);
    }
-
 }
