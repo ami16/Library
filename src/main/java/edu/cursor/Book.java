@@ -1,8 +1,7 @@
 package edu.cursor;
 
 
-import java.time.*;
-
+import org.joda.time.LocalDate;
 
 
 public class Book {
@@ -12,23 +11,23 @@ public class Book {
     private String Title;
     private LocalDate PublYear;
     private LocalDate WritYear;
-    private Integer quantity;
+    private Genre genre;
 
-    public Book(Integer ISBN, String author, String title, LocalDate publYear, LocalDate writYear, Integer quantity) {
+    public Book(String author, String title, LocalDate publYear, LocalDate writYear, Genre genre) {
+        Author = author;
+        Title = title;
+        PublYear = publYear;
+        WritYear = writYear;
+        this.genre = genre;
+    }
+
+    public Book(Integer ISBN, String author, String title, LocalDate publYear, LocalDate writYear, Genre genre) {
         this.ISBN = ISBN;
         Author = author;
         Title = title;
         PublYear = publYear;
         WritYear = writYear;
-        this.quantity = quantity;
-    }
-
-    public Book(String author, String title, LocalDate publYear, LocalDate writYear, Integer quantity) {
-        Author = author;
-        Title = title;
-        PublYear = publYear;
-        WritYear = writYear;
-        this.quantity = quantity;
+        this.genre = genre;
     }
 
     public Integer getISBN() {
@@ -71,12 +70,12 @@ public class Book {
         WritYear = writYear;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public Genre getGenre() {
+        return genre;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 
     @Override
@@ -86,23 +85,25 @@ public class Book {
 
         Book book = (Book) o;
 
-        if (!getISBN().equals(book.getISBN())) return false;
-        if (!getAuthor().equals(book.getAuthor())) return false;
-        if (!getTitle().equals(book.getTitle())) return false;
-        if (!getPublYear().equals(book.getPublYear())) return false;
-        if (!getWritYear().equals(book.getWritYear())) return false;
-        return getQuantity().equals(book.getQuantity());
+        if (getISBN() != null ? !getISBN().equals(book.getISBN()) : book.getISBN() != null) return false;
+        if (getAuthor() != null ? !getAuthor().equals(book.getAuthor()) : book.getAuthor() != null) return false;
+        if (getTitle() != null ? !getTitle().equals(book.getTitle()) : book.getTitle() != null) return false;
+        if (getPublYear() != null ? !getPublYear().equals(book.getPublYear()) : book.getPublYear() != null)
+            return false;
+        if (getWritYear() != null ? !getWritYear().equals(book.getWritYear()) : book.getWritYear() != null)
+            return false;
+        return getGenre() == book.getGenre();
 
     }
 
     @Override
     public int hashCode() {
-        int result = getISBN().hashCode();
-        result = 31 * result + getAuthor().hashCode();
-        result = 31 * result + getTitle().hashCode();
-        result = 31 * result + getPublYear().hashCode();
-        result = 31 * result + getWritYear().hashCode();
-        result = 31 * result + getQuantity().hashCode();
+        int result = getISBN() != null ? getISBN().hashCode() : 0;
+        result = 31 * result + (getAuthor() != null ? getAuthor().hashCode() : 0);
+        result = 31 * result + (getTitle() != null ? getTitle().hashCode() : 0);
+        result = 31 * result + (getPublYear() != null ? getPublYear().hashCode() : 0);
+        result = 31 * result + (getWritYear() != null ? getWritYear().hashCode() : 0);
+        result = 31 * result + (getGenre() != null ? getGenre().hashCode() : 0);
         return result;
     }
 
@@ -114,7 +115,7 @@ public class Book {
                 ", Title='" + Title + '\'' +
                 ", PublYear=" + PublYear +
                 ", WritYear=" + WritYear +
-                ", quantity=" + quantity +
+                ", genre=" + genre +
                 '}';
     }
 }
