@@ -1,5 +1,6 @@
 package edu.cursor;
 
+import org.joda.time.LocalDate;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -151,7 +152,7 @@ public class User {
          System.out.println("Input ISBN please: ");
 
          userChoice = scan.nextLine().toLowerCase().trim();
-         Iterator<Book> itr = Book.bookList.iterator();
+         Iterator<Book> itr = BookFunctions.bookList.iterator();
 
          while (itr.hasNext()) {
             Book book = itr.next();
@@ -163,6 +164,7 @@ public class User {
                   book.setQuantity(book.getQuantity() - 1);
                   book.setBookState( BookStates.TAKEN );
                   book.setTakenBy( userId );
+                  book.setTakenAt( new LocalDate() );
                } else {
                   System.out.println("Book is unavailable. Turn back in few days. ");
                }
@@ -180,17 +182,31 @@ public class User {
       String userChoice = "";
       boolean is = false;
       do {
-         System.out.println("Input ISBN please: ");
 
-         userChoice = scan.nextLine().toLowerCase().trim();
+         System.out.println( "USER bookList Size: " + BookFunctions.getBookList(userId).size());
 
-         for( Book b : Book.getBookList() ){
-            if(b.getTakenBy() == userId && b.getISBN() == Integer.parseInt(userChoice) ){
+         if( BookFunctions.getBookList(userId).size() == 1 ){
+            for( Book b : BookFunctions.getBookList() ){
                b.setTakenBy(0);
                b.setQuantity( b.getQuantity() + 1 );
-               is = true;
             }
+            is = true;
+
+         } else {
+
+            System.out.println("Input ISBN please: ");
+            userChoice = scan.nextLine().toLowerCase().trim();
+
+            for( Book b : BookFunctions.getBookList() ){
+               if(b.getTakenBy() == userId && b.getISBN() == Integer.parseInt(userChoice) ){
+                  b.setTakenBy(0);
+                  b.setQuantity( b.getQuantity() + 1 );
+                  is = true;
+               }
+            }
+
          }
+
 
          if (!is) {
             System.out.println("No such book in list. Try ones more...");

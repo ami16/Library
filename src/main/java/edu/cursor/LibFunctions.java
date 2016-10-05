@@ -10,7 +10,7 @@ public class LibFunctions {
 	public LibFunctions() {
 		auth.createUserList();
 		cred.createCredList();
-		Book.bookList = Book.createBookList() ;
+		BookFunctions.bookList = BookFunctions.createBookList() ;
 	}
 
 	public void showMainMenu(boolean userIsLogged) {
@@ -140,7 +140,7 @@ public class LibFunctions {
 		System.out.println("\tisbn\t|\t\t\ttitle\t\t\t\t\t  |  \tauthor\t |   publ. / writt.  |   (category)   |    (available)");
 		System.out.println(
 				"---------------------------------------------------------------------------------------------------------------------");
-		System.out.println( Book.bookList );
+		System.out.println( BookFunctions.bookList );
 	}
 
 
@@ -163,25 +163,25 @@ public class LibFunctions {
 			switch (userChoice) {
 				case "a":
 					is = true; System.out.println("A!");
-					Collections.sort(Book.bookList, Book.Comparators.TITLE_);
+					Collections.sort(BookFunctions.bookList, Book.Comparators.TITLE_);
 					getLibraryBooks();
 					proposeLibrarySorted();
 					break;
 				case "b":
 					is = true; System.out.println("B");
-					Collections.sort(Book.bookList, Book.Comparators.AUTHOR_);
+					Collections.sort(BookFunctions.bookList, Book.Comparators.AUTHOR_);
 					getLibraryBooks();
 					proposeLibrarySorted();
 					break;
 				case "c":
 					is = true; System.out.println("C!");
-					Collections.sort(Book.bookList, Book.Comparators.WRITTEN_);
+					Collections.sort(BookFunctions.bookList, Book.Comparators.WRITTEN_);
 					getLibraryBooks();
 					proposeLibrarySorted();
 					break;
 				case "d":
 					is = true; System.out.println("D");
-					Collections.sort(Book.bookList, Book.Comparators.PUBLISHED_);
+					Collections.sort(BookFunctions.bookList, Book.Comparators.PUBLISHED_);
 					getLibraryBooks();
 					proposeLibrarySorted();
 					break;
