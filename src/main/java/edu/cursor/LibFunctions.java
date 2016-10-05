@@ -126,11 +126,12 @@ public class LibFunctions {
 
 				case '2': // My books
 					Book.showUserBooks( auth.getLoggedUser().getId() );
-					showMyBooksMenu( auth.getLoggedUser().getId() );
+					BookFunctions.showMyBooksMenu( auth.getLoggedUser().getId() );
 					break;
 
 				case '3': // My profile
-					System.out.println("---My PROFILE---");
+					UserFunctions.showProfile();
+
 					break;
 			}
 		}
@@ -188,7 +189,7 @@ public class LibFunctions {
 				case "t":
 					if( auth.getUserIsLogged() ){
 						is = true;
-						User.takeBook( auth.getLoggedUser().getId() ) ;
+						UserFunctions.takeBook( auth.getLoggedUser().getId() ) ;
 						getLibraryBooks();
 						proposeLibrarySorted();
 						break;
@@ -206,37 +207,6 @@ public class LibFunctions {
 			}
 		} while (!is);
 		return userChoice;
-	}
-
-	/**
-	 * @since 0.4
-	 * When user is logged in
-	 * he can see his books taken
-	 */
-	public void showMyBooksMenu( int _id ){
-		boolean is = false;
-		Scanner scan = new Scanner(System.in);
-		String userReply = "";
-
-		do{
-			if( Book.getUserBooks( auth.getLoggedUser().getId() ).size() == 0 ) {
-				System.out.println("You have no books taken. \nz - to Main menu");
-			} else {
-				System.out.println("r - Return book \nz - to Main menu");
-			}
-
-			userReply = scan.nextLine().trim();
-			if( userReply.equalsIgnoreCase("r") ){
-				is = true;
-				User.returnBook( auth.getLoggedUser().getId() );
-				Book.showUserBooks( auth.getLoggedUser().getId() );
-				showMyBooksMenu( auth.getLoggedUser().getId() );
-			}
-			if( userReply.equalsIgnoreCase("z") ){
-				is = true;
-			}
-
-		} while(!is) ;
 	}
 
 	public void sayBye() {

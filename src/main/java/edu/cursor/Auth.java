@@ -52,21 +52,21 @@ public class Auth {
 
    // 1. USERS LIST. Olesya
    public List<User> createUserList() {
-      userList.add(new User(1, "Peter", "Griffin", "peter@gmail.com", 982545785, "Quahog, Spoon st., 34", "25-11-2016"));
-      userList.add(new User(2, "Lois", "Griffin", "lois@gmail.com", 735458787, "Quahog, Spoon st.,34", "18-05-2014"));
+      userList.add(new User(1, "Peter", "Griffin", "peter@gmail.com", 982545785, "Quahog, Spoon st., 34", "2016-11-25", UserStates.USER));
+      userList.add(new User(2, "Lois", "Griffin", "lois@gmail.com", 735458787, "Quahog, Spoon st.,34", "2014-05-08", UserStates.USER));
       userList.add(
-          new User(3, "Homer", "Simpson", "hommy@gmail.com", 598741547, "Springfield, Evergreeen st.,45", "13-04-2016"));
+          new User(3, "Homer", "Simpson", "hommy@gmail.com", 598741547, "Springfield, Evergreeen st.,45", "2016-04-13", UserStates.USER));
       userList.add(
-          new User(4, "Eric", "Cartman", "eric@gmail.com", 857845175, "South Park, Jew st., 1845", "25-06-2014"));
-         // Jew St. )))))))
+          new User(4, "Eric", "Cartman", "eric@gmail.com", 857845175, "South Park, Jew st., 1845", "2014-25-06", UserStates.USER));
       userList.add(
-          new User(5, "Leopold", "Stoch", "butters@gmail.com", 547845145, "South Park, Raisins st., 34", "18-07-2013"));
-      userList.add(new User(6, "User1", "Userenko", "m@m.c", 987654321, "abcdefghijklmn", "01-01-2016"));
+          new User(5, "Leopold", "Stoch", "butters@gmail.com", 547845145, "South Park, Raisins st., 34", "2013-18-07", UserStates.USER));
+      userList.add(new User(6, "Yuzer", "Yuzerenko", "m@m.c", 987654321, "Address in a bit blaabcdefghijklmn", "2016-01-01", UserStates.USER));
+      userList.add(new User(7, "Alex", "Ogiyenko", "a@mail.com", 111111119, "Underground Ave 189/4a", "2010-01-01", UserStates.ADMIN));
       return userList;
    }
 
    public List<User> addUser( int id, String firstName, String lastName, String email, int mobileNo, String address, String dateOfRegistration, String pass ) {
-      userList.add( new User(id, firstName, lastName, email, mobileNo, address, dateOfRegistration) ) ;
+      userList.add( new User(id, firstName, lastName, email, mobileNo, address, dateOfRegistration, UserStates.USER) ) ;
       cred.addCred( id, pass ) ;
       return userList;
    }
@@ -252,7 +252,7 @@ public class Auth {
       return val.matches("^[a-zA-Z0-9_-]{2,16}$");
    }
 
-   private boolean validateMobile( int val ){
+   public boolean validateMobile( int val ){
       return Integer.toString(val).matches("^(\\d{9})$");
    }
 

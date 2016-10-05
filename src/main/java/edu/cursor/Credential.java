@@ -2,11 +2,12 @@ package edu.cursor;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Credential {
 
-   private Map<Integer, String> cList = new HashMap<>();
-   public Map<Integer, String> getcList() { return cList; }
+   private Map<Integer, String> credList = new HashMap<>();
+   public Map<Integer, String> getCredList() { return credList; }
 
    private static Credential instance ;
 
@@ -28,22 +29,22 @@ public class Credential {
 
    // 1. CREDENTIALS LIST
    public Map<Integer, String> createCredList() {
-      cList.put(1, "peter") ;
-      cList.put(2, "lois") ;
-      cList.put(3, "doughnut") ;
-      cList.put(4, "shit") ;
-      cList.put(5, "brave") ;
-      cList.put(6, "1234") ;
-      return cList;
+      credList.put(1, "peter") ;
+      credList.put(2, "lois") ;
+      credList.put(3, "doughnut") ;
+      credList.put(4, "shit") ;
+      credList.put(5, "brave") ;
+      credList.put(6, "1234") ;
+      credList.put(7, "admin7") ;
+      return credList;
    }
 
    public Map<Integer, String> addCred( int id, String pass ) {
-      cList.put(id, pass) ;
-      return cList ;
+      credList.put(id, pass) ;
+      return credList;
    }
 
    public String getPass( int id ){
-      return cList.get(id);
+      return credList.get(id);
    }
-
 }

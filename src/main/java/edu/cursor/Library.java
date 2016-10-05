@@ -8,7 +8,7 @@ public class Library {
 
 		Auth auth = Auth.getInstance();
 		LibFunctions func = new LibFunctions();
-		System.out.println("Library 0.4.\n");
+		System.out.println("Library 0.5.\n");
 //		List<User> uList = auth.getUserList() ;
 
 		while (true) {

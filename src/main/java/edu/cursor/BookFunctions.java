@@ -2,10 +2,10 @@ package edu.cursor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class BookFunctions {
-
 
    public static List<Book> bookList = new ArrayList<>();
 
@@ -22,6 +22,40 @@ public class BookFunctions {
 
    public static void setBookList(List<Book> _bookList) {
       bookList = _bookList;
+   }
+
+   /**
+    * @since 0.4
+    * When user is logged in
+    * he can see his books taken
+    */
+   public static void showMyBooksMenu( int _id ){
+
+      Auth auth = Auth.getInstance();
+
+      boolean is = false;
+      Scanner scan = new Scanner(System.in);
+      String userReply = "";
+
+      do{
+         if( Book.getUserBooks( auth.getLoggedUser().getId() ).size() == 0 ) {
+            System.out.println("You have no books taken. \nz - to Main menu");
+         } else {
+            System.out.println("r - Return book \nz - to Main menu");
+         }
+
+         userReply = scan.nextLine().trim();
+         if( userReply.equalsIgnoreCase("r") ){
+            is = true;
+            UserFunctions.returnBook( auth.getLoggedUser().getId() );
+            Book.showUserBooks( auth.getLoggedUser().getId() );
+            showMyBooksMenu( auth.getLoggedUser().getId() );
+         }
+         if( userReply.equalsIgnoreCase("z") ){
+            is = true;
+         }
+
+      } while(!is) ;
    }
 
    public static List<Book> createBookList() {

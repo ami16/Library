@@ -1,8 +1,10 @@
 package edu.cursor;
 
-import org.joda.time.LocalDate;
-import java.util.Iterator;
-import java.util.Scanner;
+//import org.joda.time.LocalDate;
+//import java.util.HashMap;
+//import java.util.Iterator;
+//import java.util.Map;
+//import java.util.Scanner;
 
 public class User {
 
@@ -12,7 +14,8 @@ public class User {
    private String email;
    private int mobileNo;
    private String address;
-   private String dateOfRegistration;
+   private String registrationDate;
+   private UserStates role ;
 
 
    public int getId() {
@@ -63,15 +66,23 @@ public class User {
       this.address = address;
    }
 
-   public String getDateOfRegistration() {
-      return dateOfRegistration;
+   public String getRegistrationDate() {
+      return registrationDate;
    }
 
-   public void setDateOfRegistration(String dateOfRegistration) {
-      this.dateOfRegistration = dateOfRegistration;
+   public void setRegistrationDate(String registrationDate) {
+      this.registrationDate = registrationDate;
    }
 
-   public User(int id, String firstName, String lastName, String email, int mobileNo, String address, String dateOfRegistration) {
+   public UserStates getRole() {
+      return role;
+   }
+
+   public void setRole(UserStates role) {
+      this.role = role;
+   }
+
+   public User(int id, String firstName, String lastName, String email, int mobileNo, String address, String registrationDate, UserStates role) {
       super();
       this.id = id;
       this.firstName = firstName;
@@ -79,7 +90,8 @@ public class User {
       this.email = email;
       this.mobileNo = mobileNo;
       this.address = address;
-      this.dateOfRegistration = dateOfRegistration;
+      this.registrationDate = registrationDate;
+      this.role = role ;
    }
 
    @Override
@@ -87,7 +99,7 @@ public class User {
       final int prime = 31;
       int result = 1;
       result = prime * result + ((address == null) ? 0 : address.hashCode());
-      result = prime * result + ((dateOfRegistration == null) ? 0 : dateOfRegistration.hashCode());
+      result = prime * result + ((registrationDate == null) ? 0 : registrationDate.hashCode());
       result = prime * result + ((email == null) ? 0 : email.hashCode());
       result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
       result = prime * result + id;
@@ -110,10 +122,10 @@ public class User {
             return false;
       } else if (!address.equals(other.address))
          return false;
-      if (dateOfRegistration == null) {
-         if (other.dateOfRegistration != null)
+      if (registrationDate == null) {
+         if (other.registrationDate != null)
             return false;
-      } else if (!dateOfRegistration.equals(other.dateOfRegistration))
+      } else if (!registrationDate.equals(other.registrationDate))
          return false;
       if (email == null) {
          if (other.email != null)
@@ -140,79 +152,8 @@ public class User {
    @Override
    public String toString() {
       return "User [id: " + id + ", firstName: " + firstName + ", lastName: " + lastName + ", email: " + email
-          + ", mobileNo: " + mobileNo + ", address: " + address + ", dateOfRegistration: " + dateOfRegistration
+          + ", mobileNo: " + mobileNo + ", address: " + address + ", registrationDate: " + registrationDate
           + "]";
-   }
-
-   public static void takeBook(int userId) {
-      Scanner scan = new Scanner(System.in);
-      String userChoice = "";
-      boolean is = false;
-      do {
-         System.out.println("Input ISBN please: ");
-
-         userChoice = scan.nextLine().toLowerCase().trim();
-         Iterator<Book> itr = BookFunctions.bookList.iterator();
-
-         while (itr.hasNext()) {
-            Book book = itr.next();
-            if (book.getISBN() == Integer.parseInt(userChoice)) {
-               is = true;
-               System.out.print("Book is present. ");
-               if (book.getQuantity() != 0) {
-                  System.out.println("Take it.");
-                  book.setQuantity(book.getQuantity() - 1);
-                  book.setBookState( BookStates.TAKEN );
-                  book.setTakenBy( userId );
-                  book.setTakenAt( new LocalDate() );
-               } else {
-                  System.out.println("Book is unavailable. Turn back in few days. ");
-               }
-               break;
-            }
-         }
-         if (!is) {
-            System.out.println("No such book in list. Try ones more...");
-         }
-      } while (!is);
-   }
-
-   public static void returnBook(int userId) {
-      Scanner scan = new Scanner(System.in);
-      String userChoice = "";
-      boolean is = false;
-      do {
-
-         System.out.println( "USER bookList Size: " + BookFunctions.getBookList(userId).size());
-
-         if( BookFunctions.getBookList(userId).size() == 1 ){
-            for( Book b : BookFunctions.getBookList() ){
-               b.setTakenBy(0);
-               b.setQuantity( b.getQuantity() + 1 );
-            }
-            is = true;
-
-         } else {
-
-            System.out.println("Input ISBN please: ");
-            userChoice = scan.nextLine().toLowerCase().trim();
-
-            for( Book b : BookFunctions.getBookList() ){
-               if(b.getTakenBy() == userId && b.getISBN() == Integer.parseInt(userChoice) ){
-                  b.setTakenBy(0);
-                  b.setQuantity( b.getQuantity() + 1 );
-                  is = true;
-               }
-            }
-
-         }
-
-
-         if (!is) {
-            System.out.println("No such book in list. Try ones more...");
-         }
-      } while (!is);
-
    }
 
 }
