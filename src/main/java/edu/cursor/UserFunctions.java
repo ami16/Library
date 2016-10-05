@@ -2,7 +2,9 @@ package edu.cursor;
 
 import org.joda.time.LocalDate;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserFunctions {
@@ -13,10 +15,18 @@ public class UserFunctions {
       String userChoice = "";
       boolean is = false;
       do {
-         System.out.println("Input ISBN please: ");
+//         System.out.println("Input ISBN please: ");
 
-         userChoice = scan.nextLine().toLowerCase().trim();
          Iterator<Book> itr = BookFunctions.bookList.iterator();
+
+         boolean isISBN = false;
+         do{
+            System.out.println("Input correct ISBN please: ");
+            userChoice = scan.nextLine().toLowerCase().trim();
+            if( BookFunctions.validateISBN( userChoice ) ){
+               isISBN = true;
+            }
+         } while(!isISBN);
 
          while (itr.hasNext()) {
             Book book = itr.next();
@@ -60,8 +70,14 @@ public class UserFunctions {
 
          } else {
 
-            System.out.println("Input ISBN please: ");
-            userChoice = scan.nextLine().toLowerCase().trim();
+            boolean isISBN = false;
+            do{
+               System.out.println("Input correct ISBN please: ");
+               userChoice = scan.nextLine().toLowerCase().trim();
+               if( BookFunctions.validateISBN( userChoice ) ){
+                  isISBN = true;
+               }
+            } while(!isISBN);
 
             for( Book b : BookFunctions.getBookList() ){
                if(b.getTakenBy() == userId && b.getISBN() == Integer.parseInt(userChoice) ){
@@ -179,4 +195,60 @@ public class UserFunctions {
       showProfile();
    }
 
+
+   /**
+    * @since 0.6
+    * Admin can see all users list
+    */
+   public static void showUsersMenu(){
+
+      Auth auth = Auth.getInstance();
+      if( auth.getLoggedUser().getRole() != UserStates.ADMIN ){
+         return;
+      }
+
+      boolean is = false;
+      Scanner scan = new Scanner(System.in);
+      String userReply = "";
+
+      do{
+         if( auth.getUserList().size() == 0 ) {
+            System.out.println("There's no users in your DB. \nz - to Main menu");
+         } else {
+            System.out.println("z - to Main menu");
+         }
+         userReply = scan.nextLine().trim();
+         if( userReply.equalsIgnoreCase("z") ){
+            is = true;
+         }
+
+      } while(!is) ;
+   }
+
+   public static List<Integer> getUserIdsWithBooks() {
+      List<Integer> userListWithBooks = new ArrayList<>();
+      List<Book> bookList = BookFunctions.getBookList() ;
+      for( Book b : bookList ){
+         if( b.getTakenBy() != 0 ){
+            userListWithBooks.add(b.getTakenBy()) ;
+         }
+      }
+      return userListWithBooks;
+   }
+
+   public static void getUsersForAdmin(){
+      List<User> userList = Auth.getInstance().getUserList() ;
+      List<Book> bookList = BookFunctions.getBookList() ;
+
+      for( User u : userList ){
+
+         System.out.print( u );
+
+         for( Book b : bookList ){
+            if( u.getId() == b.getTakenBy() ){
+               System.out.println( "  •— GOT BOOK " + b.getISBN() + ". \"" + b.getTitle() + "\" (" + b.getAuthor() + ")  <" + b.getTakenAt() + ">" );
+            }
+         }
+      }
+   }
 }

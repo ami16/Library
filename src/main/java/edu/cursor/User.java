@@ -1,11 +1,5 @@
 package edu.cursor;
 
-//import org.joda.time.LocalDate;
-//import java.util.HashMap;
-//import java.util.Iterator;
-//import java.util.Map;
-//import java.util.Scanner;
-
 public class User {
 
    private int id;
@@ -151,9 +145,9 @@ public class User {
 
    @Override
    public String toString() {
-      return "User [id: " + id + ", firstName: " + firstName + ", lastName: " + lastName + ", email: " + email
+      return "id: " + id + ", firstName: " + firstName + ", lastName: " + lastName + ", email: " + email
           + ", mobileNo: " + mobileNo + ", address: " + address + ", registrationDate: " + registrationDate
-          + "]";
+          + "\n";
    }
 
 }

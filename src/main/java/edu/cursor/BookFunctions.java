@@ -105,4 +105,13 @@ public class BookFunctions {
       return bookList;
    }
 
+   public static boolean validateISBN( String val ){
+      try{
+         return val.matches("^(\\d{10})$");
+      } catch (NumberFormatException e){
+         return false;
+      }
+
+   }
+
 }

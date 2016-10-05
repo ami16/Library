@@ -8,7 +8,7 @@ public class Library {
 
 		Auth auth = Auth.getInstance();
 		LibFunctions func = new LibFunctions();
-		System.out.println("Library 0.5.\n");
+		System.out.println("Library 0.6.\n");
 //		List<User> uList = auth.getUserList() ;
 
 		while (true) {
@@ -16,8 +16,8 @@ public class Library {
 //			System.out.println( uList.toString() );
 
 			func.showMainMenu( auth.getUserIsLogged());
-			char mainAnswer = func.getMain( auth.getUserIsLogged());
-			func.proceedMain(mainAnswer, auth.getUserIsLogged());
+			char mainChoice = func.getMain( auth.getUserIsLogged());
+			func.proceedMain(mainChoice, auth.getUserIsLogged());
 
 		}
 
