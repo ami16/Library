@@ -36,39 +36,4 @@
 ###For now
 
 
-L-- src    
-  L-- main
-    L-- java            
-      L-- edu                
-       L-- cursor                    
-         L-- library                        
-           +-- application
-           |   +-- App.java
-           |
-           +-- entity
-           |   L-- book
-           |   |   +-- BookCategory.java
-           |   |   +-- Book.java
-           |   |   +-- Service.java (so-called BookFunctions)
-           |   |   +-- Comparator.java
-           |   |
-           |   L-- user
-           |       +-- User.java (interface)
-           |       +-- UserRoles.java
-           |       +-- UserImpl.java
-           |       +-- Service.java (so-called UserFunctions)
-           |
-           +-- factory                        
-           |
-           +-- service
-           |   +-- Service.java (interface)
-           |   +-- ServiceImpl.java (...LibFunctions)
-           |
-           +-- util
-           |
-           |
-           +-- security
-               L-- Auth
-               |   +-- xxx
-               |
-               L-- Credential (? maybe remake)
+![Alt text](https://www.dropbox.com/s/ww1zac69upbv40t/lib1.png?dl=0 "Optional title")
