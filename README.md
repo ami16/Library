@@ -11,7 +11,7 @@
 
 4. Books collection (title, author, ISBN)
 
-5. Menu
+5.0. Menu
 
 5.1. CAN View available(!!) books (in same cat/type... & the same book v)
 
@@ -21,7 +21,7 @@
 
 5.4. View Turn back period (date.. time.. String (?) ) == 7 days
 
-6. Admin
+6.0. Admin
 
 6.1. CAN VIEW all users list
 
