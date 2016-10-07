@@ -36,21 +36,38 @@
 ###For now
 
 
-L-- src    
-  L-- main
-    L-- java            
-      L-- edu                
-       L-- cursor                    
-         L-- library                        
-           +-- application                        
-           +-- domain                        
-           ¦   L-- model                        
-           ¦       +-- BookCategory.java                        
-           ¦       +-- Book.java                        
-           ¦       +-- Comparator.java                        
-           ¦       L-- Service.java                        
-           +-- factory                        
-           +-- infrastructure                        
-           ¦   L-- ServiceImpl.java                        
-           L-- util
-           L-- security
+L-- src
+
+<space><space>L-- main
+
+<space><space><space><space>L-- java
+
+<space><space><space><space><space><space>L-- edu
+
+<space><space><space><space><space><space><space>L-- cursor
+
+<space><space><space><space><space><space><space><space><space>L-- library
+
+<space><space><space><space><space><space><space><space><space><space><space>+-- application
+
+<space><space><space><space><space><space><space><space><space><space><space>+-- domain
+
+<space><space><space><space><space><space><space><space><space><space><space>¦<space><space><space>L-- model
+
+<space><space><space><space><space><space><space><space><space><space><space>¦<space><space><space><space><space><space>+-- BookCategory.java
+
+<space><space><space><space><space><space><space><space><space><space><space>¦<space><space><space><space><space><space>+-- Book.java
+
+<space><space><space><space><space><space><space><space><space><space><space>¦<space><space><space><space><space><space>+-- Comparator.java
+
+<space><space><space><space><space><space><space><space><space><space><space>¦<space><space><space><space><space><space>L-- Service.java
+
+<space><space><space><space><space><space><space><space><space><space><space>+-- factory
+
+<space><space><space><space><space><space><space><space><space><space><space>+-- infrastructure
+
+<space><space><space><space><space><space><space><space><space><space><space>¦<space><space><space>L-- ServiceImpl.java
+
+<space><space><space><space><space><space><space><space><space><space><space>L-- util
+
+<space><space><space><space><space><space><space><space><space><space><space>L-- security
