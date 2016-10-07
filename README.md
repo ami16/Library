@@ -36,21 +36,21 @@
 ###For now
 
 
-L-- src    
-*L-- main
-    **L-- java            
-     *** L-- edu                
-      ****L-- cursor                    
-         *****L-- library                        
-           ******+-- application                        
-           ******+-- domain                        
-           ******¦** L-- model                        
-           ******¦****       +-- BookCategory.java                        
-           ******¦****       +-- Book.java                        
-           ******¦****       +-- Comparator.java                        
-           ******¦****       L-- Service.java                        
-           ******+-- factory                        
-           ******+-- infrastructure                        
-           ******¦**   L-- ServiceImpl.java                        
-           ******L-- util
-           ******L-- security
+L- src    
+ L- main
+  L- java            
+   L- edu                
+    L- cursor                    
+     L- library                        
+      +- application                        
+      +- domain                        
+      ¦  L- model                        
+      ¦  +- BookCategory.java                        
+      ¦  +- Book.java                        
+      ¦  +- Comparator.java                        
+      ¦  L-- Service.java                        
+      +--factory                        
+      +--infrastructure                        
+      ¦  L-- ServiceImpl.java                        
+      L-- util
+      L-- security
