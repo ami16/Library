@@ -36,4 +36,4 @@
 ###For now
 
 
-![Alt text](http://bwstudio.net.ua/lib1.png "Optional title")
+![Alt text](http://bwstudio.net.ua/lib2.png "Optional title")
