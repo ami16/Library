@@ -1,0 +1,4 @@
+CRSRL0-1: Make User (in 'library/entity/user' folder) (Olesya): TODO
+CRSRL0-2: Make Book ('library/entity/book') (Igor): TODO
+CRSRL0-3: Comparator ('library/entity/book') (Maryna): TODO
+CRSRL0-4: User roles as enum ('library/entity/user') (Yura Z): TODO
