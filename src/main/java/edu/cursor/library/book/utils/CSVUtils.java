@@ -1,8 +1,8 @@
 package edu.cursor.library.book.utils;
 
 
-import edu.cursor.Genre;
 import edu.cursor.library.book.entity.TblBook;
+import edu.cursor.library.book.enums.Genre;
 import org.joda.time.LocalDate;
 
 import java.io.*;

@@ -1,6 +1,7 @@
 package edu.cursor.library.book.utils;
 
-import edu.cursor.Genre;
+
+import edu.cursor.library.book.enums.Genre;
 
 import java.util.Arrays;
 import java.util.Scanner;

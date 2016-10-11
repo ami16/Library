@@ -1,7 +1,8 @@
 package edu.cursor.library.book.service;
 
-import edu.cursor.Genre;
+
 import edu.cursor.library.book.entity.TblBook;
+import edu.cursor.library.book.enums.Genre;
 import edu.cursor.library.book.utils.CSVUtils;
 import edu.cursor.library.book.utils.GenreUtils;
 import org.joda.time.LocalDate;
@@ -97,15 +98,15 @@ public class BookService {
 
         } else {
             System.out.println("Pls enter Author for new book.");
-            String Authornew = scan.nextLine();
+            String authorNew = scan.nextLine();
             System.out.println("Pls enter Title for new book.");
-            String Titlenew = scan.nextLine();
+            String titleNew = scan.nextLine();
             System.out.println("Pls enter PublYear(YYYY-MM-DD) for new book.");
-            LocalDate PublYearnew = LocalDate.parse(scan.nextLine());
+            LocalDate PublYearNew = LocalDate.parse(scan.nextLine());
             System.out.println("Pls enter WritYear(YYYY-MM-DD) for new book.");
-            LocalDate WritYearnew = LocalDate.parse(scan.nextLine());
-            Genre genrenew = GenreUtils.chooseGenre();
-            bookList.add(new TblBook(ISBNnew, Authornew, Titlenew, PublYearnew, WritYearnew, genrenew));
+            LocalDate WritYearNew = LocalDate.parse(scan.nextLine());
+            Genre genreNew = GenreUtils.chooseGenre();
+            bookList.add(new TblBook(ISBNnew, authorNew, titleNew, PublYearNew, WritYearNew, genreNew));
             CSVUtils.writeLine(writer, bookList, patch);
         }
 

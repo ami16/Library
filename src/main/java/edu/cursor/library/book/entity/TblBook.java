@@ -1,25 +1,25 @@
 package edu.cursor.library.book.entity;
 
 
-import edu.cursor.Genre;
+import edu.cursor.library.book.enums.Genre;
 import org.joda.time.LocalDate;
 
 
 public class TblBook {
 
     private int ISBN;
-    private String Author;
-    private String Title;
-    private LocalDate PublYear;
-    private LocalDate WritYear;
+    private String author;
+    private String title;
+    private LocalDate publYear;
+    private LocalDate writYear;
     private Genre genre;
 
     public TblBook(Integer ISBN, String author, String title, LocalDate publYear, LocalDate writYear, Genre genre) {
         this.ISBN = ISBN;
-        Author = author;
-        Title = title;
-        PublYear = publYear;
-        WritYear = writYear;
+        this.author = author;
+        this.title = title;
+        this.publYear = publYear;
+        this.writYear = writYear;
         this.genre = genre;
     }
 
@@ -32,35 +32,35 @@ public class TblBook {
     }
 
     public String getAuthor() {
-        return Author;
+        return author;
     }
 
     public void setAuthor(String author) {
-        Author = author;
+        this.author = author;
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.title = title;
     }
 
     public LocalDate getPublYear() {
-        return PublYear;
+        return publYear;
     }
 
     public void setPublYear(LocalDate publYear) {
-        PublYear = publYear;
+        this.publYear = publYear;
     }
 
     public LocalDate getWritYear() {
-        return WritYear;
+        return writYear;
     }
 
     public void setWritYear(LocalDate writYear) {
-        WritYear = writYear;
+        this.writYear = writYear;
     }
 
     public Genre getGenre() {
@@ -104,10 +104,10 @@ public class TblBook {
     public String toString() {
         return "Book{" +
                 "ISBN=" + ISBN +
-                ", Author='" + Author + '\'' +
-                ", Title='" + Title + '\'' +
-                ", PublYear=" + PublYear +
-                ", WritYear=" + WritYear +
+                ", author='" + author + '\'' +
+                ", title='" + title + '\'' +
+                ", publYear=" + publYear +
+                ", writYear=" + writYear +
                 ", genre=" + genre +
                 '}';
     }
