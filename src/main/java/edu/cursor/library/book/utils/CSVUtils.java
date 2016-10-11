@@ -15,8 +15,8 @@ public class CSVUtils {
     private static File file;
 
 
-    public static void writeLine(Writer w, List<TblBook> bookList, String patch) throws IOException {
-        w = new BufferedWriter(new FileWriter(patch));
+    public static void writeLine(Writer w, List<TblBook> bookList, String path) throws IOException {
+        w = new BufferedWriter(new FileWriter(path));
         w.write("ISBN,Author,Title,publYear,writYear,Genre,\n");
         for (TblBook b : bookList) {
             w.append(b.getISBN().toString());
@@ -39,12 +39,12 @@ public class CSVUtils {
     }
 
 
-    public static TblBook[] readFile(BufferedReader r, String patch) throws IOException {
+    public static TblBook[] readFile(BufferedReader r, String path) throws IOException {
         String line;
         int counter = 0;
         TblBook[] bookArray;
         try {
-            file = new File(patch);
+            file = new File(path);
             r = new BufferedReader(new FileReader(file));
             while ((line = r.readLine()) != null) {
                 counter++;
@@ -54,7 +54,7 @@ public class CSVUtils {
             r.close();
         }
         try {
-            file = new File(patch);
+            file = new File(path);
             r = new BufferedReader(new FileReader(file));
             line = r.readLine();
             int index = 0;

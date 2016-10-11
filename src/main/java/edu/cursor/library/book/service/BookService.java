@@ -17,7 +17,7 @@ public class BookService {
 
     private static List<TblBook> bookList = new ArrayList<>();
     Scanner scan = new Scanner(System.in);
-    private String patch = System.getProperty("user.dir") + "/src/main/java/edu/cursor/library/book/database/573.csv";
+    private String path = System.getProperty("user.dir") + "/src/main/java/edu/cursor/library/book/database/573.csv";
     BufferedReader bfr = null;
     FileWriter writer = null;
 
@@ -44,7 +44,7 @@ public class BookService {
 
     public List<TblBook> createBookList() throws IOException {
         List <TblBook> bookList = new ArrayList<>();
-        Collections.addAll(bookList, CSVUtils.readFile(bfr,patch));
+        Collections.addAll(bookList, CSVUtils.readFile(bfr, path));
         return bookList;
     }
 
@@ -94,7 +94,7 @@ public class BookService {
         if (newBook) {
             TblBook oldBook = bookList.stream().filter(s -> s.getISBN().equals(ISBNnew)).findFirst().get();
             bookList.add(oldBook);
-            CSVUtils.writeLine(writer, bookList, patch);
+            CSVUtils.writeLine(writer, bookList, path);
 
         } else {
             System.out.println("Pls enter Author for new book.");
@@ -107,7 +107,7 @@ public class BookService {
             LocalDate WritYearNew = LocalDate.parse(scan.nextLine());
             Genre genreNew = GenreUtils.chooseGenre();
             bookList.add(new TblBook(ISBNnew, authorNew, titleNew, PublYearNew, WritYearNew, genreNew));
-            CSVUtils.writeLine(writer, bookList, patch);
+            CSVUtils.writeLine(writer, bookList, path);
         }
 
     }
@@ -128,7 +128,7 @@ public class BookService {
             TblBook book = (TblBook) it.next();
             if (book.getISBN().equals(ISBNnew)) {
                 bookList.remove(book);
-                CSVUtils.writeLine(writer, bookList, patch);
+                CSVUtils.writeLine(writer, bookList, path);
                 break;
             } else {
                 System.out.println("Sory book with this ISBN not exist");
