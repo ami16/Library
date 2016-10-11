@@ -1,6 +1,6 @@
 package edu.cursor.library.user.entity;
 
-import java.util.Date;
+import org.joda.time.LocalDate ;
 
 public class TblUser {
 	private int id;
@@ -9,10 +9,10 @@ public class TblUser {
 	private String eMail;
 	private int mobileNum;
 	private String address;
-	private Date dateOfRegistration;
+	private LocalDate dateOfRegistration;
 	
 	public TblUser(int id, String firstName, String lastName, String eMail, int mobileNum, String address,
-			Date dateOfRegistration) {
+						LocalDate dateOfRegistration) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -70,11 +70,11 @@ public class TblUser {
 		this.address = address;
 	}
 
-	public Date getDateOfRegistration() {
+	public LocalDate getDateOfRegistration() {
 		return dateOfRegistration;
 	}
 
-	public void setDateOfRegistration(Date dateOfRegistration) {
+	public void setDateOfRegistration(LocalDate dateOfRegistration) {
 		this.dateOfRegistration = dateOfRegistration;
 	}
 
