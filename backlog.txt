@@ -1,4 +1,4 @@
 CRSRL0-1: Make User (in 'library/user/entity' folder) (Olesya): TODO
-CRSRL0-2: Make Book ('library/book/entity') (Igor): TODO
+CRSRL0-2: Make Book ('library/book/entity') (Igor): IN PROGRESS
 CRSRL0-3: Comparator ('library/book/utils') (Maryna): TODO
 CRSRL0-4: User roles as enum ('library/user/enumeration') (Yura Z): TODO
