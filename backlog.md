@@ -6,6 +6,7 @@
 -[ ]CRSRL0-6: Create SQL script 'application/cursorLibrary.sql' (answers on 4 questions...) (Yura P): TODO
 -[ ]CRSRL0-7: re-Make Book service (interface, inner functionality) (Igor): TODO
 -[ ]CRSRL0-8: Create Book database (with real-like content) (Igor): REVIEW
--[ ]CRSRL0-9: LibService
--[ ]CRSRL0-10: LibSecurity
+-[ ]CRSRL0-9: Factory
+-[ ]CRSRL0-10: LibService
+-[ ]CRSRL0-11: LibSecurity
 ...
