@@ -1,7 +1,7 @@
 package edu.cursor.library.book.utils;
 
 
-import edu.cursor.library.book.entity.TblBook;
+import edu.cursor.library.book.entity.Book2;
 import edu.cursor.library.book.enums.Genre;
 import org.joda.time.LocalDate;
 
@@ -15,10 +15,10 @@ public class CSVUtils {
     private static File file;
 
 
-    public static void writeLine(Writer w, List<TblBook> bookList, String path) throws IOException {
+    public static void writeLine(Writer w, List<Book2> bookList, String path) throws IOException {
         w = new BufferedWriter(new FileWriter(path));
         w.write("ISBN,Author,Title,publYear,writYear,Genre,\n");
-        for (TblBook b : bookList) {
+        for (Book2 b : bookList) {
             w.append(b.getISBN().toString());
             w.append(DEFAULT_SEPARATOR);
             w.append(b.getAuthor());
@@ -39,10 +39,10 @@ public class CSVUtils {
     }
 
 
-    public static TblBook[] readFile(BufferedReader r, String path) throws IOException {
+    public static Book2[] readFile(BufferedReader r, String path) throws IOException {
         String line;
         int counter = 0;
-        TblBook[] bookArray;
+        Book2[] bookArray;
         try {
             file = new File(path);
             r = new BufferedReader(new FileReader(file));
@@ -50,7 +50,7 @@ public class CSVUtils {
                 counter++;
             }
         } finally {
-            bookArray = new TblBook[counter - 1];
+            bookArray = new Book2[counter - 1];
             r.close();
         }
         try {
@@ -67,7 +67,7 @@ public class CSVUtils {
                 LocalDate writYear = LocalDate.parse(fields[4]);
                 String StrGenre = fields[5].toUpperCase();
                 Genre genre = null;
-                TblBook book = new TblBook(ISBN, author, title, publYear, writYear, GenreUtils.chooseGenre(StrGenre));
+                Book2 book = new Book2(ISBN, author, title, publYear, writYear, GenreUtils.chooseGenre(StrGenre));
                 bookArray[index] = book;
                 index++;
             }
