@@ -2,7 +2,7 @@
 ~~CRSRL0-2: Make Book ('library/book/entity/TblBook.java') (Igor): DONE~~ <br />
 CRSRL0-3: Comparator ('library/book/utils/Comparator.java') (Maryna): TODO <br />
 ~~CRSRL0-4: User roles as enum ('library/user/enums/Roles.java') (Yura Z): FAILED~~ <br />
-CRSRL0-5: Description in README.md (answers on 4 questions...) (Yura P): TODO <br />
+CRSRL0-5: Description in README.md (answers on 4 questions...) (Yura Zh): TODO <br />
 CRSRL0-6: Create SQL script 'application/cursorLibrary.sql' (Yura P): TODO <br />
 CRSRL0-7: re-Make Book service (interface, inner functionality) (Igor): TODO <br />
 CRSRL0-8: Create Book database (with real-like content) (Igor): REVIEW <br />
