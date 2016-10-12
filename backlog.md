@@ -9,7 +9,6 @@ CRSRL0-8: Create Book database (with real-like content) (Igor): REVIEW <br />
 CRSRL0-9: Factory (pending) <br />
 CRSRL0-10: LibService (Andriy): IN_PROGRESS <br />
 CRSRL0-11: LibSecurity (Andriy): IN_PROGRESS <br />
-CRSRL0-12: User enums 'library/user/enums' (Olesya): IN_PROGRESS <br />
-CRSRL0-13: User Service 'library/user/service' (interface + impl) (Olesya): IN_PROGRESS <br />
-CRSRL0-14: Apache+ (Andriy): IN_PROGRESS <br />
+CRSRL0-12: User Service 'library/user/service' (interface + impl) (Olesya): IN_PROGRESS <br />
+CRSRL0-13: Apache+ (Andriy): IN_PROGRESS <br />
 ...
