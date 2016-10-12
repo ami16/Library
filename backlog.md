@@ -10,6 +10,6 @@ CRSRL0-9: Factory (pending) <br />
 CRSRL0-10: LibService (Andriy): IN_PROGRESS <br />
 CRSRL0-11: LibSecurity (Andriy): IN_PROGRESS <br />
 CRSRL0-12: User Service 'library/user/service' (interface + impl) (Olesya): IN_PROGRESS <br />
-CRSRL0-13: Apache+ (Andriy): IN_PROGRESS <br />
+CRSRL0-13: Apache Commons (Andriy): IN_PROGRESS <br />
 CRSRL0-14: Create file.csv for store userlist user/database/userList.csv (Olesya): TODO <br />
 ...
