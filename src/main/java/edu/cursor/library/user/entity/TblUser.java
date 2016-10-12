@@ -11,6 +11,10 @@ public class TblUser {
 	private String address;
 	private LocalDate dateOfRegistration;
 	
+	public TblUser() {
+		
+	}
+	
 	public TblUser(int id, String firstName, String lastName, String eMail, int mobileNum, String address,
 						LocalDate dateOfRegistration) {
 		this.id = id;
@@ -139,5 +143,4 @@ public class TblUser {
 				+ ", mobileNum=" + mobileNum + ", address=" + address + ", dateOfRegistration=" + dateOfRegistration
 				+ "]";
 	}
-	
 	}
