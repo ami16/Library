@@ -1,9 +1,14 @@
-package edu.cursor.library.user.entity;
+package edu.cursor.library.security.test;
 
 import edu.cursor.library.user.enums.Roles;
-import org.joda.time.LocalDate ;
+import org.joda.time.LocalDate;
 
-public class TblUser {
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Scanner;
+
+public class UserService {
 	private int id;
 	private String firstName;
 	private String lastName;
@@ -13,12 +18,12 @@ public class TblUser {
 	private LocalDate dateOfRegistration;
 	private Roles role;
 	
-	public TblUser() {
+	public UserService() {
 		
 	}
 	
-	public TblUser(int id, String firstName, String lastName, String eMail, int mobileNum, String address,
-						LocalDate dateOfRegistration, Roles role) {
+	public UserService(int id, String firstName, String lastName, String eMail, int mobileNum, String address,
+							 LocalDate dateOfRegistration, Roles role) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -115,7 +120,7 @@ public class TblUser {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TblUser other = (TblUser) obj;
+		UserService other = (UserService) obj;
 		if (address == null) {
 			if (other.address != null)
 				return false;

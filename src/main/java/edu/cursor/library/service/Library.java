@@ -5,9 +5,14 @@ import edu.cursor.library.security.AuthImpl;
 public interface Library {
 
    public void start() ;
-   public void showMainMenu(boolean userIsLogged, AuthImpl auth) ;
-   public void showMainMenuLogged() ;
-   public void showMainMenuAdmin() ;
-   public void showMainMenuSimple() ;
 
+   void showMainMenu(boolean userIsLogged, AuthImpl auth) ;
+   void showMainMenuSimple() ;
+   void showMainMenuLogged() ;
+   void showMainMenuAdmin() ;
+
+   void replyReader(int type);
+
+
+   void sayBye();
 }

@@ -4,7 +4,7 @@ import edu.cursor.library.user.entity.TblUser;
 
 import java.util.Map;
 
-public interface Credential {
+public interface Credentials {
 
    public Map<Integer, String> createCredentialList();
    public Map<Integer, String> addCredential( int id, String pass );

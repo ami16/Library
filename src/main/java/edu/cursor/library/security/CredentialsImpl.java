@@ -5,23 +5,23 @@ import edu.cursor.library.user.entity.TblUser;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CredentialImpl implements Credential {
+public class CredentialsImpl implements Credentials {
 
    private Map<Integer, String> credentialList = new HashMap<>();
    public Map<Integer, String> getCredentialList() { return credentialList; }
 
-   private static CredentialImpl instance ;
+   private static CredentialsImpl instance ;
 
-   private CredentialImpl() {
+   private CredentialsImpl() {
 
    }
 
-   public static CredentialImpl getInstance(){
+   public static CredentialsImpl getInstance(){
       if( instance == null ){
-         synchronized (CredentialImpl.class){
+         synchronized (CredentialsImpl.class){
             // Double check
             if (instance == null) {
-               instance = new CredentialImpl() ;
+               instance = new CredentialsImpl() ;
             }
          }
       }

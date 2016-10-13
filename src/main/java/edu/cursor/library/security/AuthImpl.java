@@ -2,15 +2,12 @@ package edu.cursor.library.security;
 
 import edu.cursor.library.user.entity.TblUser;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class AuthImpl
+public class AuthImpl implements Auth
 {
-   Credential cred = CredentialImpl.getInstance();
+   Credentials cred = CredentialsImpl.getInstance();
    private boolean userIsLogged = false;
    private TblUser loggedUser;
-   private List<TblUser> userList = new ArrayList<>();
+//   private List<TblUser> userList = new ArrayList<>();
 
    public boolean isUserLogged() {
       return userIsLogged;
@@ -28,13 +25,13 @@ public class AuthImpl
       this.loggedUser = loggedUser;
    }
 
-   public List<TblUser> getUserList() {
-      return userList;
-   }
-
-   public void setUserList(List<TblUser> userList) {
-      this.userList = userList;
-   }
+//   public List<TblUser> getUserList() {
+//      return userList;
+//   }
+//
+//   public void setUserList(List<TblUser> userList) {
+//      this.userList = userList;
+//   }
 
    private static AuthImpl instance ;
    private AuthImpl() {}
@@ -49,5 +46,17 @@ public class AuthImpl
          }
       }
       return instance ;
+   }
+
+   @Override
+   public void logIn(TblUser user) {
+      setLoggedUser(user);
+      setUserLogged(true);
+   }
+
+   @Override
+   public void logOut() {
+      setLoggedUser(null);
+      setUserLogged(false);
    }
 }
