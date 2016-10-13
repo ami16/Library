@@ -88,7 +88,7 @@ public class ServiceImpl implements Service{
       while (iterator.hasNext()) {
          TblUser user = iterator.next();
          if ( user.geteMail().equals(login) ) {
-            if( cred.getPassword(getUserId(user.getEmail())).equals(pass) ){
+            if( cred.getPassword(user.getId(user.geteMail()).equals(pass) ){
                return true;
             }
          }

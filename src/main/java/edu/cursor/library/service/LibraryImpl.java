@@ -3,7 +3,7 @@ package edu.cursor.library.service;
 import edu.cursor.library.security.AuthImpl;
 import edu.cursor.library.security.CredentialsImpl;
 import edu.cursor.library.user.entity.TblUser;
-import edu.cursor.library.user.enums.Roles;
+import edu.cursor.library.user.enums.Role;
 
 import java.util.Scanner;
 
@@ -34,7 +34,7 @@ public class LibraryImpl implements Library {
          System.out.println("Hello, " + user.getFirstName());
          System.out.println("----------------------------------------------------------");
 
-         if(auth.getLoggedUser().getRole() == Roles.ADMIN){
+         if(auth.getLoggedUser().getRole() == Role.ADMIN){
             showMainMenuAdmin();
          } else {
             showMainMenuLogged();
