@@ -2,6 +2,8 @@ package edu.cursor.library.user.entity;
 
 import org.joda.time.LocalDate ;
 
+import edu.cursor.library.user.enums.Role;
+
 public class TblUser {
 	private int id;
 	private String firstName;
@@ -10,7 +12,7 @@ public class TblUser {
 	private int mobileNum;
 	private String address;
 	private LocalDate dateOfRegistration;
-	
+	private Role role;
 	public TblUser() {
 		
 	}
