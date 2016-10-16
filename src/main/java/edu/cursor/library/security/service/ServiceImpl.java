@@ -59,11 +59,11 @@ public class ServiceImpl implements Service{
    public int getNewUserId(){
 
       // userService
-      Iterator<TblUser> itr = getUserList().iterator();
+  //    Iterator<TblUser> itr = getUserList().iterator();
       int currentId = 1 ;
-      while (itr.hasNext()) {
-         currentId = itr.next().getId();
-      }
+    //  while (itr.hasNext()) {
+    //     currentId = itr.next().getId();
+    //  }
       return currentId + 1;
    }
 
