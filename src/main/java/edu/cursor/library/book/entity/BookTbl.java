@@ -5,7 +5,7 @@ import edu.cursor.library.book.enums.Genre;
 import org.joda.time.LocalDate;
 
 
-public class Book2 {
+public class BookTbl {
 
     private int ISBN;
     private String author;
@@ -14,7 +14,7 @@ public class Book2 {
     private LocalDate writYear;
     private Genre genre;
 
-    public Book2(Integer ISBN, String author, String title, LocalDate publYear, LocalDate writYear, Genre genre) {
+    public BookTbl(Integer ISBN, String author, String title, LocalDate publYear, LocalDate writYear, Genre genre) {
         this.ISBN = ISBN;
         this.author = author;
         this.title = title;
@@ -76,7 +76,7 @@ public class Book2 {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Book2 book = (Book2) o;
+        BookTbl book = (BookTbl) o;
 
         if (getISBN() != null ? !getISBN().equals(book.getISBN()) : book.getISBN() != null) return false;
         if (getAuthor() != null ? !getAuthor().equals(book.getAuthor()) : book.getAuthor() != null) return false;
