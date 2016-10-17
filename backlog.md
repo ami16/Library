@@ -9,9 +9,9 @@ CRSRL0-8: (Igor) Create Book database (with real-like content): REVIEW <br />
 CRSRL0-9: Factory (pending) <br />
 CRSRL0-10: (Andriy) LibService: IN_PROGRESS <br />
 CRSRL0-11: (Andriy) LibSecurity: IN_PROGRESS <br />
-CRSRL0-12: (Olesya) User Service 'library/user/service' (interface + impl): IN_PROGRESS <br />
+~~CRSRL0-12: (Olesya) User Service 'library/user/service' (interface + impl): DONE~~ <br />
 ~~CRSRL0-13: (Andriy) Apache Commons: DONE <br />~~
-CRSRL0-14: (Olesya) Create file.csv for storing userlist 'user/database/userList.csv': IN_PROGRESS <br />
+~~CRSRL0-14: (Olesya) Create file.csv for storing userlist 'user/database/userList.csv': DONE~~ <br />
 ~~CRSRL0-15: (Olesya) User roles as enum ('library/user/enums/Role.java'): DONE~~ <br />
 CRSRL0-16: (Yura Zh) Create Logger: TODO <br />
 ...
