@@ -1,9 +1,8 @@
-package edu.cursor.library.security;
+package edu.cursor.library.security.register;
 
-import edu.cursor.library.security.service.Service;
 import org.joda.time.LocalDate ;
 import java.util.Scanner;
-import edu.cursor.library.security.service.ServiceImpl;
+import edu.cursor.library.security.service.SecurityServiceImpl;
 
 public class RegisterImpl implements Register{
 
@@ -16,7 +15,7 @@ public class RegisterImpl implements Register{
       Scanner scan = new Scanner(System.in);
       String desiredMail;
       boolean loginAllowed = false;
-      ServiceImpl srv = new ServiceImpl();
+      SecurityServiceImpl srv = new SecurityServiceImpl();
 
       // LOGIN
       outer: do {
@@ -116,7 +115,7 @@ public class RegisterImpl implements Register{
 
                int newId = srv.getNewUserId() ;
                // userService
-               addUser( newId, desiredName, desiredName2, desiredMail, desiredMobile, desiredAddr, new LocalDate().toString(), pass1 ) ;
+//               addUser( newId, desiredName, desiredName2, desiredMail, desiredMobile, desiredAddr, new LocalDate().toString(), pass1 ) ;
                System.out.println("Now login using your credentials");
             }
 

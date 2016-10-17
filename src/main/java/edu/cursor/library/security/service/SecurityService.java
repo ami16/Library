@@ -1,6 +1,6 @@
 package edu.cursor.library.security.service;
 
-public interface Service {
+public interface SecurityService {
 
    boolean validateLogin(String val);
    boolean validatePass(String val);

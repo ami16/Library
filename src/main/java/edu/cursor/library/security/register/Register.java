@@ -1,4 +1,4 @@
-package edu.cursor.library.security;
+package edu.cursor.library.security.register;
 
 public interface Register {
 
