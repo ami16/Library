@@ -1,39 +1,35 @@
 package edu.cursor.library.user.service;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
-
+import edu.cursor.library.book.entity.TblBook;
 import edu.cursor.library.user.entity.TblUser;
+import edu.cursor.library.user.utils.CSVUserUtil;
 
 public class UserServiceImpl implements UserService {
 	public static final String WRONG_CHOICE = "Incorrect item. Try again";
 	private static List<TblUser> userList;
-	private static Scanner sc;
 	private String path = System.getProperty("user.dir") + "/src/main/java/edu/cursor/library/user/database/573.csv";
 	 BufferedReader bfr = null;
 	 
-@Override
+    @Override
 	public List<TblUser> createUserList(){
 		List <TblUser> userList = new ArrayList<>();
-        Collections.addAll(userList, CSVUtils.readFile(bfr, path));
+        Collections.addAll(userList, CSVUserUtil.readFile(bfr, path));
         return userList;
 		}
 
 	@Override
 	public void viewBookList() {
 		// TODO Auto-generated method stub
-		
-	}
+		}
 
 	@Override
 	public void takeBook(TblBook book) {
 		// TODO Auto-generated method stub
-		
-	}
+		}
 
 	@Override
 	public void returnBook(TblBook book) {
