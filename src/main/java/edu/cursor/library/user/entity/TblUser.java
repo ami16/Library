@@ -30,11 +30,11 @@ public class TblUser {
 		this.role = role;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -62,11 +62,11 @@ public class TblUser {
 		this.eMail = eMail;
 	}
 
-	public int getMobileNum() {
+	public Integer getMobileNum() {
 		return mobileNum;
 	}
 
-	public void setMobileNum(int mobileNum) {
+	public void setMobileNum(Integer mobileNum) {
 		this.mobileNum = mobileNum;
 	}
 
