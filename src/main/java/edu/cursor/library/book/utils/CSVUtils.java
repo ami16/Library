@@ -12,50 +12,47 @@ public class CSVUtils {
 
     private static final char DEFAULT_SEPARATOR = ',';
 
-    private static File file;
 
-
-    public static void writeLine(Writer w, List<BookTbl> bookList, String path) throws IOException {
-        w = new BufferedWriter(new FileWriter(path));
-        w.write("ISBN,Author,Title,publYear,writYear,Genre,\n");
-        for (BookTbl b : bookList) {
-            w.append(b.getISBN().toString());
-            w.append(DEFAULT_SEPARATOR);
-            w.append(b.getAuthor());
-            w.append(DEFAULT_SEPARATOR);
-            w.append(b.getTitle());
-            w.append(DEFAULT_SEPARATOR);
-            w.append(b.getPublYear().toString());
-            w.append(DEFAULT_SEPARATOR);
-            w.append(b.getWritYear().toString());
-            w.append(DEFAULT_SEPARATOR);
-            w.append(b.getGenre().toString());
-            w.append(DEFAULT_SEPARATOR);
-            w.append("\n");
+    public static void writeLine(List<BookTbl> bookList, String path) {
+        try (Writer w = new BufferedWriter(new FileWriter(path))) {
+            w.write("ISBN,Author,Title,publYear,writYear,Genre,\n");
+            for (BookTbl b : bookList) {
+                w.append(b.getISBN().toString());
+                w.append(DEFAULT_SEPARATOR);
+                w.append(b.getAuthor());
+                w.append(DEFAULT_SEPARATOR);
+                w.append(b.getTitle());
+                w.append(DEFAULT_SEPARATOR);
+                w.append(b.getPublYear().toString());
+                w.append(DEFAULT_SEPARATOR);
+                w.append(b.getWritYear().toString());
+                w.append(DEFAULT_SEPARATOR);
+                w.append(b.getGenre().toString());
+                w.append(DEFAULT_SEPARATOR);
+                w.append("\n");
+            }
+            w.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        w.flush();
-        w.close();
 
     }
 
-
-    public static BookTbl[] readFile(BufferedReader r, String path) throws IOException {
+    public static BookTbl[] readFile(String path) {
         String line;
         int counter = 0;
         BookTbl[] bookArray;
-        try {
-            file = new File(path);
-            r = new BufferedReader(new FileReader(file));
+        File file = new File(path);
+        try (BufferedReader r = new BufferedReader(new FileReader(file))) {
             while ((line = r.readLine()) != null) {
                 counter++;
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         } finally {
             bookArray = new BookTbl[counter - 1];
-            r.close();
         }
-        try {
-            file = new File(path);
-            r = new BufferedReader(new FileReader(file));
+        try (BufferedReader r = new BufferedReader(new FileReader(file))) {
             line = r.readLine();
             int index = 0;
             while ((line = r.readLine()) != null) {
@@ -71,8 +68,8 @@ public class CSVUtils {
                 bookArray[index] = book;
                 index++;
             }
-        } finally {
-            r.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return bookArray;

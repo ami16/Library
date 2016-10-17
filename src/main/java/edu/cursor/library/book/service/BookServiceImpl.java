@@ -7,25 +7,21 @@ import edu.cursor.library.book.utils.CSVUtils;
 import edu.cursor.library.book.utils.GenreUtils;
 import org.joda.time.LocalDate;
 
-import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class BookServiceImpl implements BookService{
 
     private static List<BookTbl> bookList = new ArrayList<>();
-    Scanner scan = new Scanner(System.in);
-    private String path = System.getProperty("user.dir") + "/src/main/java/edu/cursor/library/book/database/573.csv";
-    BufferedReader bfr = null;
-    FileWriter writer = null;
+    private Scanner scan = new Scanner(System.in);
+    private String path = System.getProperty("user.dir") + "/src/main/java/edu/cursor/library/book/database/bookList.csv";
 
-    public BookServiceImpl() throws IOException {
+
+    public BookServiceImpl() {
         bookList = createBookList();
     }
 
-    public void start() throws IOException {
+    public void start() {
         while (true) {
             showMainMenu();
             getMainChoice();
@@ -42,14 +38,14 @@ public class BookServiceImpl implements BookService{
 
     }
     @Override
-    public List<BookTbl> createBookList() throws IOException {
+    public List<BookTbl> createBookList() {
         List <BookTbl> bookList = new ArrayList<>();
-        Collections.addAll(bookList, CSVUtils.readFile(bfr, path));
+        Collections.addAll(bookList, CSVUtils.readFile(path));
         return bookList;
     }
 
     @Override
-    public void proceedMain(char answer) throws IOException {
+    public void proceedMain(char answer) {
         switch (answer) {
             case '1': // List
                 viewBookList();
@@ -63,7 +59,7 @@ public class BookServiceImpl implements BookService{
         }
     }
     @Override
-    public char getMainChoice() throws IOException {
+    public char getMainChoice() {
         char mainChoice;
         do {
             mainChoice = scan.next().charAt(0);
@@ -85,7 +81,7 @@ public class BookServiceImpl implements BookService{
         } while (true);
     }
     @Override
-    public void addBook() throws IOException {
+    public void addBook() {
         System.out.println("Pls enter ISBN for new book.");
         Integer ISBNnew = scan.nextInt();
         String left = scan.nextLine();
@@ -94,7 +90,7 @@ public class BookServiceImpl implements BookService{
         if (newBook) {
             BookTbl oldBook = bookList.stream().filter(s -> s.getISBN().equals(ISBNnew)).findFirst().get();
             bookList.add(oldBook);
-            CSVUtils.writeLine(writer, bookList, path);
+            CSVUtils.writeLine(bookList, path);
 
         } else {
             System.out.println("Pls enter Author for new book.");
@@ -107,7 +103,7 @@ public class BookServiceImpl implements BookService{
             LocalDate WritYearNew = LocalDate.parse(scan.nextLine());
             Genre genreNew = GenreUtils.chooseGenre();
             bookList.add(new BookTbl(ISBNnew, authorNew, titleNew, PublYearNew, WritYearNew, genreNew));
-            CSVUtils.writeLine(writer, bookList, path);
+            CSVUtils.writeLine(bookList, path);
         }
 
     }
@@ -119,8 +115,8 @@ public class BookServiceImpl implements BookService{
                 ))
                 .forEach((k, v) -> System.out.println("-" + k + " amount: " + v + ";"));
     }
-
-    public void removeBook() throws IOException {
+    @Override
+    public void removeBook() {
         System.out.println("Pls enter ISBN for remove book.");
         Integer ISBNnew = scan.nextInt();
         String left = scan.nextLine();
@@ -128,7 +124,7 @@ public class BookServiceImpl implements BookService{
             BookTbl book = (BookTbl) it.next();
             if (book.getISBN().equals(ISBNnew)) {
                 bookList.remove(book);
-                CSVUtils.writeLine(writer, bookList, path);
+                CSVUtils.writeLine(bookList, path);
                 break;
             } else {
                 System.out.println("Sory book with this ISBN not exist");
