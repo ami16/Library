@@ -1,7 +1,7 @@
 package edu.cursor.library.book.utils;
 
 
-import edu.cursor.library.book.entity.BookTbl;
+import edu.cursor.library.book.entity.TblBook;
 import edu.cursor.library.book.enums.Genre;
 import org.joda.time.LocalDate;
 
@@ -13,10 +13,10 @@ public class CSVUtils {
     private static final char DEFAULT_SEPARATOR = ',';
 
 
-    public static void writeLine(List<BookTbl> bookList, String path) {
+    public static void writeLine(List<TblBook> bookList, String path) {
         try (Writer w = new BufferedWriter(new FileWriter(path))) {
             w.write("ISBN,Author,Title,publYear,writYear,Genre,\n");
-            for (BookTbl b : bookList) {
+            for (TblBook b : bookList) {
                 w.append(b.getISBN().toString());
                 w.append(DEFAULT_SEPARATOR);
                 w.append(b.getAuthor());
@@ -38,10 +38,10 @@ public class CSVUtils {
 
     }
 
-    public static BookTbl[] readFile(String path) {
+    public static TblBook[] readFile(String path) {
         String line;
         int counter = 0;
-        BookTbl[] bookArray;
+        TblBook[] bookArray;
         File file = new File(path);
         try (BufferedReader r = new BufferedReader(new FileReader(file))) {
             while ((line = r.readLine()) != null) {
@@ -50,7 +50,7 @@ public class CSVUtils {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            bookArray = new BookTbl[counter - 1];
+            bookArray = new TblBook[counter - 1];
         }
         try (BufferedReader r = new BufferedReader(new FileReader(file))) {
             line = r.readLine();
@@ -64,7 +64,7 @@ public class CSVUtils {
                 LocalDate writYear = LocalDate.parse(fields[4]);
                 String StrGenre = fields[5].toUpperCase();
                 Genre genre = null;
-                BookTbl book = new BookTbl(ISBN, author, title, publYear, writYear, GenreUtils.chooseGenre(StrGenre));
+                TblBook book = new TblBook(ISBN, author, title, publYear, writYear, GenreUtils.chooseGenre(StrGenre));
                 bookArray[index] = book;
                 index++;
             }

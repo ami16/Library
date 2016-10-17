@@ -1,7 +1,7 @@
 package edu.cursor.library.book.service;
 
 
-import edu.cursor.library.book.entity.BookTbl;
+import edu.cursor.library.book.entity.TblBook;
 import edu.cursor.library.book.enums.Genre;
 import edu.cursor.library.book.utils.CSVUtils;
 import edu.cursor.library.book.utils.GenreUtils;
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class BookServiceImpl implements BookService{
 
-    private static List<BookTbl> bookList = new ArrayList<>();
+    private static List<TblBook> bookList = new ArrayList<>();
     private Scanner scan = new Scanner(System.in);
     private String path = System.getProperty("user.dir") + "/src/main/java/edu/cursor/library/book/database/bookList.csv";
 
@@ -38,8 +38,8 @@ public class BookServiceImpl implements BookService{
 
     }
     @Override
-    public List<BookTbl> createBookList() {
-        List <BookTbl> bookList = new ArrayList<>();
+    public List<TblBook> createBookList() {
+        List <TblBook> bookList = new ArrayList<>();
         Collections.addAll(bookList, CSVUtils.readFile(path));
         return bookList;
     }
@@ -88,7 +88,7 @@ public class BookServiceImpl implements BookService{
         Boolean newBook = bookList.stream().map(s -> s.getISBN()).collect(
                 Collectors.toList()).stream().anyMatch(ISBNnew::equals);
         if (newBook) {
-            BookTbl oldBook = bookList.stream().filter(s -> s.getISBN().equals(ISBNnew)).findFirst().get();
+            TblBook oldBook = bookList.stream().filter(s -> s.getISBN().equals(ISBNnew)).findFirst().get();
             bookList.add(oldBook);
             CSVUtils.writeLine(bookList, path);
 
@@ -102,7 +102,7 @@ public class BookServiceImpl implements BookService{
             System.out.println("Pls enter WritYear(YYYY-MM-DD) for new book.");
             LocalDate WritYearNew = LocalDate.parse(scan.nextLine());
             Genre genreNew = GenreUtils.chooseGenre();
-            bookList.add(new BookTbl(ISBNnew, authorNew, titleNew, PublYearNew, WritYearNew, genreNew));
+            bookList.add(new TblBook(ISBNnew, authorNew, titleNew, PublYearNew, WritYearNew, genreNew));
             CSVUtils.writeLine(bookList, path);
         }
 
@@ -121,7 +121,7 @@ public class BookServiceImpl implements BookService{
         Integer ISBNnew = scan.nextInt();
         String left = scan.nextLine();
         for (Iterator it = bookList.iterator(); it.hasNext(); ) {
-            BookTbl book = (BookTbl) it.next();
+            TblBook book = (TblBook) it.next();
             if (book.getISBN().equals(ISBNnew)) {
                 bookList.remove(book);
                 CSVUtils.writeLine(bookList, path);
