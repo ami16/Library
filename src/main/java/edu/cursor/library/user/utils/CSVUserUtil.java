@@ -1,5 +1,6 @@
+package edu.cursor.library.user.utils;
+
 import edu.cursor.library.user.entity.TblUser;
-import edu.cursor.library.user.enums.Role;
 import org.joda.time.LocalDate;
 import java.io.*;
 import java.util.List;
@@ -68,9 +69,10 @@ public class CSVUserUtil {
 				userArray[index] = user;
 				index++;
 			}
-			return userArray;
+			
 		} catch (IOException ioe) {
 			// Logger code here
 		}
+		return userArray;
 	}
 }

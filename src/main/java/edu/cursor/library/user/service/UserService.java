@@ -1,6 +1,7 @@
 package edu.cursor.library.user.service;
 
 import java.util.List;
+import edu.cursor.library.book.entity.TblBook;
 import edu.cursor.library.user.entity.TblUser;
 
 public interface UserService {
