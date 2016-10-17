@@ -1,5 +1,7 @@
-package edu.cursor.library.security;
+package edu.cursor.library.security.auth;
 
+import edu.cursor.library.security.credentials.service.Credentials;
+import edu.cursor.library.security.credentials.service.CredentialsImpl;
 import edu.cursor.library.user.entity.TblUser;
 
 public class AuthImpl implements Auth

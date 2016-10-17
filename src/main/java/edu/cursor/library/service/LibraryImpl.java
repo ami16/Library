@@ -1,7 +1,7 @@
 package edu.cursor.library.service;
 
-import edu.cursor.library.security.AuthImpl;
-import edu.cursor.library.security.CredentialsImpl;
+import edu.cursor.library.security.auth.AuthImpl;
+import edu.cursor.library.security.credentials.service.CredentialsImpl;
 import edu.cursor.library.user.entity.TblUser;
 import edu.cursor.library.user.enums.Role;
 

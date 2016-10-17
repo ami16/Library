@@ -1,9 +1,8 @@
-package edu.cursor.library.security;
+package edu.cursor.library.security.validate;
 
 import java.util.Scanner;
-import edu.cursor.library.security.service.ServiceImpl;
-import edu.cursor.library.security.AuthImpl;
-import edu.cursor.library.user.entity.TblUser;
+import edu.cursor.library.security.service.SecurityServiceImpl;
+import edu.cursor.library.security.auth.AuthImpl;
 
 public class ValidateImpl implements Validate{
 
@@ -14,7 +13,7 @@ public class ValidateImpl implements Validate{
       Scanner scan = new Scanner(System.in);
       String userLogin, userPassword, verifiedLog = "";
       boolean is = false;
-      ServiceImpl srv = new ServiceImpl();
+      SecurityServiceImpl srv = new SecurityServiceImpl();
       AuthImpl auth = AuthImpl.getInstance();
 
       System.out.println("Enter your login:");
@@ -42,7 +41,7 @@ public class ValidateImpl implements Validate{
             is = srv.passIsCorrect(verifiedLog, userPassword);
             if (is) {
                // USER->getUser by ID
-               auth.logIn(user);
+//               auth.logIn(user);
             }
          }
          if (!is) {

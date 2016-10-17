@@ -1,6 +1,6 @@
 package edu.cursor.library.service;
 
-import edu.cursor.library.security.AuthImpl;
+import edu.cursor.library.security.auth.AuthImpl;
 
 public interface Library {
 
