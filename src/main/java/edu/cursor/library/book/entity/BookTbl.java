@@ -23,6 +23,9 @@ public class BookTbl {
         this.genre = genre;
     }
 
+    public BookTbl() {
+    }
+
     public Integer getISBN() {
         return ISBN;
     }
