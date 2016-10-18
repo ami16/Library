@@ -151,7 +151,7 @@ public class TblUser {
 
 	@Override
 	public String toString() {
-		return "UserService [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", eMail=" + eMail
+		return "[id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", eMail=" + eMail
 				+ ", mobileNum=" + mobileNum + ", address=" + address + ", dateOfRegistration=" + dateOfRegistration
 				+ "]";
 	}

@@ -1,6 +1,5 @@
 package edu.cursor.library.user.service;
 
-import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,15 +8,17 @@ import edu.cursor.library.user.entity.TblUser;
 import edu.cursor.library.user.utils.CSVUserUtil;
 
 public class UserServiceImpl implements UserService {
-	public static final String WRONG_CHOICE = "Incorrect item. Try again";
+	public static void main(String args[]) {
+		UserServiceImpl ser = new UserServiceImpl();
+		System.out.println(ser.createUserList());
+	}
 	private static List<TblUser> userList;
-	private String path = System.getProperty("user.dir") + "/src/main/java/edu/cursor/library/user/database/573.csv";
-	 BufferedReader bfr = null;
+	private String path = System.getProperty("user.dir") + "/src/main/java/edu/cursor/library/user/database/userList.csv";
 	 
     @Override
 	public List<TblUser> createUserList(){
 		List <TblUser> userList = new ArrayList<>();
-        Collections.addAll(userList, CSVUserUtil.readFile(bfr, path));
+        Collections.addAll(userList, CSVUserUtil.readFile(path));
         return userList;
 		}
 
