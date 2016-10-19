@@ -11,12 +11,13 @@ import edu.cursor.library.user.utils.CSVUserUtil;
 public class UserServiceImpl implements UserService {
 	public static final String WRONG_CHOICE = "Incorrect item. Try again";
 	private static List<TblUser> userList;
-	private String path = System.getProperty("user.dir") + "/src/main/java/edu/cursor/library/user/database/573.csv";
-	 BufferedReader bfr = null;
+	private static String path = System.getProperty("user.dir") + "/src/main/java/edu/cursor/library/user/database/573.csv";
+	static BufferedReader bfr = null;
 	 
-    @Override
-	public List<TblUser> createUserList(){
-		List <TblUser> userList = new ArrayList<>();
+// 	@Override
+	public static List<TblUser> createUserList(){
+//		List <TblUser> userList = new ArrayList<>();
+		userList = new ArrayList<>();
         Collections.addAll(userList, CSVUserUtil.readFile(bfr, path));
         return userList;
 		}
@@ -45,5 +46,10 @@ public class UserServiceImpl implements UserService {
 	public List<TblUser> addUser(TblUser user) {
 		// TODO Auto-generated method stub
 		return userList;
+	}
+
+	public static void main(String[] args) {
+		System.out.println("Hi!");
+		System.out.println(createUserList());
 	}
 }

@@ -5,6 +5,8 @@ import edu.cursor.library.security.credentials.service.CredentialsImpl;
 import edu.cursor.library.user.entity.TblUser;
 import edu.cursor.library.user.enums.Role;
 
+import edu.cursor.library.user.service.UserServiceImpl;
+
 import java.util.Scanner;
 
 public class LibraryImpl implements Library {
@@ -16,6 +18,9 @@ public class LibraryImpl implements Library {
       System.out.println("Lib started");
       AuthImpl auth = AuthImpl.getInstance() ;
       CredentialsImpl cred = CredentialsImpl.getInstance() ;
+      UserServiceImpl userService = new UserServiceImpl();
+
+      System.out.println( userService.createUserList() );
 
       while(true){
          showMainMenu(auth.isUserLogged(), auth);

@@ -7,7 +7,7 @@ import edu.cursor.library.user.entity.TblUser;
 public interface UserService {
 	
 	// for user
-	List<TblUser> createUserList();
+//	List<TblUser> createUserList();
 	void viewBookList();
 	void takeBook(TblBook book);
 	void returnBook(TblBook book);
