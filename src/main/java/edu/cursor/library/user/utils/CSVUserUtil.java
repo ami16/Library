@@ -37,12 +37,12 @@ public class CSVUserUtil {
 		}
 	}
 
-	public static TblUser[] readFile(BufferedReader r, String path) {
+	public static TblUser[] readFile(String path) {
 		String line;
 		int counter = 0;
 		TblUser[] userArray;
+		file = new File(path);
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-			file = new File(path);
 			while ((line = br.readLine()) != null) {
 				counter++;
 			}
@@ -52,7 +52,6 @@ public class CSVUserUtil {
 			userArray = new TblUser[counter - 1];
 		}
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-			file = new File(path);
 			line = br.readLine();
 			int index = 0;
 			while ((line = br.readLine()) != null) {
@@ -65,14 +64,17 @@ public class CSVUserUtil {
 				String address = fields[5];
 				LocalDate dateOfRegistration = LocalDate.parse(fields[6]);
 				String Role = fields[7].toUpperCase();
-				TblUser user = new TblUser(Id, firstName, lastName, eMail, mobileNum,address,dateOfRegistration, RoleUtil.chooseRole(Role));
+				TblUser user = new TblUser(Id, firstName, lastName, eMail, mobileNum, address, dateOfRegistration,
+						RoleUtil.chooseRole(Role));
 				userArray[index] = user;
 				index++;
+				System.out.println(user);
 			}
-			
+
 		} catch (IOException ioe) {
 			// Logger code here
 		}
 		return userArray;
 	}
+
 }
