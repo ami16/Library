@@ -16,4 +16,6 @@ CRSRL0-11: (Andriy) LibSecurity: IN_PROGRESS <br />
 CRSRL0-16: (Yura Zh) Create Logger: REVIEW <br />
 CRSRL0-17: (IGOR) Fix Book: TODO <br />
 CRSRL0-18: (IGOR) Fix BookService: TODO <br />
+CRSRL0-19: (OLESYA) Fix UserService: IN_PROGRESS <br />
+CRSRL0-20: (OLESYA) Create Menus in LibService: TODO <br />
 ...
