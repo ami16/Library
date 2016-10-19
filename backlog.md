@@ -13,5 +13,7 @@ CRSRL0-11: (Andriy) LibSecurity: IN_PROGRESS <br />
 ~~CRSRL0-13: (Andriy) Apache Commons: DONE <br />~~
 ~~CRSRL0-14: (Olesya) Create file.csv for storing userlist 'user/database/userList.csv': DONE~~ <br />
 ~~CRSRL0-15: (Olesya) User roles as enum ('library/user/enums/Role.java'): DONE~~ <br />
-~~CRSRL0-16: (Yura Zh) Create Logger: DONE~~ <br />
+CRSRL0-16: (Yura Zh) Create Logger: REVIEW <br />
+CRSRL0-17: (IGOR) Fix Book: TODO <br />
+CRSRL0-18: (IGOR) Fix BookService: TODO <br />
 ...
