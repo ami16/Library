@@ -2,49 +2,40 @@ package edu.cursor.library.user.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
-import edu.cursor.library.book.entity.TblBook;
 import edu.cursor.library.user.entity.TblUser;
-import edu.cursor.library.user.utils.CSVUserUtil;
+import edu.cursor.library.user.utils.IOCsv;
+
 
 public class UserServiceImpl implements UserService {
-	public static void main(String args[]) {
-		UserServiceImpl ser = new UserServiceImpl();
-		System.out.println(ser.createUserList());
-	}
-	private static List<TblUser> userList;
-	private String path = System.getProperty("user.dir") + "/src/main/java/edu/cursor/library/user/database/userList.csv";
-	 
-    @Override
-	public List<TblUser> createUserList(){
-		List <TblUser> userList = new ArrayList<>();
-        Collections.addAll(userList, CSVUserUtil.readFile(path));
-        return userList;
-		}
+ 	private static List<TblUser> userList = new ArrayList<>();
+	private String path = System.getProperty("user.dir")
+			+ "/src/main/java/edu/cursor/library/user/database/userList.csv";
 
 	@Override
-	public void viewBookList() {
-		// TODO Auto-generated method stub
-		}
-
-	@Override
-	public void takeBook(TblBook book) {
-		// TODO Auto-generated method stub
-		}
-
-	@Override
-	public void returnBook(TblBook book) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public List<TblUser> deleteUser(TblUser user) {
-		// TODO Auto-generated method stub
+	public List<TblUser> getUserList() {
+		Collections.addAll(userList, IOCsv.readFile(path));
 		return userList;
 	}
+
 	@Override
-	public List<TblUser> addUser(TblUser user) {
-		// TODO Auto-generated method stub
+	public List<TblUser> deleteUser(int choice) {
+		for (Iterator it = userList.iterator(); it.hasNext();) {
+			TblUser user = (TblUser) it.next();
+			if (user.getId() == choice) {
+				it.remove();
+				IOCsv.writeFile(userList, path);
+			}
+		}
+		return userList;
+	}
+
+	@Override
+	public List<TblUser> addUser(TblUser newUser) {
+		userList.add(new TblUser(newUser.getId(), newUser.getFirstName(), newUser.getLastName(), newUser.geteMail(),
+				newUser.getMobileNum(), newUser.getAddress(), newUser.getDateOfRegistration(), newUser.getRole()));
+		IOCsv.writeFile(userList, path);
 		return userList;
 	}
 }
