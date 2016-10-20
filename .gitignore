@@ -9,3 +9,12 @@
 # IntelliJ Idea
 *.idea
 *.iml
+
+#sublime
+project.sublime-workspace
+/central-js/client/tmp/
+/central-js/client/build/
+
+# NetBeans
+nbactions.xml
+nb-configuration.xml
