@@ -105,13 +105,13 @@ public class TblBook {
 
     @Override
     public String toString() {
-        return "Book - {" +
-                "ISBN= " + ISBN +
-                ", Author: '" + author + '\'' +
-                ", Title: '" + title + '\'' +
-                ", Published - " + publYear +
-                ", Wrote - " + writYear +
-                ", Genre is " + genre +
+        return "TblBook{" +
+                "ISBN=" + ISBN +
+                ", Author='" + author + '\'' +
+                ", Title='" + title + '\'' +
+                ", Published=" + publYear +
+                ", Written=" + writYear +
+                ", Genre=" + genre +
                 '}';
     }
 }
