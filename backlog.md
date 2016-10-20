@@ -1,6 +1,6 @@
 * ~~CRSRL0-1: (Olesya) Make User (in 'library/user/entity/TblUser' folder): DONE~~ <br />
 * ~~CRSRL0-2: (Igor) Make Book ('library/book/entity/TblBook.java'): DONE~~ <br />
-* ~~CRSRL0-3: (Maryna) Comparator ('library/book/utils/Comparator.java'): DONE (Andriy) ~~ <br />
+* ~~CRSRL0-3: (Maryna) Comparator ('library/book/utils/Comparator.java'): DONE (Andriy)~~ <br />
 * ~~CRSRL0-4: (Yura Z) User roles as enum ('library/user/enums/Roles.java'): FAILED~~ <br />
 * ~~CRSRL0-5: (Yura P) Description in README.md (answers on 4 questions...): DONE~~ <br />
 CRSRL0-6: (Yura P) Create SQL script 'application/cursorLibrary.sql': REVIEW <br />
