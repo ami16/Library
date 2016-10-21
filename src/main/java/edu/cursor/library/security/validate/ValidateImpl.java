@@ -11,9 +11,9 @@ public class ValidateImpl implements Validate{
 
    public void validateUser() {
       Scanner scan = new Scanner(System.in);
-      String userLogin, userPassword, verifiedLog = "";
+      String userLogin, userPassword, verifiedLogin = "";
       boolean is = false;
-      SecurityServiceImpl srv = new SecurityServiceImpl();
+      SecurityServiceImpl securityService = new SecurityServiceImpl();
       AuthImpl auth = AuthImpl.getInstance();
 
       System.out.println("Enter your login:");
@@ -22,9 +22,9 @@ public class ValidateImpl implements Validate{
          if (userLogin.equals("")) {
             System.out.print("Enter smth: ");
          } else {
-            is = srv.userExists(userLogin);
+            is = securityService.userExists(userLogin);
             if (is)
-               verifiedLog = userLogin;
+               verifiedLogin = userLogin;
          }
          if (!is) {
             System.out.println("No such login (3)");
@@ -38,10 +38,10 @@ public class ValidateImpl implements Validate{
          if (userPassword.equals("")) {
             System.out.print("Enter smth: ");
          } else {
-            is = srv.passIsCorrect(verifiedLog, userPassword);
+            is = securityService.passIsCorrect(verifiedLogin, userPassword);
             if (is) {
-               // USER->getUser by ID
-//               auth.logIn(user);
+               // USER->getUser by ...
+               auth.logIn( securityService.getUser(verifiedLogin) );
             }
          }
          if (!is) {

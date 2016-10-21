@@ -9,7 +9,7 @@ public class AuthImpl implements Auth
    Credentials cred = CredentialsImpl.getInstance();
    private boolean userIsLogged = false;
    private TblUser loggedUser;
-//   private List<TblUser> userList = new ArrayList<>();
+
 
    public boolean isUserLogged() {
       return userIsLogged;

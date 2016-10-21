@@ -7,7 +7,8 @@ import java.util.Map;
 public interface Credentials {
 
    //  Map<Integer, String> createCredentialsList();
-   Map<Integer, String> getCredentialsList(String file);
+//   Map<Integer, String> getCredentialsList(String file);
+   Map<Integer, String> getCredentialsList();
    String getPassword(TblUser user) ;
    void addCredentials( int id, String pass );
 

@@ -1,6 +1,12 @@
 package edu.cursor.library.security.register;
 
+import edu.cursor.library.security.credentials.service.CredentialsImpl;
+import edu.cursor.library.user.entity.TblUser;
+import edu.cursor.library.user.enums.Role;
+import edu.cursor.library.user.service.UserServiceImpl;
 import org.joda.time.LocalDate ;
+
+import java.sql.Timestamp;
 import java.util.Scanner;
 import edu.cursor.library.security.service.SecurityServiceImpl;
 
@@ -15,7 +21,9 @@ public class RegisterImpl implements Register{
       Scanner scan = new Scanner(System.in);
       String desiredMail;
       boolean loginAllowed = false;
-      SecurityServiceImpl srv = new SecurityServiceImpl();
+      UserServiceImpl userService = new UserServiceImpl();
+      CredentialsImpl credentials = CredentialsImpl.getInstance();
+      SecurityServiceImpl securityService = new SecurityServiceImpl();
 
       // LOGIN
       outer: do {
@@ -24,9 +32,9 @@ public class RegisterImpl implements Register{
          // X
          if (desiredMail.equalsIgnoreCase("x"))
             break;
-         if ( srv.validateMail(desiredMail)) {
+         if ( securityService.validateMail(desiredMail)) {
 
-            if (!srv.loginAvailable(desiredMail)) {
+            if (!securityService.loginAvailable(desiredMail, true)) {
                loginAllowed = false;
             } else {
 
@@ -42,7 +50,7 @@ public class RegisterImpl implements Register{
                   // X
                   if (pass1.equalsIgnoreCase("x"))
                      break outer;
-                  if (srv.validatePass(pass1))
+                  if (securityService.validatePass(pass1))
                      passCorrect = true;
                } while (!passCorrect);
                do {
@@ -68,7 +76,7 @@ public class RegisterImpl implements Register{
                   // X
                   if (desiredName.equalsIgnoreCase("x"))
                      break outer;
-                  if (srv.validateName(desiredName))
+                  if (securityService.validateName(desiredName))
                      correctName = true;
                } while (!correctName);
 
@@ -81,7 +89,7 @@ public class RegisterImpl implements Register{
                   // X
                   if (desiredName2.equalsIgnoreCase("x"))
                      break outer;
-                  if (srv.validateName(desiredName2))
+                  if (securityService.validateName(desiredName2))
                      correctName2 = true;
                } while (!correctName2);
 
@@ -94,7 +102,7 @@ public class RegisterImpl implements Register{
                   // X
                   if ( Integer.toString(desiredMobile).equalsIgnoreCase("x"))
                      break outer;
-                  if (srv.validateMobile(desiredMobile))
+                  if (securityService.validateMobile(desiredMobile))
                      correctMobile = true;
                } while (!correctMobile);
 
@@ -113,10 +121,27 @@ public class RegisterImpl implements Register{
 
                loginAllowed = true;
 
-               int newId = srv.getNewUserId() ;
+               int newId = securityService.getNewUserId() ;
                // userService
 //               addUser( newId, desiredName, desiredName2, desiredMail, desiredMobile, desiredAddr, new LocalDate().toString(), pass1 ) ;
-               System.out.println("Now login using your credentials");
+               if(
+                  userService.addUser( new TblUser(
+                      newId,
+                      desiredName,
+                      desiredName2,
+                      desiredMail,
+                      desiredMobile,
+                      desiredAddr,
+                      LocalDate.now(),
+                      Role.USER
+                  ) )
+                ){
+                  credentials.addCredentials(newId, pass1);
+                  System.out.println("Now login using your credentials");
+               } else {
+                  System.out.println("Something went wrong. Try ones more or contact admin... Bla-bla..");
+               }
+
             }
 
          } else {

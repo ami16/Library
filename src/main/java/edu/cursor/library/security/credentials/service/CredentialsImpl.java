@@ -13,8 +13,8 @@ public class CredentialsImpl implements Credentials {
 
    private static String projPath = System.getProperty("user.dir"),
        dbPath = "/src/main/java/edu/cursor/library/security/credentials/db/",
-       fileName = "tbl.csv";
-   private static String file = projPath + dbPath + fileName ;
+       fileName = "tbl.csv",
+       file = projPath + dbPath + fileName ;
    private Map<Integer, String> credentialsList = new HashMap<>();
    private static CredentialsImpl instance ;
 
@@ -36,7 +36,8 @@ public class CredentialsImpl implements Credentials {
 
    @Override
    public String getPassword(TblUser user){
-      Map<Integer, String> credentialsList = getCredentialsList(file);
+//      Map<Integer, String> credentialsList = getCredentialsList(file);
+      Map<Integer, String> credentialsList = getCredentialsList();
 
       Map<Integer, String> result = credentialsList.entrySet()
           .stream()
@@ -46,7 +47,7 @@ public class CredentialsImpl implements Credentials {
    }
 
    @Override
-   public Map<Integer, String> getCredentialsList(String file) {
+   public Map<Integer, String> getCredentialsList() {
       credentialsList.clear();
       try(Scanner scan = new Scanner(new File(file))){
          String[] fields;
@@ -63,7 +64,8 @@ public class CredentialsImpl implements Credentials {
 
    @Override
    public void addCredentials ( int id, String pass ) {
-      getCredentialsList(file);
+//      getCredentialsList(file);
+      getCredentialsList();
       credentialsList.put(id, pass) ;
       try(FileWriter fw = new FileWriter(file)){
          fw.write("ID,pass\n");
