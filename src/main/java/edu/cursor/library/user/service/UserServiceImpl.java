@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+
+import edu.cursor.library.security.register.RegisterImpl;
 import edu.cursor.library.user.entity.TblUser;
 import edu.cursor.library.user.utils.IOCsv;
 
 
 public class UserServiceImpl implements UserService {
+	private RegisterImpl register = new RegisterImpl();
 	private static List<TblUser> userList = new ArrayList<>();
 	private String path = System.getProperty("user.dir")
 		+ "/src/main/java/edu/cursor/library/user/database/userList.csv";
@@ -20,7 +23,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<TblUser> deleteUser(int choice) {
+	public void deleteUser(int choice) {
 		for (Iterator it = userList.iterator(); it.hasNext();) {
 			TblUser user = (TblUser) it.next();
 			if (user.getId() == choice) {
@@ -28,14 +31,12 @@ public class UserServiceImpl implements UserService {
 				IOCsv.writeFile(userList, path);
 			}
 		}
-		return userList;
 	}
 
 	@Override
-	public List<TblUser> addUser(TblUser newUser) {
+	public void addUser(TblUser newUser) {
 		userList.add(new TblUser(newUser.getId(), newUser.getFirstName(), newUser.getLastName(), newUser.geteMail(),
 			newUser.getMobileNum(), newUser.getAddress(), newUser.getDateOfRegistration(), newUser.getRole()));
 		IOCsv.writeFile(userList, path);
-		return userList;
 	}
 }

@@ -20,7 +20,7 @@ public class LibraryImpl implements Library {
       CredentialsImpl cred = CredentialsImpl.getInstance() ;
       UserServiceImpl userService = new UserServiceImpl();
 
-      System.out.println( userService.createUserList() );
+      System.out.println( userService.getUserList() );
 
       while(true){
          showMainMenu(auth.isUserLogged(), auth);
