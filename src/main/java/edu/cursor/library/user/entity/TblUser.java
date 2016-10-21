@@ -1,6 +1,6 @@
 package edu.cursor.library.user.entity;
 
-import org.joda.time.LocalDate ;
+import org.joda.time.LocalDate;
 
 import edu.cursor.library.user.enums.Role;
 
@@ -15,11 +15,11 @@ public class TblUser {
 	private Role role;
 
 	public TblUser() {
-		
+
 	}
-	
+
 	public TblUser(int id, String firstName, String lastName, String eMail, int mobileNum, String address,
-						LocalDate dateOfRegistration, Role role) {
+			LocalDate dateOfRegistration, Role role) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -151,8 +151,8 @@ public class TblUser {
 
 	@Override
 	public String toString() {
-		return "UserService [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", eMail=" + eMail
-				+ ", mobileNum=" + mobileNum + ", address=" + address + ", dateOfRegistration=" + dateOfRegistration
-				+ "]";
+		return "id=" + id + ", First Name: " + firstName + ", last Name: " + lastName + ", e-Mail: " + eMail
+				+ ", mobile: " + mobileNum + ", address: " + address + ", date of registration: "
+				+ dateOfRegistration;
 	}
-	}
+}

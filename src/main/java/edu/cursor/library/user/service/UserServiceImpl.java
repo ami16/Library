@@ -1,55 +1,41 @@
 package edu.cursor.library.user.service;
 
-import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
-import edu.cursor.library.book.entity.TblBook;
 import edu.cursor.library.user.entity.TblUser;
-import edu.cursor.library.user.utils.CSVUserUtil;
+import edu.cursor.library.user.utils.IOCsv;
+
 
 public class UserServiceImpl implements UserService {
-	public static final String WRONG_CHOICE = "Incorrect item. Try again";
-	private static List<TblUser> userList;
-	private static String path = System.getProperty("user.dir") + "/src/main/java/edu/cursor/library/user/database/573.csv";
-	static BufferedReader bfr = null;
-	 
-// 	@Override
-	public static List<TblUser> createUserList(){
-//		List <TblUser> userList = new ArrayList<>();
-		userList = new ArrayList<>();
-        Collections.addAll(userList, CSVUserUtil.readFile(bfr, path));
-        return userList;
-		}
+	private static List<TblUser> userList = new ArrayList<>();
+	private String path = System.getProperty("user.dir")
+		+ "/src/main/java/edu/cursor/library/user/database/userList.csv";
 
 	@Override
-	public void viewBookList() {
-		// TODO Auto-generated method stub
-		}
-
-	@Override
-	public void takeBook(TblBook book) {
-		// TODO Auto-generated method stub
-		}
-
-	@Override
-	public void returnBook(TblBook book) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public List<TblUser> deleteUser(TblUser user) {
-		// TODO Auto-generated method stub
-		return userList;
-	}
-	@Override
-	public List<TblUser> addUser(TblUser user) {
-		// TODO Auto-generated method stub
+	public List<TblUser> getUserList() {
+		Collections.addAll(userList, IOCsv.readFile(path));
 		return userList;
 	}
 
-	public static void main(String[] args) {
-		System.out.println("Hi!");
-		System.out.println(createUserList());
+	@Override
+	public List<TblUser> deleteUser(int choice) {
+		for (Iterator it = userList.iterator(); it.hasNext();) {
+			TblUser user = (TblUser) it.next();
+			if (user.getId() == choice) {
+				it.remove();
+				IOCsv.writeFile(userList, path);
+			}
+		}
+		return userList;
+	}
+
+	@Override
+	public List<TblUser> addUser(TblUser newUser) {
+		userList.add(new TblUser(newUser.getId(), newUser.getFirstName(), newUser.getLastName(), newUser.geteMail(),
+			newUser.getMobileNum(), newUser.getAddress(), newUser.getDateOfRegistration(), newUser.getRole()));
+		IOCsv.writeFile(userList, path);
+		return userList;
 	}
 }

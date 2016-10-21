@@ -1,16 +1,17 @@
 package edu.cursor.library.user.utils;
 
 import edu.cursor.library.user.entity.TblUser;
+import edu.cursor.library.user.enums.Role;
 import org.joda.time.LocalDate;
 import java.io.*;
 import java.util.List;
 
-public class CSVUserUtil {
+public class IOCsv {
 
 	private static final char DEFAULT_SEPARATOR = ',';
 	private static File file;
 
-	public static void writeLine(Writer w, List<TblUser> userList, String path) {
+	public static void writeFile(List<TblUser> userList, String path) {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
 			bw.write("Id,firstName,lastName,eMail,mobileNum,address,dateOfRegistration,role,\n");
 			for (TblUser b : userList) {
@@ -33,16 +34,16 @@ public class CSVUserUtil {
 			}
 			bw.flush();
 		} catch (IOException ioe) {
-			// some code here Logger
+			// Logger code here
 		}
 	}
 
-	public static TblUser[] readFile(BufferedReader r, String path) {
+	public static TblUser[] readFile(String path) {
 		String line;
 		int counter = 0;
 		TblUser[] userArray;
+		file = new File(path);
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-			file = new File(path);
 			while ((line = br.readLine()) != null) {
 				counter++;
 			}
@@ -52,7 +53,6 @@ public class CSVUserUtil {
 			userArray = new TblUser[counter - 1];
 		}
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-			file = new File(path);
 			line = br.readLine();
 			int index = 0;
 			while ((line = br.readLine()) != null) {
@@ -64,12 +64,13 @@ public class CSVUserUtil {
 				Integer mobileNum = Integer.parseInt(fields[4]);
 				String address = fields[5];
 				LocalDate dateOfRegistration = LocalDate.parse(fields[6]);
-				String Role = fields[7].toUpperCase();
-				TblUser user = new TblUser(Id, firstName, lastName, eMail, mobileNum,address,dateOfRegistration, RoleUtil.chooseRole(Role));
+				String role = fields[7].toUpperCase();
+				TblUser user = new TblUser(Id, firstName, lastName, eMail, mobileNum, address, dateOfRegistration,
+						Role.valueOf(role));
 				userArray[index] = user;
 				index++;
+				System.out.println(user);
 			}
-			
 		} catch (IOException ioe) {
 			// Logger code here
 		}
