@@ -1,7 +1,9 @@
 package edu.cursor.library.service;
 
+import edu.cursor.library.book.service.BookServiceImpl;
 import edu.cursor.library.security.auth.AuthImpl;
 import edu.cursor.library.security.credentials.service.CredentialsImpl;
+import edu.cursor.library.security.register.RegisterImpl;
 import edu.cursor.library.user.entity.TblUser;
 import edu.cursor.library.user.enums.Role;
 
@@ -10,17 +12,20 @@ import edu.cursor.library.user.service.UserServiceImpl;
 import java.util.Scanner;
 
 public class LibraryImpl implements Library {
-
+   public static final String WRONG_CHOICE = "Choose correct item (1-3 or x): ";
+   private UserServiceImpl userService = new UserServiceImpl();
+   private BookServiceImpl bookService =new BookServiceImpl();
+   private RegisterImpl register = new RegisterImpl();
+   private AuthImpl auth = AuthImpl.getInstance() ;
    public LibraryImpl() { }
 
    @Override
    public void start() {
       System.out.println("Lib started");
-      AuthImpl auth = AuthImpl.getInstance() ;
       CredentialsImpl cred = CredentialsImpl.getInstance() ;
-      UserServiceImpl userService = new UserServiceImpl();
+      
 
-      System.out.println( userService.getUserList() );
+      //System.out.println( userService.getUserList() );
 
       while(true){
          showMainMenu(auth.isUserLogged(), auth);
@@ -83,6 +88,14 @@ public class LibraryImpl implements Library {
       System.out.println("x. Exit");
       replyReader(2);
    }
+   
+   private void showFourthItemSubMenuA() {
+	   // Fourth item menu admin. Name of method - optionality
+	   System.out.println("1. Add user ");
+	   System.out.println("2. Remove user ");
+	   System.out.println("3. Back to main menu ");
+	   
+   }
 
    public void replyReader(int type){
       Scanner scan = new Scanner(System.in);
@@ -93,15 +106,16 @@ public class LibraryImpl implements Library {
             case 0: // not logged in
                switch (Character.toLowerCase(scan.next().charAt(0))) {
                   case '1':
-                     // -- REGISTER
+                     register.registerUser();
                      is = true;
                      break;
                   case '2':
-                     // -- LOGIN
+                     //auth.logIn(user);
                      is = true;
                      break;
                   case '3':
                      // -- VIEW LIBRARY BOOKS
+                	  bookService.viewBookList();
                      is = true;
                      break;
                   case 'x':
@@ -109,14 +123,14 @@ public class LibraryImpl implements Library {
                      sayBye();
                      break;
                   default:
-                     System.out.println("Choose correct item (1-3 or x): ");
+                     System.out.println(WRONG_CHOICE);
                }
                break;
 
             case 1: // simple logged in
                switch (Character.toLowerCase(scan.next().charAt(0))) {
                   case '1':
-                     // -- VIEW LIBRARY BOOKS
+                     bookService.viewBookList();
                      is = true;
                      break;
                   case '2':
@@ -128,7 +142,7 @@ public class LibraryImpl implements Library {
                      is = true;
                      break;
                   case 'z':
-                     // -- LOG OUT
+                     auth.logOut();
                      is = true;
                      break;
                   case 'x':
@@ -136,14 +150,14 @@ public class LibraryImpl implements Library {
                      sayBye();
                      break;
                   default:
-                     System.out.println("Choose correct item (1-3, x or z): ");
+                     System.out.println(WRONG_CHOICE);
                }
                break;
 
             case 2: // logged in ADMIN
                switch (Character.toLowerCase(scan.next().charAt(0))) {
                   case '1':
-                     // -- VIEW LIBRARY BOOKS
+                     bookService.viewBookList();
                      is = true;
                      break;
                   case '2':
@@ -154,12 +168,33 @@ public class LibraryImpl implements Library {
                      // -- My profile
                      is = true;
                      break;
-                  case '4':
-                     // -- View users list
+                  case '4':  // i thing we need one more method for this switch
+                     userService.getUserList();
+                     showFourthItemSubMenuA();
+                     switch (Character.toLowerCase(scan.next().charAt(0))) {
+                     case '1' : {
+                    	 // add user code here
+                    	 register.registerUser();
+                    	 break;
+                     }
+                     case '2' : {
+                    	 // delete user code here 
+                    	 System.out.println("Select user`s id for remove: ");
+                    	 userService.deleteUser(scan.nextInt());
+                    	 break;
+                     }
+                     case '3' : {
+                    	 // go to admin`s main menu code here 
+                    	 showMainMenuAdmin();
+                    	 break;
+                     }
+                     default : 
+                    	 System.out.println(WRONG_CHOICE);
+                     }
                      is = true;
                      break;
                   case 'z':
-                     // -- LOG OUT
+                     auth.logOut();
                      is = true;
                      break;
                   case 'x':
@@ -167,7 +202,7 @@ public class LibraryImpl implements Library {
                      sayBye();
                      break;
                   default:
-                     System.out.println("Choose correct item (1-3, x or z): ");
+                     System.out.println(WRONG_CHOICE);
                }
                break;
 
@@ -176,8 +211,7 @@ public class LibraryImpl implements Library {
          }
       } while(!is) ;
    }
-
-
+    
    public void sayBye() {
       System.out.println("See ya.");
       System.exit(0);
