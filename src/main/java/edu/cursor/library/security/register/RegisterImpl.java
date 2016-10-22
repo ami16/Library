@@ -122,9 +122,9 @@ public class RegisterImpl implements Register{
                loginAllowed = true;
 
                int newId = securityService.getNewUserId() ;
-               // userService
-//               addUser( newId, desiredName, desiredName2, desiredMail, desiredMobile, desiredAddr, new LocalDate().toString(), pass1 ) ;
-               if(
+                 //  userService
+            
+//               if () {
                   userService.addUser( new TblUser(
                       newId,
                       desiredName,
@@ -133,14 +133,13 @@ public class RegisterImpl implements Register{
                       desiredMobile,
                       desiredAddr,
                       LocalDate.now(),
-                      Role.USER
-                  ) )
-                ){
+                      Role.USER) );
+                
                   credentials.addCredentials(newId, pass1);
-                  System.out.println("Now login using your credentials");
-               } else {
-                  System.out.println("Something went wrong. Try ones more or contact admin... Bla-bla..");
-               }
+//                  System.out.println("Now login using your credentials");
+//               } else {
+//                  System.out.println("Something went wrong. Try ones more or contact admin... Bla-bla..");
+//               }
 
             }
 
