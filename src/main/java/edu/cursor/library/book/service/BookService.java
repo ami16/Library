@@ -7,12 +7,14 @@ import java.util.List;
 
 
 public interface BookService {
-   void showMainMenu();
+
     List<TblBook> createBookList();
-    void proceedMain(char answer);
-    char getMainChoice();
+
     void addBookOld(Integer ISBN);
-    void addBookNew(Integer ISBN, String author, String title, String publYear, String writYear, Genre genre)
+
+    void addBookNew(Integer ISBN, String author, String title, String publYear, String writYear, Genre genre);
+
     void viewBookList();
+
     void removeBook(Integer ISBN);
 }
