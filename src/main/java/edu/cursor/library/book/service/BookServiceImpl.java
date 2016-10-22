@@ -4,13 +4,12 @@ package edu.cursor.library.book.service;
 import edu.cursor.library.book.entity.TblBook;
 import edu.cursor.library.book.enums.Genre;
 import edu.cursor.library.book.utils.CSVUtils;
-import edu.cursor.library.book.utils.GenreUtils;
 import org.joda.time.LocalDate;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class BookServiceImpl implements BookService{
+public class BookServiceImpl implements BookService {
 
     private static List<TblBook> bookList = new ArrayList<>();
     private Scanner scan = new Scanner(System.in);
@@ -21,92 +20,39 @@ public class BookServiceImpl implements BookService{
         bookList = createBookList();
     }
 
-    public void start() {
-        while (true) {
-            showMainMenu();
-            getMainChoice();
-        }
-    }
-    @Override
-    public void showMainMenu() {
-        System.out.println("MENU:\n");
-        System.out.println("Hello !");
-        System.out.println("1. View library books");
-        System.out.println("2. Add Book");
-        System.out.println("3. Remove Book");
-        System.out.println("x. Exit");
 
-    }
     @Override
     public List<TblBook> createBookList() {
-        List <TblBook> bookList = new ArrayList<>();
+        List<TblBook> bookList = new ArrayList<>();
         Collections.addAll(bookList, CSVUtils.readFile(path));
         return bookList;
     }
 
-    @Override
-    public void proceedMain(char answer) {
-        switch (answer) {
-            case '1': // List
-                viewBookList();
-                break;
-            case '2': // Add book
-                addBook();
-                break;
-            case '3': // Remove book
-                removeBook();
-                break;
-        }
-    }
-    @Override
-    public char getMainChoice() {
-        char mainChoice;
-        do {
-            mainChoice = scan.next().charAt(0);
-            switch (Character.toLowerCase(mainChoice)) {
-                case '1':
-                case '2':
-                case '3':
-                case '4':
-                    proceedMain(mainChoice);
-                    break;
-                case 'x':
-                    sayBye();
-                    System.exit(0);
-                    break;
-                default:
-                    System.out.println("Choose correct item (1-3 or x): ");
-            }
-            return mainChoice;
-        } while (true);
-    }
-    @Override
-    public void addBook() {
-        System.out.println("Pls enter ISBN for new book.");
-        Integer ISBNnew = scan.nextInt();
-        String left = scan.nextLine();
-        Boolean newBook = bookList.stream().map(s -> s.getISBN()).collect(
-                Collectors.toList()).stream().anyMatch(ISBNnew::equals);
-        if (newBook) {
-            TblBook oldBook = bookList.stream().filter(s -> s.getISBN().equals(ISBNnew)).findFirst().get();
-            bookList.add(oldBook);
-            CSVUtils.writeLine(bookList, path);
 
-        } else {
-            System.out.println("Pls enter Author for new book.");
-            String authorNew = scan.nextLine();
-            System.out.println("Pls enter Title for new book.");
-            String titleNew = scan.nextLine();
-            System.out.println("Pls enter PublYear(YYYY-MM-DD) for new book.");
-            LocalDate PublYearNew = LocalDate.parse(scan.nextLine());
-            System.out.println("Pls enter WritYear(YYYY-MM-DD) for new book.");
-            LocalDate WritYearNew = LocalDate.parse(scan.nextLine());
-            Genre genreNew = GenreUtils.chooseGenre();
-            bookList.add(new TblBook(ISBNnew, authorNew, titleNew, PublYearNew, WritYearNew, genreNew));
+    @Override
+    public void addBookOld(Integer ISBN) {
+        if (bookList.stream()
+                .anyMatch(s -> s.getISBN() == ISBN)) {
+            bookList.add(bookList.stream()
+                    .filter(s -> s.getISBN() == ISBN)
+                    .findFirst().get());
             CSVUtils.writeLine(bookList, path);
         }
 
     }
+
+    @Override
+    public void addBookNew(Integer ISBN, String author, String title, String publYear, String writYear, Genre genre) {
+        try {
+            LocalDate PublYearNew = LocalDate.parse(publYear);
+            LocalDate WritYearNew = LocalDate.parse(writYear);
+            bookList.add(new TblBook(ISBN, author, title, PublYearNew, WritYearNew, genre));
+            CSVUtils.writeLine(bookList, path);
+        } catch (IllegalArgumentException i) {
+            System.out.println(i.getMessage());
+        }
+    }
+
     @Override
     public void viewBookList() {
         bookList.stream().collect(
@@ -115,27 +61,19 @@ public class BookServiceImpl implements BookService{
                 ))
                 .forEach((k, v) -> System.out.println("-" + k + " amount: " + v + ";"));
     }
+
     @Override
-    public void removeBook() {
-        System.out.println("Pls enter ISBN for remove book.");
-        Integer ISBNnew = scan.nextInt();
-        String left = scan.nextLine();
+    public void removeBook(Integer ISBN) {
         for (Iterator it = bookList.iterator(); it.hasNext(); ) {
-            TblBook book = (TblBook) it.next();
-            if (book.getISBN().equals(ISBNnew)) {
-                bookList.remove(book);
+            if (((TblBook) it.next()).getISBN() == ISBN) {
+                it.remove();
                 CSVUtils.writeLine(bookList, path);
-                break;
-            } else {
-                System.out.println("Sory book with this ISBN not exist");
-                removeBook();
+                return;
             }
         }
-
+        // for future creating class Exception
+        // throw new  throw new BookStoreException();
     }
 
-    public void sayBye() {
-        System.out.println("See ya.");
-    }
 
 }
