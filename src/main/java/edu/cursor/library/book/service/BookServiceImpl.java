@@ -80,32 +80,29 @@ public class BookServiceImpl implements BookService{
             return mainChoice;
         } while (true);
     }
-    @Override
-    public void addBook() {
-        System.out.println("Pls enter ISBN for new book.");
-        Integer ISBNnew = scan.nextInt();
-        String left = scan.nextLine();
-        Boolean newBook = bookList.stream().map(s -> s.getISBN()).collect(
-                Collectors.toList()).stream().anyMatch(ISBNnew::equals);
-        if (newBook) {
-            TblBook oldBook = bookList.stream().filter(s -> s.getISBN().equals(ISBNnew)).findFirst().get();
-            bookList.add(oldBook);
-            CSVUtils.writeLine(bookList, path);
 
-        } else {
-            System.out.println("Pls enter Author for new book.");
-            String authorNew = scan.nextLine();
-            System.out.println("Pls enter Title for new book.");
-            String titleNew = scan.nextLine();
-            System.out.println("Pls enter PublYear(YYYY-MM-DD) for new book.");
-            LocalDate PublYearNew = LocalDate.parse(scan.nextLine());
-            System.out.println("Pls enter WritYear(YYYY-MM-DD) for new book.");
-            LocalDate WritYearNew = LocalDate.parse(scan.nextLine());
-            Genre genreNew = GenreUtils.chooseGenre();
-            bookList.add(new TblBook(ISBNnew, authorNew, titleNew, PublYearNew, WritYearNew, genreNew));
+    @Override
+    public void addBookOld(Integer ISBN) {
+        if (bookList.stream()
+                .anyMatch(s -> s.getISBN() == ISBN)) {
+            bookList.add(bookList.stream()
+                    .filter(s -> s.getISBN() == ISBN)
+                    .findFirst().get());
             CSVUtils.writeLine(bookList, path);
         }
 
+    }
+
+    @Override
+    public void addBookNew(Integer ISBN, String author, String title, String publYear, String writYear, Genre genre) {
+        try {
+            LocalDate PublYearNew = LocalDate.parse(publYear);
+            LocalDate WritYearNew = LocalDate.parse(writYear);
+            bookList.add(new TblBook(ISBN, author, title, PublYearNew, WritYearNew, genre));
+            CSVUtils.writeLine(bookList, path);
+        } catch (IllegalArgumentException i) {
+            System.out.println(i.getMessage());
+        }
     }
     @Override
     public void viewBookList() {
@@ -124,7 +121,8 @@ public class BookServiceImpl implements BookService{
                 return;
             }
         }
-        throw new NoSuchElementException();
+        // for future creating class Exception
+        // throw new  throw new BookStoreException();
     }
 
     public void sayBye() {
