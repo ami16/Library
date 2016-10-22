@@ -12,5 +12,5 @@ public interface BookService {
     char getMainChoice();
     void addBook();
     void viewBookList();
-    void removeBook();
+    void removeBook(Integer ISBN);
 }

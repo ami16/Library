@@ -116,22 +116,15 @@ public class BookServiceImpl implements BookService{
                 .forEach((k, v) -> System.out.println("-" + k + " amount: " + v + ";"));
     }
     @Override
-    public void removeBook() {
-        System.out.println("Pls enter ISBN for remove book.");
-        Integer ISBNnew = scan.nextInt();
-        String left = scan.nextLine();
+    public void removeBook(Integer ISBN) {
         for (Iterator it = bookList.iterator(); it.hasNext(); ) {
-            TblBook book = (TblBook) it.next();
-            if (book.getISBN().equals(ISBNnew)) {
-                bookList.remove(book);
+            if (((TblBook) it.next()).getISBN() == ISBN) {
+                it.remove();
                 CSVUtils.writeLine(bookList, path);
-                break;
-            } else {
-                System.out.println("Sory book with this ISBN not exist");
-                removeBook();
+                return;
             }
         }
-
+        throw new NoSuchElementException();
     }
 
     public void sayBye() {
