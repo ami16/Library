@@ -8,4 +8,5 @@ public interface UserService {
    List<TblUser> getUserList();
     void deleteUser(int choice);
     void addUser(TblUser user);
+    TblUser getUserProfile(TblUser user);
 }
