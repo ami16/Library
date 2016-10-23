@@ -3,7 +3,7 @@ package edu.cursor.library.book.service;
 
 import edu.cursor.library.book.entity.TblBook;
 import edu.cursor.library.book.enums.Genre;
-import edu.cursor.library.book.utils.CSVUtils;
+import edu.cursor.library.book.utils.IOUtils;
 import org.joda.time.LocalDate;
 
 import java.util.*;
@@ -24,7 +24,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<TblBook> createBookList() {
         List<TblBook> bookList = new ArrayList<>();
-        Collections.addAll(bookList, CSVUtils.readFile(path));
+        Collections.addAll(bookList, IOUtils.readFile(path));
         return bookList;
     }
 
@@ -36,7 +36,7 @@ public class BookServiceImpl implements BookService {
             bookList.add(bookList.stream()
                     .filter(s -> s.getISBN() == ISBN)
                     .findFirst().get());
-            CSVUtils.writeLine(bookList, path);
+            IOUtils.writeLine(bookList, path);
         }
 
     }
@@ -47,7 +47,7 @@ public class BookServiceImpl implements BookService {
             LocalDate PublYearNew = LocalDate.parse(publYear);
             LocalDate WritYearNew = LocalDate.parse(writYear);
             bookList.add(new TblBook(ISBN, author, title, PublYearNew, WritYearNew, genre));
-            CSVUtils.writeLine(bookList, path);
+            IOUtils.writeLine(bookList, path);
         } catch (IllegalArgumentException i) {
             System.out.println(i.getMessage());
         }
@@ -67,7 +67,7 @@ public class BookServiceImpl implements BookService {
         for (Iterator it = bookList.iterator(); it.hasNext(); ) {
             if (((TblBook) it.next()).getISBN() == ISBN) {
                 it.remove();
-                CSVUtils.writeLine(bookList, path);
+                IOUtils.writeLine(bookList, path);
                 return;
             }
         }

@@ -8,7 +8,7 @@ import org.joda.time.LocalDate;
 import java.io.*;
 import java.util.List;
 
-public class CSVUtils {
+public class IOUtils {
 
     private static final char DEFAULT_SEPARATOR = ',';
 
@@ -33,7 +33,7 @@ public class CSVUtils {
             }
             w.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+            // Logger code here
         }
 
     }
@@ -69,7 +69,7 @@ public class CSVUtils {
                 index++;
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            // Logger code here
         }
 
         return bookArray;
