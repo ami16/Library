@@ -13,7 +13,7 @@ public class BookServiceImpl implements BookService {
 
     private static List<TblBook> bookList = new ArrayList<>();
     private Scanner scan = new Scanner(System.in);
-    private String path = System.getProperty("user.dir") + "/src/main/java/edu/cursor/library/book/database/bookList.csv";
+    private String path = System.getProperty("user.dir") + "/src/main/resources/bookList.csv";
 
 
     public BookServiceImpl() {
@@ -30,7 +30,7 @@ public class BookServiceImpl implements BookService {
 
 
     @Override
-    public void addBookOld(Integer ISBN) {
+    public void addBookOld(int ISBN) {
         if (bookList.stream()
                 .anyMatch(s -> s.getISBN() == ISBN)) {
             bookList.add(bookList.stream()
@@ -42,7 +42,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void addBookNew(Integer ISBN, String author, String title, String publYear, String writYear, Genre genre) {
+    public void addBookNew(int ISBN, String author, String title, String publYear, String writYear, Genre genre) {
         try {
             LocalDate PublYearNew = LocalDate.parse(publYear);
             LocalDate WritYearNew = LocalDate.parse(writYear);
@@ -63,7 +63,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void removeBook(Integer ISBN) {
+    public void removeBook(int ISBN) {
         for (Iterator it = bookList.iterator(); it.hasNext(); ) {
             if (((TblBook) it.next()).getISBN() == ISBN) {
                 it.remove();

@@ -2,7 +2,6 @@ package edu.cursor.library.book.utils;
 
 
 import edu.cursor.library.book.entity.TblBook;
-import edu.cursor.library.book.enums.Genre;
 import org.joda.time.LocalDate;
 
 import java.io.*;
@@ -63,12 +62,10 @@ public class IOUtils {
                 LocalDate publYear = LocalDate.parse(fields[3]);
                 LocalDate writYear = LocalDate.parse(fields[4]);
                 String StrGenre = fields[5].toUpperCase();
-                Genre genre = null;
-                TblBook book = new TblBook(ISBN, author, title, publYear, writYear, GenreUtils.chooseGenre(StrGenre));
-                bookArray[index] = book;
+                bookArray[index] = new TblBook(ISBN, author, title, publYear, writYear, GenreUtils.chooseGenre(StrGenre));
                 index++;
             }
-        } catch (IOException e) {
+        } catch (IOException | IllegalArgumentException e) {
             // Logger code here
         }
 
