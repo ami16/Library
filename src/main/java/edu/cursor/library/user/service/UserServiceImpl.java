@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import edu.cursor.library.service.LibraryImpl;
 import edu.cursor.library.user.entity.TblUser;
+import edu.cursor.library.user.enums.Role;
 import edu.cursor.library.user.utils.IOCsv;
 
 public class UserServiceImpl implements UserService {
 	private static List<TblUser> userList = new ArrayList<>();
 	private String path = System.getProperty("user.dir")
 			+ "/src/main/resources/userList.csv";
-
+    private static LibraryImpl lib = LibraryImpl.getInstance();
+    
 	@Override
 	public List<TblUser> getUserList() {
 		Collections.addAll(userList, IOCsv.readFile(path));
@@ -28,14 +31,13 @@ public class UserServiceImpl implements UserService {
 				IOCsv.writeFile(userList, path);
 			}
 		}
-		} catch (UserNotFoundException e) {
-			e.getMessage();
-		} finally { lib.showFourthItemSubMenuA();
+		} catch (Exception e) {
+			// some code here
+		} finally { lib.showUserSubMenuAdmin();
 		}
 		}
 	
-
-	@Override
+    @Override
 	public void addUser(TblUser newUser) {
 		try {
 		userList.add(new TblUser(newUser.getId(), newUser.getFirstName(), newUser.getLastName(), newUser.geteMail(),
@@ -45,28 +47,29 @@ public class UserServiceImpl implements UserService {
 		} catch (IllegalArgumentException ie) {
 			System.out.println("Something wrong. Try again");
 		} finally {
-			// some code here
+			if (newUser.getRole().equals(Role.ADMIN)) {
+				lib.showUserSubMenuAdmin();
+				}
+				else lib.showMainMenuLogged();
 		}
-	}
-
-	public boolean isUserAdded(TblUser user) {
-		for (Iterator it = userList.iterator(); it.hasNext();) {
-			TblUser userId = (TblUser) it.next();
-			if (userId.getId().equals(user.getId())) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	@Override
-	public TblUser getUserProfile(TblUser user) {
+	public void showUserProfile(TblUser user) {
+		try {
 		for (Iterator it = userList.iterator(); it.hasNext();) {
 	    TblUser userId = (TblUser) it.next();
-		if (userId.getId().equals(user.getId())) {
-			
+		if (userId.getId().equals(user.getId()));
+		 } 
+		System.out.println(user.toString());
+		} catch (Exception ue) {
+			//some code here
 		}
+		finally {
+			if (user.getRole().equals(Role.ADMIN)) {
+			lib.showMainMenuAdmin();
+			}
+			else lib.showMainMenuLogged();
 		}
-		return user;
 	}
 	}
