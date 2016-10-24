@@ -18,8 +18,7 @@ public class GenreUtils {
                 .stream()
                 .anyMatch(tryGenre::equals);
         if (checkGenre) {
-            Genre genre = Genre.valueOf(tryGenre);
-            return genre;
+            return Genre.valueOf(tryGenre);
         } else {
             System.out.println("Wrong genre!!!");
             System.out.println("Do you want write correct genre? Press 'y'");
@@ -36,8 +35,7 @@ public class GenreUtils {
                 .stream()
                 .anyMatch(myGenre::equals);
         if (checkGenre) {
-            Genre genre = Genre.valueOf(myGenre);
-            return genre;
+            return Genre.valueOf(myGenre);
         } else {
             System.out.println("Genre:" + myGenre + " doesn't exist!");
             return chooseGenre();
