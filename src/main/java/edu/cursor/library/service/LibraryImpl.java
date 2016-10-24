@@ -222,7 +222,7 @@ public class LibraryImpl implements Library {
 					is = true;
 					break;
 				case '4':
-					userService.getUserList();
+					System.out.println(userService.getUserList().toString());
 					showUserSubMenuAdmin();
 					is = true;
 					break;

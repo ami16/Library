@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import org.joda.time.LocalDate;
+
 import edu.cursor.library.service.LibraryImpl;
 import edu.cursor.library.user.entity.TblUser;
 import edu.cursor.library.user.enums.Role;
@@ -15,12 +19,18 @@ public class UserServiceImpl implements UserService {
 			+ "/src/main/resources/userList.csv";
     private static LibraryImpl lib = LibraryImpl.getInstance();
     
+    public UserServiceImpl() {
+    	createUserList();
+	}
+    
+    public void createUserList() {
+    	Collections.addAll(userList, IOCsv.readFile(path));
+    }
 	@Override
 	public List<TblUser> getUserList() {
-		Collections.addAll(userList, IOCsv.readFile(path));
 		return userList;
 	}
-
+	
 	@Override
 	public void deleteUser(int choice) {
 		try {
@@ -29,10 +39,11 @@ public class UserServiceImpl implements UserService {
 			if (user.getId() == choice) {
 				it.remove();
 				IOCsv.writeFile(userList, path);
+				System.out.println("User removed successfully.");
 			}
 		}
 		} catch (Exception e) {
-			// some code here
+			System.out.println("User is not found");
 		} finally { lib.showUserSubMenuAdmin();
 		}
 		}
@@ -46,11 +57,11 @@ public class UserServiceImpl implements UserService {
 		System.out.println("Profile created successfully.");
 		} catch (IllegalArgumentException ie) {
 			System.out.println("Something wrong. Try again");
-		} finally {
-			if (newUser.getRole().equals(Role.ADMIN)) {
-				lib.showUserSubMenuAdmin();
-				}
-				else lib.showMainMenuLogged();
+		} finally {  // always return users menu. Because we added user..need fix
+//			if (newUser.getRole().equals(Role.ADMIN)) {
+//				lib.showUserSubMenuAdmin();
+//				}
+//				else lib.showMainMenuLogged();
 		}
 	}
 
@@ -63,7 +74,7 @@ public class UserServiceImpl implements UserService {
 		 } 
 		System.out.println(user.toString());
 		} catch (Exception ue) {
-			//some code here
+			System.out.println("User not found");
 		}
 		finally {
 			if (user.getRole().equals(Role.ADMIN)) {
