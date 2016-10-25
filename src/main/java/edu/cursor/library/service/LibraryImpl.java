@@ -11,15 +11,26 @@ import java.util.Scanner;
 
 public class LibraryImpl implements Library {
 	private Scanner scan = new Scanner(System.in);
-	public static final String WRONG_CHOICE = "Choose correct item (1-3 or x): ";
+	public static final String WRONG_CHOICE_MENU = "Choose correct item (1-3 or x): ";
 	private UserServiceImpl userService = new UserServiceImpl();
 	private BookServiceImpl bookService = new BookServiceImpl();
 	private ValidateImpl validService =new ValidateImpl();
 	private RegisterImpl register = new RegisterImpl();
 	private AuthImpl auth = AuthImpl.getInstance();
-
-	public LibraryImpl() {
+    private static LibraryImpl instance;
+	private LibraryImpl() {
 	}
+	public static LibraryImpl getInstance(){
+	      if( instance == null ){
+	         synchronized (LibraryImpl.class){
+	            // Double check
+	            if (instance == null) {
+	               instance = new LibraryImpl() ;
+	            }
+	         }
+	      }
+	      return instance ;
+	   }
 
 	@Override
 	public void start() {
@@ -90,6 +101,30 @@ public class LibraryImpl implements Library {
 		System.out.println("2. Add exsist book");
 		System.out.println("3. Remove book");
 		System.out.println("4. Back to main menu");
+		switch (Character.toLowerCase(scan.next().charAt(0))) {
+		case '1': {
+			//bookService.addBookNew(ISBN, author, title, publYear, writYear, genre);
+			break;
+		}
+		case '2' : {
+			System.out.println("Select book`s ISBN for add: ");
+			bookService.addBookOld(scan.nextInt());
+			break;
+		}
+		case '3': {
+			System.out.println("Select book`s ISBN for remove: ");
+		bookService.removeBook(scan.nextInt());	
+		break;
+		}
+		case '4' : {
+			showMainMenuAdmin();
+			break;
+		}
+		default : 
+			System.out.println("Select correct item (1-4)");
+			showBookSubMenuAdmin();
+			}
+		
 	}
 
 	public void showUserSubMenuAdmin() {
@@ -112,7 +147,7 @@ public class LibraryImpl implements Library {
 			break;
 		}
 		default:
-			System.out.println(WRONG_CHOICE);
+			System.out.println("Select correct item (1-3)");
 			showUserSubMenuAdmin();
 		}
 	}
@@ -140,7 +175,7 @@ public class LibraryImpl implements Library {
 					sayBye();
 					break;
 				default:
-					System.out.println(WRONG_CHOICE);
+					System.out.println(WRONG_CHOICE_MENU);
 				}
 				break;
 
@@ -155,7 +190,7 @@ public class LibraryImpl implements Library {
 					is = true;
 					break;
 				case '3':
-					System.out.println(userService.getUserProfile(auth.getLoggedUser()));
+					userService.showUserProfile(auth.getLoggedUser());
 					is = true;
 					break;
 				case 'z':
@@ -167,7 +202,7 @@ public class LibraryImpl implements Library {
 					sayBye();
 					break;
 				default:
-					System.out.println(WRONG_CHOICE);
+					System.out.println(WRONG_CHOICE_MENU);
 				}
 				break;
 
@@ -183,11 +218,11 @@ public class LibraryImpl implements Library {
 					is = true;
 					break;
 				case '3':
-					System.out.println(userService.getUserProfile(auth.getLoggedUser()));
+					userService.showUserProfile(auth.getLoggedUser());
 					is = true;
 					break;
 				case '4':
-					userService.getUserList();
+					System.out.println(userService.getUserList().toString());
 					showUserSubMenuAdmin();
 					is = true;
 					break;
@@ -200,7 +235,7 @@ public class LibraryImpl implements Library {
 					sayBye();
 					break;
 				default:
-					System.out.println(WRONG_CHOICE);
+					System.out.println(WRONG_CHOICE_MENU);
 				}
 				break;
 
