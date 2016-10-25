@@ -2,13 +2,12 @@ package edu.cursor.library.book.utils;
 
 
 import edu.cursor.library.book.entity.TblBook;
-import edu.cursor.library.book.enums.Genre;
 import org.joda.time.LocalDate;
 
 import java.io.*;
 import java.util.List;
 
-public class CSVUtils {
+public class IOUtils {
 
     private static final char DEFAULT_SEPARATOR = ',';
 
@@ -33,7 +32,7 @@ public class CSVUtils {
             }
             w.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+            // Logger code here
         }
 
     }
@@ -63,13 +62,11 @@ public class CSVUtils {
                 LocalDate publYear = LocalDate.parse(fields[3]);
                 LocalDate writYear = LocalDate.parse(fields[4]);
                 String StrGenre = fields[5].toUpperCase();
-                Genre genre = null;
-                TblBook book = new TblBook(ISBN, author, title, publYear, writYear, GenreUtils.chooseGenre(StrGenre));
-                bookArray[index] = book;
+                bookArray[index] = new TblBook(ISBN, author, title, publYear, writYear, GenreUtils.chooseGenre(StrGenre));
                 index++;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException | IllegalArgumentException e) {
+            // Logger code here
         }
 
         return bookArray;
