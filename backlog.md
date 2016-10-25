@@ -19,6 +19,6 @@ CRSRL0-18: (IGOR) Fix BookService: IN_PROGRESS <br />
 * ~~CRSRL0-19: (OLESYA) Fix UserService: DONE~~ <br />
 * ~~CRSRL0-20: (OLESYA) Create Menus in LibService: DONE~~ <br />
 * ~~CRSRL0-21: (IGOR) Fix CSV (Utils): DONE~~ <br />
-CRSRL0-22: (IGOR) Book Exceptions: TODO
-CRSRL0-23: (IGOR) Change Genres: TODO
+CRSRL0-22: (IGOR) Book Exceptions: TODO <br />
+CRSRL0-23: (IGOR) Change Genres: TODO <br />
 ...
