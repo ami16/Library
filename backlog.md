@@ -14,10 +14,11 @@ CRSRL0-10: (Andriy+) LibService: IN_PROGRESS <br />
 * ~~CRSRL0-14: (Olesya) Create file.csv for storing userlist 'user/database/userList.csv': DONE~~ <br />
 * ~~CRSRL0-15: (Olesya) User roles as enum ('library/user/enums/Role.java'): DONE~~ <br />
 CRSRL0-16: (Yura Zh) Create Logger: REVIEW <br />
-CRSRL0-17: (IGOR) Fix Book: IN_PROGRESS <br />
+* ~~CRSRL0-17: (IGOR) Fix Book: DONE~~ <br />
 CRSRL0-18: (IGOR) Fix BookService: IN_PROGRESS <br />
 * ~~CRSRL0-19: (OLESYA) Fix UserService: DONE~~ <br />
 * ~~CRSRL0-20: (OLESYA) Create Menus in LibService: DONE~~ <br />
 * ~~CRSRL0-21: (IGOR) Fix CSV (Utils): DONE~~ <br />
 CRSRL0-22: (IGOR) Book Exceptions: TODO
+CRSRL0-23: (IGOR) Change Genres: TODO
 ...
