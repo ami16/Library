@@ -2,6 +2,10 @@ package edu.cursor.library.book.entity;
 
 
 import edu.cursor.library.book.enums.Genre;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.joda.time.LocalDate;
 
 
@@ -77,41 +81,43 @@ public class TblBook {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
+
         if (o == null || getClass() != o.getClass()) return false;
 
-        TblBook book = (TblBook) o;
+        TblBook tblBook = (TblBook) o;
 
-        if (getISBN() != null ? !getISBN().equals(book.getISBN()) : book.getISBN() != null) return false;
-        if (getAuthor() != null ? !getAuthor().equals(book.getAuthor()) : book.getAuthor() != null) return false;
-        if (getTitle() != null ? !getTitle().equals(book.getTitle()) : book.getTitle() != null) return false;
-        if (getPublYear() != null ? !getPublYear().equals(book.getPublYear()) : book.getPublYear() != null)
-            return false;
-        if (getWritYear() != null ? !getWritYear().equals(book.getWritYear()) : book.getWritYear() != null)
-            return false;
-        return getGenre() == book.getGenre();
-
+        return new EqualsBuilder()
+                .append(getISBN(), tblBook.getISBN())
+                .append(getAuthor(), tblBook.getAuthor())
+                .append(getTitle(), tblBook.getTitle())
+                .append(getPublYear(), tblBook.getPublYear())
+                .append(getWritYear(), tblBook.getWritYear())
+                .append(getGenre(), tblBook.getGenre())
+                .isEquals();
     }
 
     @Override
     public int hashCode() {
-        int result = getISBN() != null ? getISBN().hashCode() : 0;
-        result = 31 * result + (getAuthor() != null ? getAuthor().hashCode() : 0);
-        result = 31 * result + (getTitle() != null ? getTitle().hashCode() : 0);
-        result = 31 * result + (getPublYear() != null ? getPublYear().hashCode() : 0);
-        result = 31 * result + (getWritYear() != null ? getWritYear().hashCode() : 0);
-        result = 31 * result + (getGenre() != null ? getGenre().hashCode() : 0);
-        return result;
+        return new HashCodeBuilder(17, 37)
+                .append(getISBN())
+                .append(getAuthor())
+                .append(getTitle())
+                .append(getPublYear())
+                .append(getWritYear())
+                .append(getGenre())
+                .toHashCode();
     }
 
     @Override
     public String toString() {
-        return "TblBook{" +
-                "ISBN=" + ISBN +
-                ", Author='" + author + '\'' +
-                ", Title='" + title + '\'' +
-                ", Published=" + publYear +
-                ", Written=" + writYear +
-                ", Genre=" + genre +
-                '}';
+        return new ToStringBuilder(this,
+                ToStringStyle.SHORT_PREFIX_STYLE)
+                .append("ISBN", ISBN)
+                .append("Author", author)
+                .append("Title", title)
+                .append("Published", publYear)
+                .append("Written", writYear)
+                .append("Genre", genre)
+                .toString();
     }
 }
