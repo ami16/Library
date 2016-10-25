@@ -6,15 +6,15 @@ import edu.cursor.library.book.enums.Genre;
 import java.util.List;
 
 
-public interface BookService {
+interface BookService {
 
     List<TblBook> createBookList();
 
-    void addBookOld(Integer ISBN);
+    void addBookOld(int ISBN);
 
-    void addBookNew(Integer ISBN, String author, String title, String publYear, String writYear, Genre genre);
+    void addBookNew(int ISBN, String author, String title, String publYear, String writYear, Genre genre);
 
     void viewBookList();
 
-    void removeBook(Integer ISBN);
+    void removeBook(int ISBN);
 }
