@@ -69,7 +69,6 @@ public class IOCsv {
 						Role.valueOf(role));
 				userArray[index] = user;
 				index++;
-				System.out.println(user);
 			}
 		} catch (IOException ioe) {
 			// Logger code here
