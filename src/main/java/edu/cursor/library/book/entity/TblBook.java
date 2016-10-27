@@ -8,6 +8,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.joda.time.LocalDate;
 
+import java.util.EnumSet;
+
 
 public class TblBook {
 
@@ -16,9 +18,9 @@ public class TblBook {
     private String title;
     private LocalDate publYear;
     private LocalDate writYear;
-    private Genre genre;
+    private EnumSet<Genre> genre;
 
-    public TblBook(Integer ISBN, String author, String title, LocalDate publYear, LocalDate writYear, Genre genre) {
+    public TblBook(Integer ISBN, String author, String title, LocalDate publYear, LocalDate writYear, EnumSet<Genre> genre) {
         this.ISBN = ISBN;
         this.author = author;
         this.title = title;
@@ -70,11 +72,11 @@ public class TblBook {
         this.writYear = writYear;
     }
 
-    public Genre getGenre() {
+    public EnumSet<Genre> getGenre() {
         return genre;
     }
 
-    public void setGenre(Genre genre) {
+    public void setGenre(EnumSet<Genre> genre) {
         this.genre = genre;
     }
 

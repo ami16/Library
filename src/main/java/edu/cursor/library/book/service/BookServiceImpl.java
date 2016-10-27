@@ -2,7 +2,7 @@ package edu.cursor.library.book.service;
 
 
 import edu.cursor.library.book.entity.TblBook;
-import edu.cursor.library.book.enums.Genre;
+import edu.cursor.library.book.utils.GenreUtils;
 import edu.cursor.library.book.utils.IOUtils;
 import org.joda.time.LocalDate;
 
@@ -12,8 +12,7 @@ import java.util.stream.Collectors;
 public class BookServiceImpl implements BookService {
 
     private static List<TblBook> bookList = new ArrayList<>();
-    private Scanner scan = new Scanner(System.in);
-    private String path = System.getProperty("user.dir") + "/src/main/resources/bookList.csv";
+    private final String path = System.getProperty("user.dir") + "/src/main/resources/bookList.csv";
 
 
     public BookServiceImpl() {
@@ -39,17 +38,21 @@ public class BookServiceImpl implements BookService {
             IOUtils.writeLine(bookList, path);
         }
 
+        // for future creating class Exception
+        // Logger code here
     }
 
     @Override
-    public void addBookNew(int ISBN, String author, String title, String publYear, String writYear, Genre genre) {
+    public void addBookNew(int ISBN, String author, String title, String publYear, String writYear, String genre) {
         try {
-            LocalDate PublYearNew = LocalDate.parse(publYear);
-            LocalDate WritYearNew = LocalDate.parse(writYear);
-            bookList.add(new TblBook(ISBN, author, title, PublYearNew, WritYearNew, genre));
-            IOUtils.writeLine(bookList, path);
+            bookList.add(new TblBook(ISBN, author, title,
+                    LocalDate.parse(publYear), LocalDate.parse(writYear),
+                    GenreUtils.insertGenre(genre)));
+
         } catch (IllegalArgumentException i) {
             System.out.println(i.getMessage());
+            // for future creating class Exception
+            // Logger code here
         }
     }
 
@@ -63,15 +66,30 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void removeBook(int ISBN) {
+    public void replaceBook(int ISBN) {
         for (Iterator it = bookList.iterator(); it.hasNext(); ) {
             if (((TblBook) it.next()).getISBN() == ISBN) {
+                //replaced in another place selected book
+                //NameOfPlace.add((TblBook) it.next());
                 it.remove();
                 IOUtils.writeLine(bookList, path);
                 return;
             }
         }
         // for future creating class Exception
+        // Logger code here
+        // throw new  throw new BookStoreException();
+    }
+
+    @Override
+    public void removeBook(int ISBN) {
+        for (TblBook b: bookList) {
+            while (b.getISBN() == ISBN) {
+                replaceBook(ISBN);
+            }
+        }
+        // for future creating class Exception
+        // Logger code here
         // throw new  throw new BookStoreException();
     }
 

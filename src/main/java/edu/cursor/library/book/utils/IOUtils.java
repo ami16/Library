@@ -2,14 +2,20 @@ package edu.cursor.library.book.utils;
 
 
 import edu.cursor.library.book.entity.TblBook;
+import edu.cursor.library.book.enums.Genre;
 import org.joda.time.LocalDate;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
+
+
 
 public class IOUtils {
 
     private static final char DEFAULT_SEPARATOR = ',';
+    private static final String MULTI_PICKLIST_SEPARATOR = ";";
 
 
     public static void writeLine(List<TblBook> bookList, String path) {
@@ -26,7 +32,7 @@ public class IOUtils {
                 w.append(DEFAULT_SEPARATOR);
                 w.append(b.getWritYear().toString());
                 w.append(DEFAULT_SEPARATOR);
-                w.append(b.getGenre().toString());
+                w.append(converToString(b.getGenre()));
                 w.append(DEFAULT_SEPARATOR);
                 w.append("\n");
             }
@@ -35,6 +41,27 @@ public class IOUtils {
             // Logger code here
         }
 
+    }
+
+    public static String converToString(EnumSet genre) {
+        StringBuilder sb = new StringBuilder();
+       for (int i = 0; i < genre.toArray().length; i++){
+               sb.append(genre.toArray()[i].toString());
+           if (i < genre.toArray().length - 1) {
+               sb.append(MULTI_PICKLIST_SEPARATOR);
+           }
+       }
+       return sb.toString();
+    }
+
+    public static EnumSet<Genre> converToEnumSet (String myGenre) {
+        String[] fields = myGenre.split(MULTI_PICKLIST_SEPARATOR);
+        List <Genre> gen = new ArrayList<>();
+        for (String st : fields) {
+            gen.add(GenreUtils.chooseGenre(st));
+
+        }
+        return EnumSet.copyOf(gen);
     }
 
     public static TblBook[] readFile(String path) {
@@ -56,13 +83,9 @@ public class IOUtils {
             int index = 0;
             while ((line = r.readLine()) != null) {
                 String[] fields = line.split(",");
-                Integer ISBN = Integer.parseInt(fields[0]);
-                String author = fields[1];
-                String title = fields[2];
-                LocalDate publYear = LocalDate.parse(fields[3]);
-                LocalDate writYear = LocalDate.parse(fields[4]);
-                String StrGenre = fields[5].toUpperCase();
-                bookArray[index] = new TblBook(ISBN, author, title, publYear, writYear, GenreUtils.chooseGenre(StrGenre));
+                bookArray[index] = new TblBook(Integer.parseInt(fields[0]), fields[1], fields[2],
+                        LocalDate.parse(fields[3]), LocalDate.parse(fields[4]),
+                        converToEnumSet(fields[5].toUpperCase()));
                 index++;
             }
         } catch (IOException | IllegalArgumentException e) {

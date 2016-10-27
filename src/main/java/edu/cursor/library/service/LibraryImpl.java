@@ -113,7 +113,7 @@ public class LibraryImpl implements Library {
 		}
 		case '3': {
 			System.out.println("Select book`s ISBN for remove: ");
-		bookService.removeBook(scan.nextInt());	
+		bookService.replaceBook(scan.nextInt());
 		break;
 		}
 		case '4' : {
