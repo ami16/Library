@@ -1,10 +1,10 @@
 package edu.cursor.library.book.utils;
 
 
+
 import edu.cursor.library.book.enums.Genre;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class GenreUtils {
@@ -28,6 +28,8 @@ public class GenreUtils {
             } else return Genre.UNKNOWN;
         }
     }
+
+
     public static Genre chooseGenre(String myGenre) {
         Boolean checkGenre = Arrays.stream(Genre.values())
                 .map(Genre::name)
@@ -41,5 +43,6 @@ public class GenreUtils {
             return chooseGenre();
         }
     }
+
 
 }
