@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 public class CredentialsImpl implements Credentials {
 
    private static String projPath = System.getProperty("user.dir"),
-       dbPath = "/src/main/java/edu/cursor/library/security/credentials/db/",
-       fileName = "tbl.csv",
+       dbPath = "/src/main/java/edu/cursor/library/resources/",
+       fileName = "credentialsList.csv",
        file = projPath + dbPath + fileName ;
    private Map<Integer, String> credentialsList = new HashMap<>();
    private static CredentialsImpl instance ;
