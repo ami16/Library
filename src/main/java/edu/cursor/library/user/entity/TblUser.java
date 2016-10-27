@@ -3,8 +3,8 @@ package edu.cursor.library.user.entity;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.joda.time.LocalDate;
-
 import edu.cursor.library.user.enums.Role;
 
 public class TblUser {
@@ -128,16 +128,17 @@ public class TblUser {
 	          .append(this.getRole())
 	          .toHashCode();    
 	}
-	@Override
-	public String toString() {
-	return new ToStringBuilder(this).append("id ", this.getId())
-	    .append("name", this.getFirstName())
-	    .append("surname", this.getLastName())
-	    .append("e-mail",this.geteMail())
-	    .append("mobile number", this.getMobileNum())
-	    .append("address", this.getAddress())
-	    .append("date of registration", this.getDateOfRegistration())
-	    .append("role", this.getRole())
-	    .toString();    
-	}
+	@Override 
+	public String toString() { 
+	return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE) 
+	.append("id ", this.getId()) 
+	.append("name", this.getFirstName()) 
+	.append("surname", this.getLastName()) 
+	.append("e-mail",this.geteMail()) 
+	.append("mobile number", this.getMobileNum()) 
+	.append("address", this.getAddress()) 
+	.append("date of registration", this.getDateOfRegistration()) 
+	.append("role", this.getRole()) 
+	.toString(); 
+	} 
 }

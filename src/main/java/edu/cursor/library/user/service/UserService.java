@@ -5,8 +5,9 @@ import edu.cursor.library.user.entity.TblUser;
 
 public interface UserService {
 
-   List<TblUser> getUserList();
-    void deleteUser(int choice);
-    void addUser(TblUser user);
-    void showUserProfile(TblUser user);
+	List<TblUser> getUserList(); 
+	void showUserList(); 
+	void deleteUser(int choice); 
+	void addUser(TblUser user); 
+	void showUserProfile(TblUser user); 
 }

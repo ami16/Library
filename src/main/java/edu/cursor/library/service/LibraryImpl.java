@@ -128,7 +128,6 @@ public class LibraryImpl implements Library {
 	}
 
 	public void showUserSubMenuAdmin() {
-		System.out.println("--- USER LIST ---");
 		System.out.println("1. Add user ");
 		System.out.println("2. Remove user ");
 		System.out.println("3. Back to main menu ");
@@ -222,8 +221,9 @@ public class LibraryImpl implements Library {
 					is = true;
 					break;
 				case '4':
-					System.out.println(userService.getUserList().toString());
-					showUserSubMenuAdmin();
+					System.out.println("-— USER LIST —-"); 
+					userService.showUserList(); 
+					showUserSubMenuAdmin(); 
 					is = true;
 					break;
 				case 'z':
