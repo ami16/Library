@@ -21,9 +21,9 @@ public class RegisterImpl implements Register{
       Scanner scan = new Scanner(System.in);
       String desiredMail;
       boolean loginAllowed = false;
-      UserServiceImpl userService = new UserServiceImpl();
+      UserServiceImpl userService = UserServiceImpl.getInstance();
       CredentialsImpl credentials = CredentialsImpl.getInstance();
-      SecurityServiceImpl securityService = new SecurityServiceImpl();
+      SecurityServiceImpl securityService = SecurityServiceImpl.getInstance();
 
       // LOGIN
       outer: do {
@@ -95,15 +95,16 @@ public class RegisterImpl implements Register{
 
                // name2 ok. Now MOBILE
                boolean correctMobile = false;
-               int desiredMobile;
+               String desiredMobile;
                do {
-                  System.out.print("Your mobile # (9 numbers): ");
-                  desiredMobile = scan.nextInt();
+                  System.out.print("Your mobile # (9 numbers starting with NON-ZERO digit): ");
+                  desiredMobile = scan.nextLine();
                   // X
-                  if ( Integer.toString(desiredMobile).equalsIgnoreCase("x"))
+                  if ( desiredMobile.equalsIgnoreCase("x"))
                      break outer;
-                  if (securityService.validateMobile(desiredMobile))
-                     correctMobile = true;
+
+                     correctMobile = securityService.validateMobile(desiredMobile) ;
+
                } while (!correctMobile);
 
                // MOBILE ok. Now ADDRESS
@@ -122,24 +123,25 @@ public class RegisterImpl implements Register{
                loginAllowed = true;
 
                int newId = securityService.getNewUserId() ;
-                 //  userService
-            
-//               if () {
+               // userService
+//               addUser( newId, desiredName, desiredName2, desiredMail, desiredMobile, desiredAddr, new LocalDate().toString(), pass1 ) ;
+               if(
                   userService.addUser( new TblUser(
                       newId,
                       desiredName,
                       desiredName2,
                       desiredMail,
-                      desiredMobile,
+                      Integer.parseInt(desiredMobile),
                       desiredAddr,
                       LocalDate.now(),
-                      Role.USER) );
-                
+                      Role.USER
+                  ) )
+                ){
                   credentials.addCredentials(newId, pass1);
-//                  System.out.println("Now login using your credentials");
-//               } else {
-//                  System.out.println("Something went wrong. Try ones more or contact admin... Bla-bla..");
-//               }
+                  System.out.println("Now login using your credentials");
+               } else {
+                  System.out.println("Something went wrong. Try ones more or contact admin... Bla-bla..");
+               }
 
             }
 
@@ -147,6 +149,5 @@ public class RegisterImpl implements Register{
             System.out.println("Not allowed");
          }
       } while (!loginAllowed);
-
    }
 }

@@ -6,19 +6,30 @@ import edu.cursor.library.security.auth.AuthImpl;
 
 public class ValidateImpl implements Validate{
 
-   public ValidateImpl() {
+   public ValidateImpl() {}
+   private static ValidateImpl instance;
+   public static ValidateImpl getInstance(){
+      if(instance == null){
+         synchronized (ValidateImpl.class){
+            // Double check
+            if (instance == null) {
+               instance = new ValidateImpl() ;
+            }
+         }
+      }
+      return instance;
    }
 
    public void validateUser() {
       Scanner scan = new Scanner(System.in);
       String userLogin, userPassword, verifiedLogin = "";
       boolean is = false;
-      SecurityServiceImpl securityService = new SecurityServiceImpl();
+      SecurityServiceImpl securityService = SecurityServiceImpl.getInstance();
       AuthImpl auth = AuthImpl.getInstance();
 
       System.out.println("Enter your login:");
       do {
-         userLogin = scan.nextLine().trim();
+         userLogin = scan.nextLine().trim().toLowerCase();
          if (userLogin.equals("")) {
             System.out.print("Enter smth: ");
          } else {

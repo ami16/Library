@@ -12,16 +12,13 @@ import java.util.stream.Collectors;
 public class CredentialsImpl implements Credentials {
 
    private static String projPath = System.getProperty("user.dir"),
-       dbPath = "/src/main/java/edu/cursor/library/resources/",
+       dbPath = "/src/main/resources/",
        fileName = "credentialsList.csv",
        file = projPath + dbPath + fileName ;
    private Map<Integer, String> credentialsList = new HashMap<>();
+
    private static CredentialsImpl instance ;
-
-   private CredentialsImpl() {
-
-   }
-
+   private CredentialsImpl() {}
    public static CredentialsImpl getInstance(){
       if( instance == null ){
          synchronized (CredentialsImpl.class){
@@ -36,7 +33,6 @@ public class CredentialsImpl implements Credentials {
 
    @Override
    public String getPassword(TblUser user){
-//      Map<Integer, String> credentialsList = getCredentialsList(file);
       Map<Integer, String> credentialsList = getCredentialsList();
 
       Map<Integer, String> result = credentialsList.entrySet()

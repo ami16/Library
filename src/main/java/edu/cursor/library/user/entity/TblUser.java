@@ -139,6 +139,7 @@ public class TblUser {
 	.append("address", this.getAddress()) 
 	.append("date of registration", this.getDateOfRegistration()) 
 	.append("role", this.getRole()) 
-	.toString(); 
+	.append("\n")
+	.toString();
 	} 
 }

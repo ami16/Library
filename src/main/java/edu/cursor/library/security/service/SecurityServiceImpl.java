@@ -6,17 +6,28 @@ import java.util.List;
 import java.util.Map;
 
 import edu.cursor.library.security.credentials.service.CredentialsImpl;
+import edu.cursor.library.user.enums.Role;
 import edu.cursor.library.user.service.UserServiceImpl;
 
 public class SecurityServiceImpl implements SecurityService {
 
 
    CredentialsImpl cred = CredentialsImpl.getInstance();
-   private static UserServiceImpl userService = new UserServiceImpl();
+   UserServiceImpl userService = UserServiceImpl.getInstance();
    private static List<TblUser> tempUserList = null ;
 
-   public SecurityServiceImpl() {
-//      System.out.println(tempUserList);
+   private SecurityServiceImpl() {}
+   private static SecurityServiceImpl instance;
+   public static SecurityServiceImpl getInstance(){
+      if( instance == null ){
+         synchronized (SecurityServiceImpl.class){
+            // Double check
+            if (instance == null) {
+               instance = new SecurityServiceImpl() ;
+            }
+         }
+      }
+      return instance;
    }
 
 
@@ -42,8 +53,17 @@ public class SecurityServiceImpl implements SecurityService {
    }
 
    @Override
-   public boolean validateMobile(int val) {
-      return Integer.toString(val).matches("^(\\d{9})$");
+   public boolean validateMobile(String val) {
+      try{
+         int intPhone = Integer.parseInt(val);
+         return intPhone != 0 && intPhone >= 100000000 && val.matches("^(\\d{9})$");
+      }catch (Exception e){
+         return false;
+      }
+   }
+
+   public boolean validateUserId(String val) {
+      return val.matches("^(\\d{1,9})$");
    }
 
    @Override

@@ -10,31 +10,6 @@ public class AuthImpl implements Auth
    private boolean userIsLogged = false;
    private TblUser loggedUser;
 
-
-   public boolean isUserLogged() {
-      return userIsLogged;
-   }
-
-   public void setUserLogged(boolean userIsLogged) {
-      this.userIsLogged = userIsLogged;
-   }
-
-   public TblUser getLoggedUser() {
-      return loggedUser;
-   }
-
-   public void setLoggedUser(TblUser loggedUser) {
-      this.loggedUser = loggedUser;
-   }
-
-//   public List<TblUser> getUserList() {
-//      return userList;
-//   }
-//
-//   public void setUserList(List<TblUser> userList) {
-//      this.userList = userList;
-//   }
-
    private static AuthImpl instance ;
    private AuthImpl() {}
 
@@ -50,15 +25,33 @@ public class AuthImpl implements Auth
       return instance ;
    }
 
+   public boolean isUserLoggedIn() {
+      return userIsLogged;
+   }
+
+   public void setUserIsLogged(boolean userIsLogged) {
+      this.userIsLogged = userIsLogged;
+   }
+
+   public TblUser getLoggedInUser() {
+      return loggedUser;
+   }
+
+   public void setLoggedInUser(TblUser loggedUser) {
+      this.loggedUser = loggedUser;
+   }
+
+
+
    @Override
    public void logIn(TblUser user) {
-      setLoggedUser(user);
-      setUserLogged(true);
+      setLoggedInUser(user);
+      setUserIsLogged(true);
    }
 
    @Override
    public void logOut() {
-      setLoggedUser(null);
-      setUserLogged(false);
+      setLoggedInUser(null);
+      setUserIsLogged(false);
    }
 }

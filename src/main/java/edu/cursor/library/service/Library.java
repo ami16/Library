@@ -6,9 +6,9 @@ public interface Library {
 
    public void start() ;
 
-   void showMainMenu(boolean userIsLogged, AuthImpl auth) ;
+   void showMainMenu();
    void showMainMenuSimple() ;
-   void showMainMenuLogged() ;
+   void showMainMenuLoggedIn() ;
    void showMainMenuAdmin() ;
 
    void replyReader(int type);

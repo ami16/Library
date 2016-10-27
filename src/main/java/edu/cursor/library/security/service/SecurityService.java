@@ -8,7 +8,7 @@ public interface SecurityService {
    boolean validatePass(String val);
    boolean validateMail(String val);
    boolean validateName(String val);
-   boolean validateMobile( int val );
+   boolean validateMobile(String val);
 
    boolean loginAvailable(String desiredLogin, boolean showMessage);
    int getNewUserId();

@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class BookMenuUtils {
     private static final Scanner scan = new Scanner(System.in);
-    BookServiceImpl service = new BookServiceImpl();
+    BookServiceImpl service = BookServiceImpl.getInstance();
 
     public void bookMenuAdmin() {
         System.out.println("--- BOOK MENU ---");

@@ -8,12 +8,13 @@ Id,firstName,lastName,eMail,mobileNum,address,dateOfRegistration,role
 7,Ivan,Babyrnych,ivanko@gmail.com,670245120,Svitla st.56 Sambir,2014-09-10,USER
 8,Teodor,Homyk,dido@gmail.com,685478452,Nova st.4 Drohobych,2016-10-12,USER
 9,Oleh,Koval,koval@gmail.com,687458475,Zelena st.78 Odessa,2015-12-12,USER
-10,Zenyk,Lytvyn,zeno@gmail.com,974525895,Sambirska st.56 Komarno,2013-07-12,ADMIN,
+10,Zenyk,Lytvyn,zeno@gmail.com,974525895,Sambirska st.56 Komarno,2013-07-12,ADMIN
 11,Andrew,Lloyd-Webber,m@m.z,123456789,Adress is my home kagbe,2016-10-17,USER
-12,andrew2,qwertyu,m@m.c,123123123,asdf rewdsf fgjrgt adrf qte,2016-10-17,USER
+12,andrew2,qwertyu,m@m.c,321321321,asdf rewdsf fgjrgt adrf qte,2016-10-17,USER
 13,Qwerty,Salomon,m@m.s,321321321,Adress on fictional shit,2016-10-17,USER
 14,Admin,Adminovyk,m@m.x,987654321,Admin Street 52/4. Stack City,2016-10-20,ADMIN
 15,Liza2,Moninsky,l@l.z,222222229,Adress is my Home... Cap?,2016-10-21,USER
-16,Aaaaa,Bbbbb,a@a.a,999999999,AddressAddressAddress,2016-10-24,USER
 17,MyFriend,Johnson,m1@m.c,333222111,AdrAdrAdrAdr,2016-10-24,USER
 18,Vasyl,Hnativ,v@v.v,100000000,Adddrrreeesss,2016-10-26,USER
+19,Newie,Newston,n@n.n,444444444,NewAddressHere Right now,2016-10-27,USER
+20,Leonid,Faykovych,l@l.l,123123123,asdasdasdasd,2016-10-27,ADMIN
