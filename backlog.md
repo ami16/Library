@@ -6,7 +6,7 @@
 CRSRL0-6: (Yura P) Create SQL script 'application/cursorLibrary.sql': REVIEW <br />
 * ~~CRSRL0-7: (Igor) re-Make Book service (interface, inner functionality): DONE~~ <br />
 * ~~CRSRL0-8: (Igor) Create Book database (with real-like content): DONE~~ <br />
-CRSRL0-9: Factory (pending) <br />
+* ~~CRSRL0-9: Factory (DECLINED)~~ <br />
 CRSRL0-10: (Andriy+) LibService: IN_PROGRESS <br />
 * ~~CRSRL0-11: (Andriy) LibSecurity: DONE~~ <br />
 * ~~CRSRL0-12: (Olesya) User Service 'library/user/service' (interface + impl): DONE~~ <br />
@@ -21,5 +21,5 @@ CRSRL0-18: (IGOR) Fix BookService: IN_PROGRESS <br />
 * ~~CRSRL0-21: (IGOR) Fix CSV (Utils): DONE~~ <br />
 CRSRL0-22: (IGOR) Book Exceptions: TODO <br />
 * ~~CRSRL0-23: (IGOR) Change Genres: DONE (KROSAVCHEG!)~~ <br />
-CRSRL0-24: (OLESYA) UserServiceImpl fixes: TODO <br />
+* ~~CRSRL0-24: (OLESYA) UserServiceImpl fixes: DONE~~ <br />
 ...
