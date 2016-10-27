@@ -2,7 +2,6 @@ package edu.cursor.library.book.service;
 
 
 import edu.cursor.library.book.entity.TblBook;
-import edu.cursor.library.book.enums.Genre;
 import edu.cursor.library.book.utils.IOUtils;
 import org.joda.time.LocalDate;
 
@@ -12,7 +11,6 @@ import java.util.stream.Collectors;
 public class BookServiceImpl implements BookService {
 
     private static List<TblBook> bookList = new ArrayList<>();
-    private Scanner scan = new Scanner(System.in);
     private String path = System.getProperty("user.dir") + "/src/main/resources/bookList.csv";
 
 
@@ -39,17 +37,21 @@ public class BookServiceImpl implements BookService {
             IOUtils.writeLine(bookList, path);
         }
 
+        // for future creating class Exception
+        // Logger code here
     }
 
     @Override
-    public void addBookNew(int ISBN, String author, String title, String publYear, String writYear, Genre genre) {
+    public void addBookNew(int ISBN, String author, String title, String publYear, String writYear, String genre) {
         try {
-            LocalDate PublYearNew = LocalDate.parse(publYear);
-            LocalDate WritYearNew = LocalDate.parse(writYear);
-            bookList.add(new TblBook(ISBN, author, title, PublYearNew, WritYearNew, genre));
-            IOUtils.writeLine(bookList, path);
+            bookList.add(new TblBook(ISBN, author, title,
+                    LocalDate.parse(publYear), LocalDate.parse(writYear),
+                    IOUtils.converToEnumSet(genre)));
+
         } catch (IllegalArgumentException i) {
             System.out.println(i.getMessage());
+            // for future creating class Exception
+            // Logger code here
         }
     }
 
@@ -72,6 +74,7 @@ public class BookServiceImpl implements BookService {
             }
         }
         // for future creating class Exception
+        // Logger code here
         // throw new  throw new BookStoreException();
     }
 
