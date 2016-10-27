@@ -22,4 +22,5 @@ CRSRL0-18: (IGOR) Fix BookService: IN_PROGRESS <br />
 CRSRL0-22: (IGOR) Book Exceptions: TODO <br />
 * ~~CRSRL0-23: (IGOR) Change Genres: DONE (KROSAVCHEG!)~~ <br />
 * ~~CRSRL0-24: (OLESYA) UserServiceImpl fixes: DONE~~ <br />
+CRSRL0-25: (Andriy) Library Fixes: TODO <br />
 ...
