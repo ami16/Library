@@ -15,5 +15,7 @@ interface BookService {
 
     void viewBookList();
 
+    void replaceBook(int ISBN);
+
     void removeBook(int ISBN);
 }

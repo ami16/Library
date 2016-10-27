@@ -2,6 +2,7 @@ package edu.cursor.library.book.service;
 
 
 import edu.cursor.library.book.entity.TblBook;
+import edu.cursor.library.book.utils.GenreUtils;
 import edu.cursor.library.book.utils.IOUtils;
 import org.joda.time.LocalDate;
 
@@ -11,7 +12,7 @@ import java.util.stream.Collectors;
 public class BookServiceImpl implements BookService {
 
     private static List<TblBook> bookList = new ArrayList<>();
-    private String path = System.getProperty("user.dir") + "/src/main/resources/bookList.csv";
+    private final String path = System.getProperty("user.dir") + "/src/main/resources/bookList.csv";
 
 
     public BookServiceImpl() {
@@ -46,7 +47,7 @@ public class BookServiceImpl implements BookService {
         try {
             bookList.add(new TblBook(ISBN, author, title,
                     LocalDate.parse(publYear), LocalDate.parse(writYear),
-                    IOUtils.converToEnumSet(genre)));
+                    GenreUtils.insertGenre(genre)));
 
         } catch (IllegalArgumentException i) {
             System.out.println(i.getMessage());
@@ -65,12 +66,26 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void removeBook(int ISBN) {
+    public void replaceBook(int ISBN) {
         for (Iterator it = bookList.iterator(); it.hasNext(); ) {
             if (((TblBook) it.next()).getISBN() == ISBN) {
+                //replaced in another place selected book
+                //NameOfPlace.add((TblBook) it.next());
                 it.remove();
                 IOUtils.writeLine(bookList, path);
                 return;
+            }
+        }
+        // for future creating class Exception
+        // Logger code here
+        // throw new  throw new BookStoreException();
+    }
+
+    @Override
+    public void removeBook(int ISBN) {
+        for (TblBook b: bookList) {
+            while (b.getISBN() == ISBN) {
+                replaceBook(ISBN);
             }
         }
         // for future creating class Exception
