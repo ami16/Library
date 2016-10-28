@@ -14,6 +14,7 @@ public interface SecurityService {
    int getNewUserId();
 
    boolean userExists(String login);
+   boolean userExists(int userId);
    boolean passIsCorrect(String login, String pass);
    TblUser getUser(int id) ;
    TblUser getUser(String mail) ;

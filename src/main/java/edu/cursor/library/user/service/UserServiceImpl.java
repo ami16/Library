@@ -171,7 +171,9 @@ public class UserServiceImpl implements UserService {
 			if( userList.size() == 0 ) {
 				System.out.println("Ther'e no users. \nz - to Main menu");
 			} else {
-				System.out.println("a - ADD user, d - DELETE user, e - EDIT user \nz - to Main menu");
+				System.out.println("a - ADD user, d - DELETE user, e - EDIT user, v - View taken books by user " +
+					"\nz - to Main" +
+					" menu");
 			}
 
 			// Wait for user reply
@@ -188,6 +190,10 @@ public class UserServiceImpl implements UserService {
 				case "e":
 					is = true;
 					promptUpdateuser();
+					break;
+				case "v":
+					is = true;
+					promptViewTakenBooks();
 					break;
 				case "z":
 					is = true;
@@ -362,7 +368,7 @@ public class UserServiceImpl implements UserService {
 		String userChoice = "";
 		boolean isInList = false;
 		boolean isISBN = false;
-
+		TblUser currentUser = auth.getLoggedInUser();
 
 		do {
 
@@ -399,7 +405,7 @@ public class UserServiceImpl implements UserService {
 					System.out.println("Availbale. Please take one.");
 
 					// REAL TAKEBOOK METHOD
-					takeBook( auth.getLoggedInUser(), bookService.getBookById(userIsbn) );
+					takeBook( currentUser, bookService.getBookById(userIsbn) );
 
 				} else {
 					System.out.println("Smth wrong. Contact admin urgently!");
@@ -427,6 +433,32 @@ public class UserServiceImpl implements UserService {
 	 ** ------------ User -----------------
 	 **/
 
+	// This is for admin eventually
+	public void promptViewTakenBooks(){
+		Scanner scan = new Scanner(System.in);
+		String userReply;
+		boolean isId = false;
+		boolean userExists = false;
+
+		do{
+			System.out.println("Give proper user id: ");
+			userReply = scan.nextLine();
+			isId = SecurityServiceImpl.getInstance().validateUserId( userReply );
+
+			if( isId ){
+				userExists = SecurityServiceImpl.getInstance().userExists( Integer.parseInt(userReply) );
+
+				if(userExists){
+					TblUser user = UserServiceImpl.getInstance().getUser(Integer.parseInt(userReply));
+					showUserBooks( user );
+					showUserBooksMenu( user );
+				}
+			}
+
+		}while (!userExists);
+	}
+
+
 	public List<TblBook> getUserBooks( TblUser user ) {
 		List<TblBook> userBooks = new ArrayList<>();
 		int userId = user.getId();
@@ -445,7 +477,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public void showUserBooks( TblUser user ) {
-		System.out.println("--- My books here ---");
+
+		if( user.getId().equals( auth.getLoggedInUser().getId() ) ){
+			System.out.println("--- My books here ---");
+		} else {
+			System.out.println("--- User books here (" + user.getId() + ", " + user.getFirstName() + ", "
+				                 + user.getLastName() + ", " + ", " + user.geteMail() + ", "
+								     + user.getRole() + ") ---");
+		}
 
 		for( TblBook b : getUserBooks( user ) ){
 			System.out.println(b);
@@ -464,15 +503,22 @@ public class UserServiceImpl implements UserService {
 		do{
 			List<TblBook> userBooks = getUserBooks( user );
 			if( userBooks.size() == 0 ) {
-				System.out.println("You have no books taken. \nz - to Main menu");
+				System.out.println("You have no books taken. \n");
 			} else {
-				System.out.println("r - Return book \nz - to Main menu");
+				if( currentUser == user ){
+					System.out.println("r - Return book \n");
+				}
 			}
+//			if( currentUser.getRole() == Role.ADMIN ){
+//				System.out.println("u - to Users menu");
+//			}
+			System.out.println("z - to Main menu");
+
 
 			// Wait for user reply
 			userReply = scan.nextLine().trim();
 
-			if( userReply.equalsIgnoreCase("r") ){
+			if( userReply.equalsIgnoreCase("r") && currentUser == user ){
 				is = true;
 
 				if( userBooks.size() == 1 ){

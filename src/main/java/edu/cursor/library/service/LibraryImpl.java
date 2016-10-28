@@ -21,8 +21,6 @@ public class LibraryImpl implements Library {
 	private static LibraryImpl instance;
 
 	private Scanner scan = new Scanner(System.in);
-//	private ValidateImpl validService = new ValidateImpl();
-//	private RegisterImpl register = new RegisterImpl();
 
 	private AuthImpl auth = AuthImpl.getInstance();
 	private CredentialsImpl cred = CredentialsImpl.getInstance();
@@ -30,18 +28,6 @@ public class LibraryImpl implements Library {
 	private UserServiceImpl userService = UserServiceImpl.getInstance();
 	private UserBooksRegistryImpl userBooksRegistry = new UserBooksRegistryImpl();
 
-//	private LibraryImpl() {}
-//	public static LibraryImpl getInstance(){
-//		if( instance == null ){
-//			synchronized (LibraryImpl.class){
-//				// Double check
-//				if (instance == null) {
-//					instance = new LibraryImpl() ;
-//				}
-//			}
-//		}
-//		return instance ;
-//	}
 	public LibraryImpl() {}
 
 
@@ -109,60 +95,6 @@ public class LibraryImpl implements Library {
 		System.out.println("x. Exit");
 		replyReader(2);
 	}
-//	public void showBookSubMenuAdmin() {
-//		System.out.println("--- BOOK LIST ---");
-//		System.out.println("1. Add new book");
-//		System.out.println("2. Add exsist book");
-//		System.out.println("3. Remove book");
-//		System.out.println("4. Back to main menu");
-//		switch (Character.toLowerCase(scan.next().charAt(0))) {
-//		case '1': {
-//			//bookService.addBookNew(ISBN, author, title, publYear, writYear, genre);
-//			break;
-//		}
-//		case '2' : {
-//			System.out.println("Select book`s ISBN for add: ");
-//			bookService.addBookOld(scan.nextInt());
-//			break;
-//		}
-//		case '3': {
-//			System.out.println("Select book`s ISBN for remove: ");
-//		bookService.replaceBook(scan.nextInt());
-//		break;
-//		}
-//		case '4' : {
-//			showMainMenuAdmin();
-//			break;
-//		}
-//		default :
-//			System.out.println("Select correct item (1-4)");
-//			showBookSubMenuAdmin();
-//			}
-//	}
-
-//	public void showUserSubMenuAdmin() {
-//		System.out.println("1. Add user ");
-//		System.out.println("2. Remove user ");
-//		System.out.println("3. Back to main menu ");
-//		switch (Character.toLowerCase(scan.next().charAt(0))) {
-//		case '1': {
-//			register.registerUser();
-//			break;
-//		}
-//		case '2': {
-//			System.out.println("Select user`s id for remove: ");
-//			userService.deleteUser(scan.nextInt());
-//			break;
-//		}
-//		case '3': {
-//			showMainMenuAdmin();
-//			break;
-//		}
-//		default:
-//			System.out.println("Select correct item (1-3)");
-//			showUserSubMenuAdmin();
-//		}
-//	}
 
 	public void replyReader(int type) {
 		Scanner scan = new Scanner(System.in);
@@ -188,7 +120,6 @@ public class LibraryImpl implements Library {
 					break;
 				case '3':
 					// ++ VIEW LIBRARY BOOKS
-//					bookService.viewBookList();
 					viewLibraryBooks();
 					proposeLibrarySorted();
 					is = true;
@@ -205,7 +136,6 @@ public class LibraryImpl implements Library {
 				switch (Character.toLowerCase(scan.next().charAt(0))) {
 				case '1':
 					// ++ VIEW LIBRARY BOOKS
-//					bookService.viewBookList();
 					viewLibraryBooks();
 					proposeLibrarySorted();
 					is = true;
@@ -238,8 +168,6 @@ public class LibraryImpl implements Library {
 			case 2: // logged in ADMIN
 				switch (Character.toLowerCase(scan.next().charAt(0))) {
 				case '1':
-//					bookService.viewBookList();
-//					showBookSubMenuAdmin();
 					// ++ VIEW LIBRARY BOOKS
 					viewLibraryBooks();
 					proposeLibrarySorted();
@@ -259,8 +187,6 @@ public class LibraryImpl implements Library {
 					break;
 				case '4':
 					// ++ View users list
-//					System.out.println("-— USER LIST —-");
-//					showUserSubMenuAdmin();
 					userService.showUserList();
 					userService.showUserListMenu();
 					is = true;
