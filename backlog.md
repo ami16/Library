@@ -7,7 +7,7 @@ CRSRL0-6: (Yura P) Create SQL script 'application/cursorLibrary.sql': REVIEW <br
 * ~~CRSRL0-7: (Igor) re-Make Book service (interface, inner functionality): DONE~~ <br />
 * ~~CRSRL0-8: (Igor) Create Book database (with real-like content): DONE~~ <br />
 * ~~CRSRL0-9: Factory (DECLINED)~~ <br />
-CRSRL0-10: (Andriy+) LibService: IN_PROGRESS <br />
+* ~~CRSRL0-10: (Andriy+) LibService: DONE~~ <br />
 * ~~CRSRL0-11: (Andriy) LibSecurity: DONE~~ <br />
 * ~~CRSRL0-12: (Olesya) User Service 'library/user/service' (interface + impl): DONE~~ <br />
 * ~~CRSRL0-13: (Andriy) Apache Commons: DONE <br />~~
@@ -15,7 +15,7 @@ CRSRL0-10: (Andriy+) LibService: IN_PROGRESS <br />
 * ~~CRSRL0-15: (Olesya) User roles as enum ('library/user/enums/Role.java'): DONE~~ <br />
 CRSRL0-16: (Yura Zh) Create Logger: REVIEW <br />
 * ~~CRSRL0-17: (IGOR) Fix Book: DONE~~ <br />
-CRSRL0-18: (IGOR) Fix BookService: IN_PROGRESS <br />
+* ~~CRSRL0-18: (IGOR) Fix BookService: DONE~~ <br />
 * ~~CRSRL0-19: (OLESYA) Fix UserService: DONE~~ <br />
 * ~~CRSRL0-20: (OLESYA) Create Menus in LibService: DONE~~ <br />
 * ~~CRSRL0-21: (IGOR) Fix CSV (Utils): DONE~~ <br />
