@@ -122,7 +122,7 @@ public class LibraryImpl implements Library {
 //		}
 //		case '2' : {
 //			System.out.println("Select book`s ISBN for add: ");
-//			bookService.addBookOld(scan.nextInt());
+//			bookService.addBookExist(scan.nextInt());
 //			break;
 //		}
 //		case '3': {

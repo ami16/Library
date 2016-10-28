@@ -9,7 +9,7 @@ public class BookMenuUtils {
     private static final Scanner scan = new Scanner(System.in);
     BookServiceImpl service = BookServiceImpl.getInstance();
 
-    public void bookMenuAdmin() {
+    /*public void bookMenuAdmin() {
         System.out.println("--- BOOK MENU ---");
         System.out.println("1. Add new book");
         System.out.println("2. Add exist book");
@@ -37,7 +37,7 @@ public class BookMenuUtils {
             }
             case '2': {
                 System.out.println("Select book`s ISBN for add: ");
-                service.addBookOld(scan.nextInt());
+                service.addBookExist(scan.nextInt());
                 break;
             }
             case '3': {
@@ -82,6 +82,6 @@ public class BookMenuUtils {
                 System.out.println("Select correct item (1-3)");
                 bookMenuUser();
         }
-    }
+    }*/
 
 }
