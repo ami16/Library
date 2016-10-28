@@ -96,6 +96,7 @@ public class LibraryImpl implements Library {
 		replyReader(2);
 	}
 
+
 	public void replyReader(int type) {
 		Scanner scan = new Scanner(System.in);
 		boolean is = false;

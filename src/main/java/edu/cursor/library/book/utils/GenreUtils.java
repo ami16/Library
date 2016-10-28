@@ -10,7 +10,7 @@ public class GenreUtils {
     private static final Scanner scan = new Scanner(System.in);
 
     public static Genre chooseGenre() {
-        System.out.println("Pls chose genre for book.");
+        System.out.println("Pls enter genre for book.");
         String tryGenre = scan.nextLine().toUpperCase();
         Boolean checkGenre = Arrays.stream(Genre.values())
                 .map(Genre::name)
@@ -49,6 +49,7 @@ public class GenreUtils {
         System.out.println("If you want add another genre press 'y'");
         while (scan.nextLine().toUpperCase().charAt(0) == 'Y') {
             genre.append(";");
+            System.out.println("Pls enter genre for book.");
             genre.append(scan.nextLine());
             System.out.println("If you want add another genre press 'y'");
         }
