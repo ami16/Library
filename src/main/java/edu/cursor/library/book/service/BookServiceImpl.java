@@ -146,6 +146,7 @@ public class BookServiceImpl implements BookService {
 
             }
         } catch (IllegalArgumentException i) {
+            System.out.println(i.getMessage());
             //logger
         }
 
