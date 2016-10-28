@@ -102,6 +102,17 @@ public class SecurityServiceImpl implements SecurityService {
    }
 
    @Override
+   public boolean userExists(int userId) {
+      TblUser user = UserServiceImpl.getInstance().getUser( userId );
+      try{
+         String login = user.geteMail();
+         return !loginAvailable(login, false);
+      } catch (Exception e){
+         return false;
+      }
+   }
+
+   @Override
    public boolean passIsCorrect(String login, String pass) {
       int id ;
       tempUserList = userService.getUserList() ;
