@@ -293,6 +293,8 @@ public class LibraryImpl implements Library {
 
 						// ADMIN! Add a book!
 						System.out.println("---- K - zaglushka -----");
+//						System.out.println("Enter ISBN for book: ");
+//						bookService.addBookNew(scan.nextInt());
 						viewLibraryBooks();
 						proposeLibrarySorted();
 						is = true;

@@ -4,6 +4,7 @@ import edu.cursor.library.book.entity.TblBook;
 import edu.cursor.library.book.enums.Genre;
 import edu.cursor.library.book.utils.GenreUtils;
 import edu.cursor.library.book.utils.IOUtils;
+import edu.cursor.library.infrastructure.exceptions.NoSuchBookException;
 import org.joda.time.LocalDate;
 
 import java.io.File;
@@ -33,18 +34,68 @@ public class BookServiceImpl implements BookService {
         return instance;
     }
 
+//    @Override
+//    public void addBookOld(int ISBN) {
+//        if (bookList.stream()
+//                .anyMatch(s -> s.getISBN() == ISBN)) {
+//            bookList.add(bookList.stream()
+//                    .filter(s -> s.getISBN() == ISBN)
+//                    .findFirst().get());
+//            IOUtils.writeLine(bookList, file);
+//        }
+//
+//        // for future creating class Exception
+//        // Logger code here
+//    }
+
     @Override
-    public void addBookOld(int ISBN) {
-        if (bookList.stream()
+    public void addBookExist(int ISBN) {
+        try {
+            if (bookList.stream()
                 .anyMatch(s -> s.getISBN() == ISBN)) {
-            bookList.add(bookList.stream()
+                bookList.add(bookList.stream()
                     .filter(s -> s.getISBN() == ISBN)
                     .findFirst().get());
-            IOUtils.writeLine(bookList, file);
+                IOUtils.writeLine(bookList, file);
+                return;
+            }
+            throw new NoSuchBookException("Doesn't exict book with ISBN = ", ISBN);
+        } catch (NoSuchBookException nb) {
+            // Logger code here
         }
 
-        // for future creating class Exception
-        // Logger code here
+    }
+
+
+    @Override
+    public void editBook(int isbn, char edit, String newValue) {
+        try {
+            switch (edit) {
+                case 'a':
+                    getBookById(isbn).setAuthor(newValue);
+                    break;
+                case 't':
+                    getBookById(isbn).setTitle(newValue);
+                    break;
+                case 'p':
+                    getBookById(isbn).setPublYear(LocalDate.parse(newValue));
+                    break;
+                case 'w':
+                    getBookById(isbn).setWritYear(LocalDate.parse(newValue));
+                    break;
+                case 'g':
+                    getBookById(isbn).setGenre(GenreUtils.insertGenre(newValue));
+                    break;
+                default:
+                    System.out.println("Wrong choice!!!");
+                    return;
+
+            }
+        } catch (IllegalArgumentException i) {
+            System.out.println(i.getMessage());
+            //logger
+        }
+
     }
 
     @Override

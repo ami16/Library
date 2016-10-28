@@ -10,7 +10,9 @@ interface BookService {
 
     List<TblBook> createBookList();
 
-    void addBookOld(int ISBN);
+    void addBookExist(int ISBN);
+    void editBook(int isbn, char edit, String newValue);
+    TblBook getBookById(int isbn);
     void addBookNew(int ISBN, String author, String title, String publYear, String writYear, String genre);
 
 //    void viewBookList();

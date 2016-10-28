@@ -37,7 +37,7 @@ public class BookMenuUtils {
             }
             case '2': {
                 System.out.println("Select book`s ISBN for add: ");
-                service.addBookOld(scan.nextInt());
+                service.addBookExist(scan.nextInt());
                 break;
             }
             case '3': {
