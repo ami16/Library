@@ -10,12 +10,13 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
+import static edu.cursor.library.infrastructure.Constans.DEFAULT_SEPARATOR;
+import static edu.cursor.library.infrastructure.Constans.MULTI_PICKLIST_SEPARATOR;
 
 
 public class IOUtils {
 
-    private static final char DEFAULT_SEPARATOR = ',';
-    private static final String MULTI_PICKLIST_SEPARATOR = ";";
+
 
 
     public static void writeLine(List<TblBook> bookList, String path) {
@@ -43,7 +44,7 @@ public class IOUtils {
 
     }
 
-    public static String converToString(EnumSet genre) {
+    private static String converToString(EnumSet genre) {
         StringBuilder sb = new StringBuilder();
        for (int i = 0; i < genre.toArray().length; i++){
                sb.append(genre.toArray()[i].toString());
