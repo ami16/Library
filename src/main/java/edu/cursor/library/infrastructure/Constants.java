@@ -1,6 +1,6 @@
 package edu.cursor.library.infrastructure;
 
-public interface Constans {
+public interface Constants {
     char DEFAULT_SEPARATOR = ',';
     String MULTI_PICKLIST_SEPARATOR = ";";
     char POSITIVE_ANSWER = 'Y';

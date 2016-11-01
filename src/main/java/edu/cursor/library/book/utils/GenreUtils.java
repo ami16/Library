@@ -3,26 +3,26 @@ package edu.cursor.library.book.utils;
 
 import edu.cursor.library.book.enums.Genre;
 
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.Scanner;
-
-import static edu.cursor.library.infrastructure.Constans.POSITIVE_ANSWER;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class GenreUtils {
     private static final Scanner scan = new Scanner(System.in);
 
-    private static Genre chooseGenre() {
-        System.out.println("Pls enter genre for book.");
+    public static Genre chooseGenre() {
+        System.out.println("Pls chose genre for book.");
         String tryGenre = scan.nextLine().toUpperCase();
-        if (Arrays.stream(Genre.values())
+        Boolean checkGenre = Arrays.stream(Genre.values())
                 .map(Genre::name)
-                .anyMatch(tryGenre::equals)) {
+                .collect(Collectors.toList())
+                .stream()
+                .anyMatch(tryGenre::equals);
+        if (checkGenre) {
             return Genre.valueOf(tryGenre);
         } else {
             System.out.println("Wrong genre!!!");
             System.out.println("Do you want write correct genre? Press 'y'");
-            if (scan.nextLine().toLowerCase().charAt(0) == POSITIVE_ANSWER) {
+            if (scan.nextLine().toLowerCase().charAt(0) == 'y') {
                 return chooseGenre();
             } else return Genre.UNKNOWN;
         }
@@ -30,9 +30,12 @@ public class GenreUtils {
 
 
     public static Genre chooseGenre(String myGenre) {
-        if (Arrays.stream(Genre.values())
+        Boolean checkGenre = Arrays.stream(Genre.values())
                 .map(Genre::name)
-                .anyMatch(myGenre::equals)) {
+                .collect(Collectors.toList())
+                .stream()
+                .anyMatch(myGenre::equals);
+        if (checkGenre) {
             return Genre.valueOf(myGenre);
         } else {
             System.out.println("Genre: " + myGenre + " doesn't exist!");
@@ -42,12 +45,11 @@ public class GenreUtils {
 
     public static EnumSet<Genre> insertGenre(String st) {
         StringBuilder genre = new StringBuilder();
-        genre.append(st.toUpperCase());
+        genre.append(st);
         System.out.println("If you want add another genre press 'y'");
-        while (scan.nextLine().toUpperCase().charAt(0) == POSITIVE_ANSWER) {
+        while (scan.nextLine().toUpperCase().charAt(0) == 'Y') {
             genre.append(";");
-            System.out.println("Pls enter genre for book.");
-            genre.append(scan.nextLine().toUpperCase());
+            genre.append(scan.nextLine());
             System.out.println("If you want add another genre press 'y'");
         }
         return IOUtils.converToEnumSet(genre.toString());
