@@ -8,7 +8,7 @@ ISBN varchar (45),
 author varchar (45),
 title varchar (45),
 publYear date,
-writYea date,
+writYear date,
 genre varchar (45)
 );
 
