@@ -2,7 +2,7 @@ package edu.cursor.library.service;
 
 import edu.cursor.library.book.entity.TblBook;
 import edu.cursor.library.book.service.BookServiceImpl;
-import edu.cursor.library.security.auth.AuthImpl;
+import edu.cursor.library.security.auth.SingleUserAuthImpl;
 import edu.cursor.library.security.credentials.service.CredentialsImpl;
 import edu.cursor.library.security.register.RegisterImpl;
 import edu.cursor.library.security.validate.ValidateImpl;
@@ -22,7 +22,7 @@ public class LibraryImpl implements Library {
 
 	private Scanner scan = new Scanner(System.in);
 
-	private AuthImpl auth = AuthImpl.getInstance();
+	private SingleUserAuthImpl auth = SingleUserAuthImpl.getInstance();
 	private CredentialsImpl cred = CredentialsImpl.getInstance();
 	private BookServiceImpl bookService = BookServiceImpl.getInstance();
 	private UserServiceImpl userService = UserServiceImpl.getInstance();

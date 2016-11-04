@@ -4,21 +4,21 @@ import edu.cursor.library.security.credentials.service.Credentials;
 import edu.cursor.library.security.credentials.service.CredentialsImpl;
 import edu.cursor.library.user.entity.TblUser;
 
-public class AuthImpl implements Auth
+public class SingleUserAuthImpl implements Auth
 {
    Credentials cred = CredentialsImpl.getInstance();
    private boolean userIsLogged = false;
    private TblUser loggedUser;
 
-   private static AuthImpl instance ;
-   private AuthImpl() {}
+   private static SingleUserAuthImpl instance ;
+   private SingleUserAuthImpl() {}
 
-   public static AuthImpl getInstance(){
+   public static SingleUserAuthImpl getInstance(){
       if( instance == null ){
-         synchronized (AuthImpl.class){
+         synchronized (SingleUserAuthImpl.class){
             // Double check
             if (instance == null) {
-               instance = new AuthImpl() ;
+               instance = new SingleUserAuthImpl() ;
             }
          }
       }
@@ -26,7 +26,7 @@ public class AuthImpl implements Auth
    }
 
    public boolean isUserLoggedIn() {
-      return userIsLogged;
+      return this.userIsLogged;
    }
 
    public void setUserIsLogged(boolean userIsLogged) {

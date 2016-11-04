@@ -2,7 +2,7 @@ package edu.cursor.library.security.validate;
 
 import java.util.Scanner;
 import edu.cursor.library.security.service.SecurityServiceImpl;
-import edu.cursor.library.security.auth.AuthImpl;
+import edu.cursor.library.security.auth.SingleUserAuthImpl;
 
 public class ValidateImpl implements Validate{
 
@@ -25,7 +25,7 @@ public class ValidateImpl implements Validate{
       String userLogin, userPassword, verifiedLogin = "";
       boolean is = false;
       SecurityServiceImpl securityService = SecurityServiceImpl.getInstance();
-      AuthImpl auth = AuthImpl.getInstance();
+      SingleUserAuthImpl auth = SingleUserAuthImpl.getInstance();
 
       System.out.println("Enter your login:");
       do {

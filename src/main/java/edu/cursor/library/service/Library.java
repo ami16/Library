@@ -1,7 +1,6 @@
 package edu.cursor.library.service;
 
 import edu.cursor.library.infrastructure.exceptions.ISBNFormatException;
-import edu.cursor.library.security.auth.AuthImpl;
 
 public interface Library {
 

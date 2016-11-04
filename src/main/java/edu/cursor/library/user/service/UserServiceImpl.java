@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import edu.cursor.library.book.entity.TblBook;
 import edu.cursor.library.book.service.BookServiceImpl;
-import edu.cursor.library.security.auth.AuthImpl;
+import edu.cursor.library.security.auth.SingleUserAuthImpl;
 import edu.cursor.library.security.register.RegisterImpl;
 import edu.cursor.library.security.service.SecurityServiceImpl;
 import edu.cursor.library.service.LibraryImpl;
@@ -16,7 +16,6 @@ import edu.cursor.library.user.enums.Role;
 import edu.cursor.library.user.registry.UserBooksRegistryImpl;
 import edu.cursor.library.user.utils.IOCsv;
 import org.joda.time.LocalDate;
-import edu.cursor.library.infrastructure.exceptions.ISBNFormatException;
 
 
 public class UserServiceImpl implements UserService {
@@ -30,7 +29,7 @@ public class UserServiceImpl implements UserService {
 
 	UserBooksRegistryImpl userBooksRegistry = new UserBooksRegistryImpl();
 	BookServiceImpl bookService = BookServiceImpl.getInstance();
-	AuthImpl auth = AuthImpl.getInstance();
+	SingleUserAuthImpl auth = SingleUserAuthImpl.getInstance();
 
 
 	private UserServiceImpl() { }
