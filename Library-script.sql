@@ -4,7 +4,7 @@ use Library;
 
 create table books
 (id_book int primary key auto_increment,
-ISBN varchar (45),
+ISBN varchar (25),
 author varchar (45),
 title varchar (45),
 publYear date,
@@ -23,3 +23,7 @@ dateOfRegistration date,
 role varchar (45)
 );
 
+create table registry
+(user_id int primary key auto_increment,
+book_id int
+);
