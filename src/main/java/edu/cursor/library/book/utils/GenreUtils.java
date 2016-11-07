@@ -3,12 +3,12 @@ package edu.cursor.library.book.utils;
 
 import edu.cursor.library.book.enums.Genre;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class GenreUtils {
-    private static Scanner scan = new Scanner(System.in);
+    private static final Scanner scan = new Scanner(System.in);
+
     public static Genre chooseGenre() {
         System.out.println("Pls chose genre for book.");
         String tryGenre = scan.nextLine().toUpperCase();
@@ -18,17 +18,17 @@ public class GenreUtils {
                 .stream()
                 .anyMatch(tryGenre::equals);
         if (checkGenre) {
-            Genre genre = Genre.valueOf(tryGenre);
-            return genre;
+            return Genre.valueOf(tryGenre);
         } else {
             System.out.println("Wrong genre!!!");
             System.out.println("Do you want write correct genre? Press 'y'");
-            char recursion = scan.nextLine().toLowerCase().charAt(0);
-            if (recursion == 'y') {
+            if (scan.nextLine().toLowerCase().charAt(0) == 'y') {
                 return chooseGenre();
             } else return Genre.UNKNOWN;
         }
     }
+
+
     public static Genre chooseGenre(String myGenre) {
         Boolean checkGenre = Arrays.stream(Genre.values())
                 .map(Genre::name)
@@ -36,12 +36,24 @@ public class GenreUtils {
                 .stream()
                 .anyMatch(myGenre::equals);
         if (checkGenre) {
-            Genre genre = Genre.valueOf(myGenre);
-            return genre;
+            return Genre.valueOf(myGenre);
         } else {
-            System.out.println("Genre:" + myGenre + " doesn't exist!");
+            System.out.println("Genre: " + myGenre + " doesn't exist!");
             return chooseGenre();
         }
     }
+
+    public static EnumSet<Genre> insertGenre(String st) {
+        StringBuilder genre = new StringBuilder();
+        genre.append(st);
+        System.out.println("If you want add another genre press 'y'");
+        while (scan.nextLine().toUpperCase().charAt(0) == 'Y') {
+            genre.append(";");
+            genre.append(scan.nextLine());
+            System.out.println("If you want add another genre press 'y'");
+        }
+        return IOUtils.converToEnumSet(genre.toString());
+    }
+
 
 }

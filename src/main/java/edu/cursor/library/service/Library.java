@@ -1,17 +1,17 @@
 package edu.cursor.library.service;
 
-import edu.cursor.library.security.AuthImpl;
+import edu.cursor.library.infrastructure.exceptions.ISBNFormatException;
 
 public interface Library {
 
    public void start() ;
 
-   void showMainMenu(boolean userIsLogged, AuthImpl auth) ;
+   void showMainMenu();
    void showMainMenuSimple() ;
-   void showMainMenuLogged() ;
+   void showMainMenuLoggedIn() ;
    void showMainMenuAdmin() ;
 
-   void replyReader(int type);
+   void replyReader(int type) throws ISBNFormatException;
 
 
    void sayBye();

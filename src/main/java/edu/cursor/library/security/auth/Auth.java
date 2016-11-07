@@ -1,4 +1,4 @@
-package edu.cursor.library.security;
+package edu.cursor.library.security.auth;
 
 import edu.cursor.library.user.entity.TblUser;
 

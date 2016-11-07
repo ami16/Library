@@ -9,10 +9,8 @@ public class App {
    private static final Logger log = Logger.getLogger(App.class);
 
    public static void main(String[] args) {
-      LibraryImpl lib = new LibraryImpl() ;
+      LibraryImpl lib = new LibraryImpl();
       lib.start();
-
-
    }
 
 }
