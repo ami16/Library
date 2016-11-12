@@ -1,4 +1,4 @@
-package edu.cursor.library.user.service;
+package edu.cursor.library.infrastructure.exceptions;
 
 public class UserNotFoundException extends Exception {
 	

@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
 				fields = scan.nextLine().split(",");
 				if(fields[0].trim().contains("Id")) continue;
 				userList.add( new TblUser(
-					Integer.parseInt(fields[0]),
+					Long.parseLong(fields[0]),
 					fields[1],
 					fields[2],
 					fields[3],
@@ -400,7 +400,7 @@ public class UserServiceImpl implements UserService {
 
 	public List<TblBook> getUserBooks( TblUser user ) {
 		List<TblBook> userBooks = new ArrayList<>();
-		int userId = user.getId();
+		long userId = user.getId();
 
 		Map<Integer, List<Integer>> bookRegistry = userBooksRegistry.getRegistryMapByUsers();
 

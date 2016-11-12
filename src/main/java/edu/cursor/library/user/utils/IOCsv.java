@@ -57,7 +57,7 @@ public class IOCsv {
 			int index = 0;
 			while ((line = br.readLine()) != null) {
 				String[] fields = line.split(",");
-				Integer Id = Integer.parseInt(fields[0]);
+				Long Id = Long.parseLong(fields[0]);
 				String firstName = fields[1];
 				String lastName = fields[2];
 				String eMail = fields[3];

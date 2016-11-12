@@ -1,14 +1,23 @@
 package edu.cursor.library.user.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Table;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.joda.time.LocalDate;
+import org.springframework.data.annotation.Id;
+
 import edu.cursor.library.user.enums.Role;
 
+@Entity
+@Table(name = "Users")
 public class TblUser {
-	private int id;
+	@Id @GeneratedValue()
+	private Long id;
 	private String firstName;
 	private String lastName;
 	private String eMail;
@@ -21,7 +30,7 @@ public class TblUser {
 
 	}
 
-	public TblUser(int id, String firstName, String lastName, String eMail, int mobileNum, String address,
+	public TblUser(Long id, String firstName, String lastName, String eMail, int mobileNum, String address,
 			LocalDate dateOfRegistration, Role role) {
 		this.id = id;
 		this.firstName = firstName;
@@ -33,11 +42,11 @@ public class TblUser {
 		this.role = role;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
