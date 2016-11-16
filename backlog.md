@@ -23,4 +23,7 @@ CRSRL0-16: (Yura Zh) Create Logger: REVIEW <br />
 * ~~CRSRL0-23: (IGOR) Change Genres: DONE (KROSAVCHEG!)~~ <br />
 * ~~CRSRL0-24: (OLESYA) UserServiceImpl fixes: DONE~~ <br />
 * ~~CRSRL0-25: (Andriy) Library Fixes: DONE~~ <br />
+* ~~CRSRL0-26: (Olesya) "Add spring dependency for pom.xml": DONE~~ <br />
+* ~~CRSRL0-27: (Olesya) "Refactoring user package for Spring/ add dependencies": DONE~~ <br />
+* ~~CRSRL0-28: (Olesya) "added lombok for Library": DONE~~ <br />
 ...
