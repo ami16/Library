@@ -12,6 +12,6 @@ public final class Constants {
    public static final String WRONG_CHOICE_MENU = "Choose correct item (1-3 or x): ";
 
    /* Database */
-   public static final String DB_NAME = "ownlib";
+   public static final String DB_NAME = "library";
 
 }

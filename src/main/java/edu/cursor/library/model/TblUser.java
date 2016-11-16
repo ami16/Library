@@ -1,12 +1,12 @@
 package edu.cursor.library.model;
 
 import edu.cursor.library.model.UserRole;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.*;
 import org.joda.time.LocalDate;
+import lombok.*;
 
+
+@Data
 public class TblUser {
 	private int id;
 	private String firstName;

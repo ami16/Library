@@ -137,10 +137,6 @@ public class MySqlUserDao implements UserDAO {
       Map<Long, Connection> map = getResultUpdate("INSERT INTO USERS " +
           "(first_name, last_name, e_mail, mobile_num, address, date_of_registration, role) VALUES" +
           "(?, ?, ?, ?, ?, ?, ?)", 7, params);
-
-//      System.out.println( map.entrySet().iterator().next().getKey() );
-
-//      return map.values().stream().findFirst() != null;
       return map.entrySet().iterator().next().getKey();
    }
 
@@ -156,9 +152,6 @@ public class MySqlUserDao implements UserDAO {
           user.getRole(),
           user.getId()
       };
-//      Map<Long, Connection> map = getResultUpdate("UPDATE USERS " +
-//          "SET first_name=?, last_name=?, e_mail=?, mobile_num=?, address=?, date_of_registration=?, role=? " +
-//          "WHERE ID = ?", 8, params);
       getResultUpdate("UPDATE USERS " +
           "SET first_name=?, last_name=?, e_mail=?, mobile_num=?, address=?, date_of_registration=?, role=? " +
           "WHERE ID = ?", 8, params);
@@ -168,9 +161,8 @@ public class MySqlUserDao implements UserDAO {
    @Override
    public void deleteUser(int userId) {
       if( auth.userCanCrud() ) {
-//         Map<Long, Connection> map = getResultUpdate("DELETE FROM USERS " +
-//             "WHERE ID = ?", 1, userId);
          getResultUpdate("DELETE FROM USERS WHERE ID = ?", 1, userId);
+         getResultUpdate("DELETE FROM credentials WHERE ID = ?", 1, userId);
       }
    }
 
@@ -216,57 +208,4 @@ public class MySqlUserDao implements UserDAO {
       }
       return null;
    }
-
-
-   public static void main(String[] args) {
-      MySqlUserDao msud = new MySqlUserDao();
-//      try{
-//         Map<ResultSet, Connection> resultMap = msud.getResultSet("SELECT * FROM users");
-//         if( resultMap.values().stream().findFirst() != null ){
-//            ResultSet rs = resultMap.entrySet().iterator().next().getKey();
-//            while (rs.next()){
-//               System.out.println(rs.getString("first_name"));
-//               System.out.println(rs.getString("last_name"));
-//               System.out.println(rs.getString("address"));
-//            }
-//            Connection conn = resultMap.entrySet().iterator().next().getValue();
-//            conn.close();
-//         }
-//      } catch (Exception e){
-//         e.printStackTrace();
-//      }
-
-//      System.out.println( msud.getUserList() );
-//      System.out.println(msud.findById(3));
-
-//      msud.createUser(
-//          new TblUser(
-//              100,
-//              "NewOne",
-//              "JDBCovsky",
-//              "j@j.j",
-//              456456456,
-//              "Some new address",
-//              LocalDate.parse("2016-11-14"),
-//              UserRole.USER
-//          )
-//      );
-
-//      msud.updateUser(
-//          new TblUser(
-//              25,
-//              "NewOneName",
-//              "JDBCovsky222",
-//              "j@j.jjj",
-//              787878787,
-//              "Some new address rafbiu qaefra daef bvafrd",
-//              LocalDate.parse("2016-11-10"),
-//              UserRole.USER
-//          )
-//      );
-
-//      msud.deleteUser(25);
-
-   }
-
 }
