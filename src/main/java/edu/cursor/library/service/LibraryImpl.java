@@ -47,7 +47,7 @@ public class LibraryImpl implements Library {
 		if (userIsLogged) {
 			TblUser user = auth.getLoggedInUser();
 			System.out.println("userISLogged: " + auth.isUserLoggedIn());
-			System.out.println("loggedInUser: " + user.geteMail() + " (id: " + user.getId() + ")");
+			System.out.println("loggedInUser: " + user.getEMail() + " (id: " + user.getId() + ")");
 			System.out.println("Hello, " + user.getFirstName());
 			System.out.println("----------------------------------------------------------");
 
