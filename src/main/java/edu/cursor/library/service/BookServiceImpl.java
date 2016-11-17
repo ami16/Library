@@ -1,12 +1,12 @@
 package edu.cursor.library.service;
 
 import edu.cursor.library.util.BookDaoUtils;
-import edu.cursor.library.infrastructure.persistance.MySqlBookDao;
+import edu.cursor.library.infrastructure.persistence.MySqlBookDao;
 import edu.cursor.library.model.BookComparator;
 import edu.cursor.library.model.BookGenre;
 import edu.cursor.library.model.TblBook;
-//import edu.cursor.library.infrastructure.persistance.GenreUtils;
-//import edu.cursor.library.infrastructure.persistance.IOUtils;
+//import edu.cursor.library.infrastructure.persistence.GenreUtils;
+//import edu.cursor.library.infrastructure.persistence.IOUtils;
 import org.joda.time.LocalDate;
 
 import java.util.*;

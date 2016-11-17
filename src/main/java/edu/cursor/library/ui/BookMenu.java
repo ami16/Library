@@ -2,7 +2,7 @@ package edu.cursor.library.ui;
 
 
 import edu.cursor.library.util.BookDaoUtils;
-import edu.cursor.library.infrastructure.persistance.MySqlBookDao;
+import edu.cursor.library.infrastructure.persistence.MySqlBookDao;
 import edu.cursor.library.model.BookGenre;
 import edu.cursor.library.model.TblBook;
 import edu.cursor.library.security.SecurityServiceImpl;

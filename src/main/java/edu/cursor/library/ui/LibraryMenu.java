@@ -1,6 +1,5 @@
 package edu.cursor.library.ui;
 
-import edu.cursor.library.infrastructure.persistance.MySqlUserBooksRegistryDao;
 import edu.cursor.library.model.BookComparator;
 import edu.cursor.library.model.TblBook;
 import edu.cursor.library.security.RegisterImpl;

@@ -1,14 +1,13 @@
-package edu.cursor.library.infrastructure.persistance;
+package edu.cursor.library.infrastructure.persistence;
 
 import edu.cursor.library.model.DAO.CredentialsDAO;
-import edu.cursor.library.model.TblUser;
 import edu.cursor.library.security.SingleUserAuthImpl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Map;
+
 import static edu.cursor.library.infrastructure.Constants.*;
 
 public class MySqlCredentialsDao implements CredentialsDAO {

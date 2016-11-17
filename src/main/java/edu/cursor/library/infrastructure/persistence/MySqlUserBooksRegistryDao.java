@@ -1,19 +1,16 @@
-package edu.cursor.library.infrastructure.persistance;
+package edu.cursor.library.infrastructure.persistence;
 
 
 import edu.cursor.library.model.DAO.UserBooksRegistryDAO;
 import edu.cursor.library.model.TblBook;
-import edu.cursor.library.model.TblCredentials;
 import edu.cursor.library.model.TblUser;
 import edu.cursor.library.model.TblUserBooksRegistry;
 import static edu.cursor.library.infrastructure.Constants.*;
 
 import edu.cursor.library.service.BookServiceImpl;
-import org.joda.time.LocalDate;
 
 import java.sql.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 public class MySqlUserBooksRegistryDao implements UserBooksRegistryDAO {

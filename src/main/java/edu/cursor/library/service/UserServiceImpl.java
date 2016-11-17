@@ -3,14 +3,14 @@ package edu.cursor.library.service;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import edu.cursor.library.infrastructure.persistance.MySqlUserDao;
+import edu.cursor.library.infrastructure.persistence.MySqlUserDao;
 import edu.cursor.library.model.TblBook;
 import edu.cursor.library.security.SingleUserAuthImpl;
 import edu.cursor.library.security.RegisterImpl;
 import edu.cursor.library.security.SecurityServiceImpl;
 import edu.cursor.library.model.TblUser;
 import edu.cursor.library.model.UserRole;
-//import edu.cursor.library.infrastructure.persistance.CSVFileUserDao ;
+//import edu.cursor.library.infrastructure.persistence.CSVFileUserDao ;
 
 
 public class UserServiceImpl implements UserService {

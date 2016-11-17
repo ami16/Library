@@ -1,4 +1,4 @@
-package edu.cursor.library.infrastructure.persistance;
+package edu.cursor.library.infrastructure.persistence;
 
 import edu.cursor.library.model.DAO.BookDAO;
 import edu.cursor.library.model.TblBook;

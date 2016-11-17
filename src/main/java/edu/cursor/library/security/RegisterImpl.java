@@ -1,8 +1,7 @@
 package edu.cursor.library.security;
 
-import edu.cursor.library.infrastructure.persistance.CSVFileUserDao;
-import edu.cursor.library.infrastructure.persistance.MySqlCredentialsDao;
-import edu.cursor.library.infrastructure.persistance.MySqlUserDao;
+import edu.cursor.library.infrastructure.persistence.MySqlCredentialsDao;
+import edu.cursor.library.infrastructure.persistence.MySqlUserDao;
 import edu.cursor.library.model.TblUser;
 import edu.cursor.library.model.UserRole;
 import edu.cursor.library.service.UserServiceImpl;

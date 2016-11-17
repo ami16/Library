@@ -1,6 +1,6 @@
 package edu.cursor.library.service;
 
-import edu.cursor.library.infrastructure.persistance.MySqlUserBooksRegistryDao;
+import edu.cursor.library.infrastructure.persistence.MySqlUserBooksRegistryDao;
 import edu.cursor.library.model.TblBook;
 import edu.cursor.library.model.TblUser;
 import edu.cursor.library.model.TblUserBooksRegistry;
