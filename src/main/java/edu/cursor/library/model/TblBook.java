@@ -15,7 +15,7 @@ import org.joda.time.LocalDate;
 import java.util.EnumSet;
 
 @NoArgsConstructor
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @AllArgsConstructor
 public class TblBook implements Comparable{
 

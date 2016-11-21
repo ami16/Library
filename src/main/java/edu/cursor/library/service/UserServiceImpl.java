@@ -108,7 +108,7 @@ public class UserServiceImpl implements UserService {
 	private Integer presentUserCount( int userId ) {
 		List<TblUser> userList = userDao.findAll();
 		Map<TblUser, Long> presentUserMap = userList.stream()
-			.filter(i -> i.getId().equals( userId ))
+			.filter(i -> i.getId() == userId )
 			.collect(
 				Collectors.groupingBy(
 					i -> i, Collectors.counting()
@@ -167,7 +167,8 @@ public class UserServiceImpl implements UserService {
 					do{
 
 						// Delete Yourself
-						if( loggedInUser.getId().equals( Integer.parseInt(userReply) ) ){
+//						if( loggedInUser.getId().equals( Integer.parseInt(userReply) ) ){
+						if( loggedInUser.getId() == Integer.parseInt(userReply) ){
 							System.out.println("You can't delete yourself.");
 							break;
 						}
@@ -314,11 +315,12 @@ public class UserServiceImpl implements UserService {
 
 	public void showUserBooks( TblUser user ) {
 
-		if( user.getId().equals( auth.getLoggedInUser().getId() ) ){
+//		if( user.getId().equals( auth.getLoggedInUser().getId() ) ){
+		if( user.getId() == auth.getLoggedInUser().getId() ){
 			System.out.println("--- My books here ---");
 		} else {
 			System.out.println("--- User books here (" + user.getId() + ", " + user.getFirstName() + ", "
-				                 + user.getLastName() + ", " + ", " + user.geteMail() + ", "
+				                 + user.getLastName() + ", " + ", " + user.getEMail() + ", "
 								     + user.getRole() + ") ---");
 		}
 
@@ -340,7 +342,7 @@ public class UserServiceImpl implements UserService {
 
 //			TblUser user = getUser(m.getKey());
 			TblUser user = userDao.findById(m.getKey());
-			System.out.println("• User " + user.getId() + ", " + user.getFirstName() + " (" + user.geteMail() +
+			System.out.println("• User " + user.getId() + ", " + user.getFirstName() + " (" + user.getEMail() +
 				") has books: " );
 
 			for( Integer x : m.getValue() ){
@@ -429,7 +431,7 @@ public class UserServiceImpl implements UserService {
 		System.out.println("---------- User Profile ---------------");
 		System.out.println("First Name: " + user.getFirstName() );
 		System.out.println("Last Name: " + user.getLastName() );
-		System.out.println("Email (login): " + user.geteMail() );
+		System.out.println("Email (login): " + user.getEMail() );
 		System.out.println("Mobile #: " + user.getMobileNum() );
 		System.out.println("Address: " + user.getAddress() );
 		System.out.println("Registration Date: " + user.getDateOfRegistration() );

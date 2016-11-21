@@ -58,7 +58,8 @@ public class CSVFileUserDao implements UserDAO{
       List<TblUser> tempUserList = getUserList() ;
 
       for( TblUser u : tempUserList ){
-         if( u.getId().equals(user.getId()) ){
+//         if( u.getId().equals(user.getId()) ){
+         if( u.getId() == user.getId() ){
             u.setFirstName( user.getFirstName() );
             u.setLastName( user.getLastName() );
             u.setMobileNum( user.getMobileNum() );
@@ -77,7 +78,8 @@ public class CSVFileUserDao implements UserDAO{
 
       int counter = 0;
       for( TblUser u : tempUserList ){
-         if( u.getId().equals(userId) ){
+//         if( u.getId().equals(userId) ){
+         if( u.getId() == userId ){
             tempUserList.remove(counter);
             break;
          }
@@ -95,11 +97,13 @@ public class CSVFileUserDao implements UserDAO{
       try( FileWriter fw = new FileWriter( new File(file) ) ){
          fw.write("Id,firstName,lastName,eMail,mobileNum,address,dateOfRegistration,role\n");
          for( TblUser u : userList ){
-            fw.append( u.getId().toString() ); fw.append(DELIMITER);
+//            fw.append( u.getId().toString() ); fw.append(DELIMITER);
+            fw.append( String.valueOf( u.getId()) ); fw.append(DELIMITER);
             fw.append( u.getFirstName() ); fw.append(DELIMITER);
             fw.append( u.getLastName() ); fw.append(DELIMITER);
-            fw.append( u.geteMail() ); fw.append(DELIMITER);
-            fw.append( u.getMobileNum().toString() ); fw.append(DELIMITER);
+            fw.append( u.getEMail() ); fw.append(DELIMITER);
+//            fw.append( u.getMobileNum().toString() ); fw.append(DELIMITER);
+            fw.append( String.valueOf( u.getMobileNum()) ); fw.append(DELIMITER);
             fw.append( u.getAddress() ); fw.append(DELIMITER);
             fw.append( u.getDateOfRegistration().toString() ); fw.append(DELIMITER);
             fw.append( u.getRole().toString() );

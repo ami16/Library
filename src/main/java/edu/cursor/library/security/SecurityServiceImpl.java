@@ -75,7 +75,7 @@ public class SecurityServiceImpl implements SecurityService {
 //      tempUserList = userService.getUserList() ;
       tempUserList = userDao.findAll();
 
-      long loginOccurrences = tempUserList.stream().filter(i -> i.geteMail().equalsIgnoreCase(desiredLogin)).count();
+      long loginOccurrences = tempUserList.stream().filter(i -> i.getEMail().equalsIgnoreCase(desiredLogin)).count();
       if(loginOccurrences > 0){
          if(showMessage)
             System.out.println("Login NOT available.");
@@ -111,7 +111,7 @@ public class SecurityServiceImpl implements SecurityService {
 //      TblUser user = UserServiceImpl.getInstance().getUser( userId );
       TblUser user = userDao.findById( userId );
       try{
-         String login = user.geteMail();
+         String login = user.getEMail();
          return !loginAvailable(login, false);
       } catch (Exception e){
          return false;
@@ -128,7 +128,7 @@ public class SecurityServiceImpl implements SecurityService {
          TblUser user = itr.next() ;
 
          // Find User by id
-         if( user.geteMail().equals(login) ){
+         if( user.getEMail().equals(login) ){
             id = user.getId();
 
 //            Map<Integer, String> credentials = cred.getCredentialsList();
@@ -167,7 +167,7 @@ public class SecurityServiceImpl implements SecurityService {
       tempUserList = userDao.findAll();
 
       for( TblUser user : tempUserList ){
-         if(user.geteMail().equals( mail)){
+         if(user.getEMail().equals( mail)){
             return user ;
          }
       }

@@ -6,7 +6,7 @@ import lombok.*;
 
 
 @NoArgsConstructor
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @AllArgsConstructor
 public class TblUser {
 	@Getter @Setter private int id;
@@ -35,7 +35,7 @@ public class TblUser {
 	              .append(this, other.getAddress())
 	              .append(this, other.getDateOfRegistration())
 	              .append(this, other.getRole())
-	              .isEquals();    
+	              .isEquals();
 	}
 	@Override
 	public int hashCode() {
@@ -47,19 +47,19 @@ public class TblUser {
 	          .append(this.getAddress())
 	          .append(this.getDateOfRegistration())
 	          .append(this.getRole())
-	          .toHashCode();    
+	          .toHashCode();
 	}
-	@Override 
-	public String toString() { 
-	return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE) 
-	.append("id ", this.getId()) 
-	.append("name", this.getFirstName()) 
-	.append("surname", this.getLastName()) 
+	@Override
+	public String toString() {
+	return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE)
+	.append("id ", this.getId())
+	.append("name", this.getFirstName())
+	.append("surname", this.getLastName())
 	.append("e-mail",this.getEMail())
-	.append("mobile number", this.getMobileNum()) 
-	.append("address", this.getAddress()) 
-	.append("date of registration", this.getDateOfRegistration()) 
-	.append("role", this.getRole()) 
+	.append("mobile number", this.getMobileNum())
+	.append("address", this.getAddress())
+	.append("date of registration", this.getDateOfRegistration())
+	.append("role", this.getRole())
 	.append("\n")
 	.toString();
 	}

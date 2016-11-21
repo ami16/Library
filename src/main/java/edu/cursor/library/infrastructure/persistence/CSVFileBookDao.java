@@ -36,7 +36,8 @@ public class CSVFileBookDao implements BookDAO {
       List<TblBook> bookList = findAll();
       List<TblBook> foundBookList = new ArrayList<>();
       for( TblBook b : bookList ){
-         if( b.getISBN().equals(id) ){
+//         if( b.getISBN().equals(id) ){
+         if( b.getISBN() == id ){
             foundBookList.add( b );
          }
       }
@@ -59,7 +60,8 @@ public class CSVFileBookDao implements BookDAO {
       List<TblBook> tempBookList = getBookList() ;
 
       for( TblBook b : tempBookList ){
-         if( b.getISBN().equals(book.getISBN()) ){
+//         if( b.getISBN().equals(book.getISBN()) ){
+         if( b.getISBN() == book.getISBN() ){
 
             if( auth.userCanCrud() ){
                b.setISBN( book.getISBN() );
@@ -81,7 +83,8 @@ public class CSVFileBookDao implements BookDAO {
 
       int counter = 0;
       for( TblBook b : tempBookList ){
-         if( b.getISBN().equals(ISBN) ){
+//         if( b.getISBN().equals(ISBN) ){
+         if( b.getISBN() == ISBN ){
             tempBookList.remove(counter);
             break;
          }
@@ -99,7 +102,7 @@ public class CSVFileBookDao implements BookDAO {
       try( FileWriter fw = new FileWriter( new File(file) ) ){
          fw.write("ISBN,Author,Title,publYear,writYear,Genre\n");
          for( TblBook b : bookList ){
-            fw.append( b.getISBN().toString() ); fw.append(DEFAULT_SEPARATOR);
+            fw.append( String.valueOf( b.getISBN() ) ); fw.append(DEFAULT_SEPARATOR);
             fw.append( b.getAuthor() ); fw.append(DEFAULT_SEPARATOR);
             fw.append( b.getTitle() ); fw.append(DEFAULT_SEPARATOR);
             fw.append( b.getPublYear().toString() ); fw.append(DEFAULT_SEPARATOR);

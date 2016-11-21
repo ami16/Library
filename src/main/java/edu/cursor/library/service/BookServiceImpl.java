@@ -111,7 +111,8 @@ public class BookServiceImpl implements BookService {
 
    public List<TblBook> getBooksById(int isbn) {
       return readBookList().stream()
-          .filter(i -> i.getISBN().equals(isbn) )
+//          .filter(i -> i.getISBN().equals(isbn) )
+          .filter(i -> i.getISBN() == isbn )
           .collect(Collectors.toList());
    }
 

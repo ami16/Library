@@ -13,8 +13,8 @@ public class BookComparator implements Comparable<TblBook> {
 //      return BookComparator.TITLE.compare(this, b);
    }
 
-   private static final Comparator<TblBook> ISBN = (TblBook b1, TblBook b2)
-       -> b1.getISBN().compareTo(b2.getISBN());
+   private static final Comparator<TblBook> ISBN = (TblBook b1, TblBook b2) -> (b1.getISBN() - b2.getISBN() );
+//       -> b1.getISBN().compareTo(b2.getISBN());
    private static final Comparator<TblBook> TITLE = (TblBook b1, TblBook b2)
        -> b1.getTitle().compareTo(b2.getTitle());
    private static final Comparator<TblBook> AUTHOR = (TblBook b1, TblBook b2)
