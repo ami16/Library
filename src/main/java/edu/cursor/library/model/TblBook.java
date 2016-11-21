@@ -1,7 +1,11 @@
 package edu.cursor.library.model;
 
 
-//import edu.cursor.library.model.BookGenre;
+
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -10,76 +14,17 @@ import org.joda.time.LocalDate;
 
 import java.util.EnumSet;
 
-
+@NoArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class TblBook implements Comparable{
 
-    private int ISBN;
-    private String author;
-    private String title;
-    private LocalDate publYear;
-    private LocalDate writYear;
-    private EnumSet<BookGenre> genre;
-
-    public TblBook(Integer ISBN, String author, String title, LocalDate publYear, LocalDate writYear,
-                   EnumSet<BookGenre> genre) {
-        this.ISBN = ISBN;
-        this.author = author;
-        this.title = title;
-        this.publYear = publYear;
-        this.writYear = writYear;
-        this.genre = genre;
-    }
-
-    public TblBook() {
-    }
-
-    public Integer getISBN() {
-        return ISBN;
-    }
-
-    public void setISBN(Integer ISBN) {
-        this.ISBN = ISBN;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public LocalDate getPublYear() {
-        return publYear;
-    }
-
-    public void setPublYear(LocalDate publYear) {
-        this.publYear = publYear;
-    }
-
-    public LocalDate getWritYear() {
-        return writYear;
-    }
-
-    public void setWritYear(LocalDate writYear) {
-        this.writYear = writYear;
-    }
-
-    public EnumSet<BookGenre> getGenre() {
-        return genre;
-    }
-
-    public void setGenre(EnumSet<BookGenre> genre) {
-        this.genre = genre;
-    }
+    @Getter @Setter private int ISBN;
+    @Getter @Setter private String author;
+    @Getter @Setter private String title;
+    @Getter @Setter private LocalDate publYear;
+    @Getter @Setter private LocalDate writYear;
+    @Getter @Setter private EnumSet<BookGenre> genre;
 
     @Override
     public boolean equals(Object o) {
