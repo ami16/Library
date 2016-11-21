@@ -3,20 +3,51 @@ package edu.cursor.library.model;
 import org.apache.commons.lang3.builder.*;
 import org.joda.time.LocalDate;
 import lombok.*;
+import org.springframework.data.annotation.Id;
+
+import javax.persistence.*;
 
 
 @NoArgsConstructor
-//@RequiredArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "users")
 public class TblUser {
-	@Getter @Setter private int id;
-	@Getter @Setter private String firstName;
-	@Getter @Setter private String lastName;
-	@Getter @Setter private String eMail;
-	@Getter @Setter private int mobileNum;
-	@Getter @Setter private String address;
-	@Getter @Setter private LocalDate dateOfRegistration;
-	@Getter @Setter private UserRole role;
+	@Getter
+	@Setter
+	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
+	@Column(name ="id",nullable = false)
+	private int id;
+	@Getter
+	@Setter
+	@Column(name = "first_name")
+	private String firstName;
+	@Getter
+	@Setter
+	@Column(name = "last_name")
+	private  String lastName;
+	@Getter
+	@Setter
+	@Column(name = "e_mail")
+	private String eMail;
+	@Getter
+	@Setter
+	@Column(name ="mobile_num")
+	private int mobileNum;
+	@Getter
+	@Setter
+	@Column(name ="address")
+	private String address;
+	@Getter
+	@Setter
+	@Column(name = "date_of_registration")
+	private LocalDate dateOfRegistration;
+	@Getter
+	@Setter
+	@Column(name = "role")
+	@Enumerated(EnumType.STRING)
+	private UserRole role;
 
 	@Override
 	public boolean equals(Object obj) {
