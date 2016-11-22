@@ -26,4 +26,9 @@ CRSRL0-16: (Yura Zh) Create Logger: REVIEW <br />
 * ~~CRSRL0-26: (Olesya) "Add spring dependency for pom.xml": DONE~~ <br />
 * ~~CRSRL0-27: (Olesya) "Refactoring user package for Spring/ add dependencies": DONE~~ <br />
 * ~~CRSRL0-28: (Olesya) "added lombok for Library": DONE~~ <br />
+* ~~CRSRL0-29: (Olesya) "fixed POJO for Lombok": DONE~~ <br />
+* ~~CRSRL0-30: (Igor) "added logger": DONE~~ <br />
+* ~~CRSRL0-31: (Olesya) "add spring data jpa+annotation for POJO": DONE~~ <br />
+* ~~CRSRL0-31(32): (Olesya) "add annotation for tbl classes/fixed field eMail": DONE~~ <br />
+* ~~CRSRL0-33: (Olesya) "add spring security dependency and uservalidator": DONE~~ <br />
 ...
