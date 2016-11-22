@@ -4,7 +4,6 @@ package edu.cursor.library.model;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.*;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -12,19 +11,43 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.joda.time.LocalDate;
 
+import javax.persistence.*;
 import java.util.EnumSet;
 
 @NoArgsConstructor
-//@RequiredArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "books")
 public class TblBook implements Comparable{
 
-    @Getter @Setter private int ISBN;
-    @Getter @Setter private String author;
-    @Getter @Setter private String title;
-    @Getter @Setter private LocalDate publYear;
-    @Getter @Setter private LocalDate writYear;
-    @Getter @Setter private EnumSet<BookGenre> genre;
+    @Getter
+    @Setter
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    //private Integer id;
+    @Column(name = "isbn", nullable = false)
+    private int ISBN;
+    @Getter
+    @Setter
+    @Column(name = "author")
+    private String author;
+    @Getter
+    @Setter
+    @Column(name = "title")
+    private String title;
+    @Getter
+    @Setter
+    @Column(name = "publ_year")
+    private LocalDate publYear;
+    @Getter
+    @Setter
+    @Column(name = "writ_year")
+    private LocalDate writYear;
+    @Getter
+    @Setter
+    @Column(name = "genre")
+    @Enumerated(EnumType.STRING)
+    private EnumSet<BookGenre> genre;
 
     @Override
     public boolean equals(Object o) {
