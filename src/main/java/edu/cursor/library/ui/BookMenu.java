@@ -29,7 +29,7 @@ public class BookMenu {
 
 
    public void promptAddNewBook(){
-
+      int userId = 0;
       boolean correctISBN = false;
       int userIsbn = 0;
       boolean correctAuthor = false;
@@ -45,6 +45,9 @@ public class BookMenu {
       TblBook sameBook = null;
 
       do{
+
+         //0. Id
+         userId = bookService.getNewBookId();
 
          // 1. ISBN
          System.out.println("1. Input ISBN");
@@ -138,6 +141,7 @@ public class BookMenu {
 
          bookDao.createBook(
              new TblBook(
+                     userId,
                  userIsbn,
                  userAuthor,
                  userTitle,

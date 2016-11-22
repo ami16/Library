@@ -128,7 +128,7 @@ public class MySqlUserDao implements UserDAO {
       Object[] params = {
           user.getFirstName(),
           user.getLastName(),
-          user.getEMail(),
+          user.getEmail(),
           user.getMobileNum(),
           user.getAddress(),
           user.getDateOfRegistration().toString(),
@@ -145,7 +145,7 @@ public class MySqlUserDao implements UserDAO {
       Object[] params = {
           user.getFirstName(),
           user.getLastName(),
-          user.getEMail(),
+          user.getEmail(),
           user.getMobileNum(),
           user.getAddress(),
           user.getDateOfRegistration().toString(),

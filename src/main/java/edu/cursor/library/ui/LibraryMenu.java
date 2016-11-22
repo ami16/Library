@@ -35,7 +35,7 @@ public class LibraryMenu {
       if (userIsLogged) {
          TblUser user = auth.getLoggedInUser();
          System.out.println("userISLogged: " + auth.isUserLoggedIn());
-         System.out.println("loggedInUser: " + user.getEMail() + " (id: " + user.getId() + ")");
+         System.out.println("loggedInUser: " + user.getEmail() + " (id: " + user.getId() + ")");
          System.out.println("Hello, " + user.getFirstName());
          System.out.println("----------------------------------------------------------");
 
