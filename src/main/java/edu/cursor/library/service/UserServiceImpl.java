@@ -320,7 +320,7 @@ public class UserServiceImpl implements UserService {
 			System.out.println("--- My books here ---");
 		} else {
 			System.out.println("--- User books here (" + user.getId() + ", " + user.getFirstName() + ", "
-				                 + user.getLastName() + ", " + ", " + user.getEMail() + ", "
+				                 + user.getLastName() + ", " + ", " + user.getEmail() + ", "
 								     + user.getRole() + ") ---");
 		}
 
@@ -342,7 +342,7 @@ public class UserServiceImpl implements UserService {
 
 //			TblUser user = getUser(m.getKey());
 			TblUser user = userDao.findById(m.getKey());
-			System.out.println("• User " + user.getId() + ", " + user.getFirstName() + " (" + user.getEMail() +
+			System.out.println("• User " + user.getId() + ", " + user.getFirstName() + " (" + user.getEmail() +
 				") has books: " );
 
 			for( Integer x : m.getValue() ){
@@ -431,7 +431,7 @@ public class UserServiceImpl implements UserService {
 		System.out.println("---------- User Profile ---------------");
 		System.out.println("First Name: " + user.getFirstName() );
 		System.out.println("Last Name: " + user.getLastName() );
-		System.out.println("Email (login): " + user.getEMail() );
+		System.out.println("Email (login): " + user.getEmail() );
 		System.out.println("Mobile #: " + user.getMobileNum() );
 		System.out.println("Address: " + user.getAddress() );
 		System.out.println("Registration Date: " + user.getDateOfRegistration() );

@@ -200,6 +200,7 @@ public class MySqlBookDao implements BookDAO {
    private TblBook getBookObject( ResultSet rs ){
       try {
             return new TblBook(
+                    rs.getInt("id"),
                 rs.getInt("isbn"),
                 rs.getString("author"),
                 rs.getString("title"),

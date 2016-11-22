@@ -101,7 +101,7 @@ public class CSVFileUserDao implements UserDAO{
             fw.append( String.valueOf( u.getId()) ); fw.append(DELIMITER);
             fw.append( u.getFirstName() ); fw.append(DELIMITER);
             fw.append( u.getLastName() ); fw.append(DELIMITER);
-            fw.append( u.getEMail() ); fw.append(DELIMITER);
+            fw.append( u.getEmail() ); fw.append(DELIMITER);
 //            fw.append( u.getMobileNum().toString() ); fw.append(DELIMITER);
             fw.append( String.valueOf( u.getMobileNum()) ); fw.append(DELIMITER);
             fw.append( u.getAddress() ); fw.append(DELIMITER);

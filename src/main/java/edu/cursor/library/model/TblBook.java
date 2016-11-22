@@ -24,7 +24,9 @@ public class TblBook implements Comparable{
     @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //private Integer id;
+    private Integer id;
+    @Getter
+    @Setter
     @Column(name = "isbn", nullable = false)
     private int ISBN;
     @Getter
@@ -46,7 +48,7 @@ public class TblBook implements Comparable{
     @Getter
     @Setter
     @Column(name = "genre")
-    @Enumerated(EnumType.STRING)
+    @Enumerated
     private EnumSet<BookGenre> genre;
 
     @Override
@@ -58,6 +60,7 @@ public class TblBook implements Comparable{
         TblBook tblBook = (TblBook) o;
 
         return new EqualsBuilder()
+                .append(getId(),tblBook.getId())
                 .append(getISBN(), tblBook.getISBN())
                 .append(getAuthor(), tblBook.getAuthor())
                 .append(getTitle(), tblBook.getTitle())
@@ -70,6 +73,7 @@ public class TblBook implements Comparable{
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
+                .append(getId())
                 .append(getISBN())
                 .append(getAuthor())
                 .append(getTitle())
@@ -83,6 +87,7 @@ public class TblBook implements Comparable{
     public String toString() {
         return new ToStringBuilder(this,
                 ToStringStyle.SIMPLE_STYLE)
+                .append("Id", id)
                 .append("ISBN", ISBN)
                 .append("Author", author)
                 .append("Title", title)

@@ -1,12 +1,12 @@
 package edu.cursor.library.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang3.builder.*;
 import org.joda.time.LocalDate;
 import lombok.*;
 import org.springframework.data.annotation.Id;
-
 import javax.persistence.*;
-
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,7 +30,7 @@ public class TblUser {
 	@Getter
 	@Setter
 	@Column(name = "e_mail")
-	private String eMail;
+    private String email;
 	@Getter
 	@Setter
 	@Column(name ="mobile_num")
@@ -61,7 +61,7 @@ public class TblUser {
 	     return new EqualsBuilder().append(this.getId(), other.getId())
 	              .append(this.getFirstName(), other.getFirstName())
 	              .append(this, other.getLastName())
-	              .append(this, other.getEMail())
+	              .append(this, other.getEmail())
 	              .append(this, other.getMobileNum())
 	              .append(this, other.getAddress())
 	              .append(this, other.getDateOfRegistration())
@@ -73,7 +73,7 @@ public class TblUser {
 	return new HashCodeBuilder().append(this.getId())
 	          .append(this.getFirstName())
 	          .append(this.getLastName())
-	          .append(this.getEMail())
+	          .append(this.getEmail())
 	          .append(this.getMobileNum())
 	          .append(this.getAddress())
 	          .append(this.getDateOfRegistration())
@@ -86,7 +86,7 @@ public class TblUser {
 	.append("id ", this.getId())
 	.append("name", this.getFirstName())
 	.append("surname", this.getLastName())
-	.append("e-mail",this.getEMail())
+	.append("e-mail",this.getEmail())
 	.append("mobile number", this.getMobileNum())
 	.append("address", this.getAddress())
 	.append("date of registration", this.getDateOfRegistration())

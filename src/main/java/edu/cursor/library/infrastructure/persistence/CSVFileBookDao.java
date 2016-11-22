@@ -100,8 +100,9 @@ public class CSVFileBookDao implements BookDAO {
     */
    private void putBookList( List<TblBook> bookList ){
       try( FileWriter fw = new FileWriter( new File(file) ) ){
-         fw.write("ISBN,Author,Title,publYear,writYear,Genre\n");
+         fw.write("iId,ISBN,Author,Title,publYear,writYear,Genre\n");
          for( TblBook b : bookList ){
+            fw.append(String.valueOf(b.getId()));fw.append(DEFAULT_SEPARATOR);
             fw.append( String.valueOf( b.getISBN() ) ); fw.append(DEFAULT_SEPARATOR);
             fw.append( b.getAuthor() ); fw.append(DEFAULT_SEPARATOR);
             fw.append( b.getTitle() ); fw.append(DEFAULT_SEPARATOR);
@@ -122,14 +123,15 @@ public class CSVFileBookDao implements BookDAO {
          String[] fields;
          while (scan.hasNext()){
             fields = scan.nextLine().split(",");
-            if(fields[0].trim().contains("ISBN")) continue;
+            if(fields[1].trim().contains("ISBN")) continue;
             bookList.add( new TblBook(
                 Integer.parseInt(fields[0]),
-                fields[1],
+                    Integer.parseInt(fields[1]),
                 fields[2],
-                LocalDate.parse(fields[3]),
+                fields[3],
                 LocalDate.parse(fields[4]),
-                bookDaoUtils.convertStringToEnumSet( fields[5] )
+                LocalDate.parse(fields[5]),
+                bookDaoUtils.convertStringToEnumSet( fields[6] )
                 )
             );
          }

@@ -24,6 +24,7 @@ public class BookServiceImpl implements BookService {
    private MySqlBookDao bookDao = new MySqlBookDao() ;
    private BookDaoUtils bookDaoUtils = new BookDaoUtils();
    private Scanner scan = new Scanner(System.in);
+   private static List<TblBook> tempBookList = null ;
 
 
 
@@ -114,6 +115,17 @@ public class BookServiceImpl implements BookService {
 //          .filter(i -> i.getISBN().equals(isbn) )
           .filter(i -> i.getISBN() == isbn )
           .collect(Collectors.toList());
+   }
+
+   public int getNewBookId(){
+      tempBookList = bookDao.findAll();
+
+      Iterator<TblBook> itr = tempBookList.iterator();
+      int currentId = 1 ;
+      while (itr.hasNext()) {
+         currentId = itr.next().getId();
+      }
+      return currentId + 1;
    }
 
 
